@@ -445,8 +445,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
   <div style="font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.3;">
     <a href="{escape_html(r['url'])}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
   </div>
-  <div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:8px;">{escape_html(r.get('sammanfattning',''))}</div>
-  <div style="font-size:11px;color:#999;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
+  <div style="font-size:15px;color:#444;line-height:1.7;margin-bottom:8px;">{escape_html(r.get('sammanfattning',''))}</div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{escape_html(r['url'])}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Las artikel &rarr;</a>
     {knapp}
@@ -478,10 +478,19 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rison Bevakning {datum}</title>
+<title>Rison Bevakning</title>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0}}
 body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh}}
+#login{{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f5f4f0}}
+#login-box{{background:#fff;padding:48px 40px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;width:320px}}
+#login-box h2{{font-size:18px;font-weight:700;margin-bottom:8px}}
+#login-box p{{font-size:13px;color:#888;margin-bottom:24px}}
+#pw{{width:100%;padding:10px 14px;font-size:14px;border:1px solid #ddd;border-radius:6px;outline:none;margin-bottom:12px}}
+#login-btn{{width:100%;padding:10px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}}
+#login-btn:hover{{opacity:0.85}}
+#fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
+#rapport{{display:none}}
 .header{{background:#1a1a1a;color:#fff;padding:28px 40px}}
 .header h1{{font-size:22px;font-weight:700;letter-spacing:-0.5px}}
 .header p{{font-size:13px;color:#999;margin-top:5px}}
@@ -494,30 +503,65 @@ button:hover{{opacity:0.85}}
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>Rison Capital &middot; Omvarldsbevakning</h1>
-  <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; Google News via Serper</p>
-</div>
-<div class="stats">
-  <span><b>{stat['sokord']}</b> sokord ({stat['fasta']} fasta + {stat['dynamiska']} dynamiska)</span>
-  <span><b>{stat['hittade']}</b> artiklar hittades</span>
-  <span><b>{stat['efter_dubbletter']}</b> efter dubblettfiltrering</span>
-  <span><b>{stat['relevanta']}</b> relevanta</span>
-  <span><b>{len(hoga)}</b> hog &middot; <b>{len(medel)}</b> medel</span>
-</div>
-<div class="content">
-  {innehall}
-</div>
-<div class="sokord-panel">
-  <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;cursor:pointer;"
-       onclick="var e=document.getElementById('sp');e.style.display=e.style.display==='none'?'block':'none'">
-    Dagens sokord (klicka for att visa)
-  </div>
-  <div id="sp" style="display:none;">
-    <div style="font-size:11px;color:#aaa;margin-bottom:8px;">🔍 = fast karna &nbsp; ✨ = dynamisk</div>
-    {sokord_html}
+
+<div id="login">
+  <div id="login-box">
+    <h2>Rison Bevakning</h2>
+    <p>Ange lösenord för att fortsätta</p>
+    <input type="password" id="pw" placeholder="Lösenord" onkeydown="if(event.key==='Enter')logga_in()">
+    <button id="login-btn" onclick="logga_in()">Logga in</button>
+    <div id="fel">Fel lösenord</div>
   </div>
 </div>
+
+<div id="rapport">
+  <div class="header">
+    <h1>Rison Capital &middot; Omvarldsbevakning</h1>
+    <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; Google News via Serper</p>
+  </div>
+  <div class="stats">
+    <span><b>{stat['sokord']}</b> sokord ({stat['fasta']} fasta + {stat['dynamiska']} dynamiska)</span>
+    <span><b>{stat['hittade']}</b> artiklar hittades</span>
+    <span><b>{stat['efter_dubbletter']}</b> efter dubblettfiltrering</span>
+    <span><b>{stat['relevanta']}</b> relevanta</span>
+    <span><b>{len(hoga)}</b> hog &middot; <b>{len(medel)}</b> medel</span>
+  </div>
+  <div class="content">
+    {innehall}
+  </div>
+  <div class="sokord-panel">
+    <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;cursor:pointer;"
+         onclick="var e=document.getElementById('sp');e.style.display=e.style.display==='none'?'block':'none'">
+      Dagens sokord (klicka for att visa)
+    </div>
+    <div id="sp" style="display:none;">
+      <div style="font-size:11px;color:#aaa;margin-bottom:8px;">🔍 = fast karna &nbsp; ✨ = dynamisk</div>
+      {sokord_html}
+    </div>
+  </div>
+</div>
+
+<script>
+async function sha256(text) {{
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}}
+async function logga_in() {{
+  const pw = document.getElementById('pw').value;
+  const hash = await sha256(pw);
+  if (hash === '8d13224db15d8e30881ae4fe4f030228cdcd5de58692f72d481a0a3df89d939f') {{
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('rapport').style.display = 'block';
+    sessionStorage.setItem('auth', '1');
+  }} else {{
+    document.getElementById('fel').style.display = 'block';
+  }}
+}}
+if (sessionStorage.getItem('auth') === '1') {{
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('rapport').style.display = 'block';
+}}
+</script>
 </body>
 </html>"""
 

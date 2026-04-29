@@ -11,7 +11,7 @@ from pathlib import Path
 
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
 SERPER_API_KEY    = os.environ["SERPER_API_KEY"]
-OUTPUT_FILE       = Path(__file__).parent / "bevakning.html"
+OUTPUT_FILE       = Path(__file__).parent / "index.html"
 SEEN_FILE         = Path(__file__).parent / "sedda_artiklar.json"
 MIN_RELEVANS      = "Medel"
 BATCH_STORLEK     = 50

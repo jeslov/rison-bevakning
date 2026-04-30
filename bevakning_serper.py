@@ -19,7 +19,7 @@ TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
 LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
 MIN_RELEVANS      = "Hog"
-BATCH_STORLEK     = 25
+BATCH_STORLEK     = 10
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
 
 # ── Källor ────────────────────────────────────────────────────────────────────
@@ -330,7 +330,7 @@ def basta_i_grupp(grupp):
 
 def bedom_batch(artiklar):
     lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:800]}"
+        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:400]}"
         for i, a in enumerate(artiklar)
     )
     prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
@@ -445,6 +445,8 @@ def bedom_med_cache(representanter):
                 relevanta.append(b)
             else:
                 cache[aid] = None  # Markera som bedömd men irrelevant
+
+        time.sleep(3.0)
 
     spara_bedomning_cache(cache)
     return relevanta

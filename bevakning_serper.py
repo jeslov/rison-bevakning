@@ -18,6 +18,7 @@ DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
 MIN_RELEVANS      = "Medel"
+LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
 BATCH_STORLEK     = 10
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
 

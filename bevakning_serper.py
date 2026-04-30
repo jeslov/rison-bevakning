@@ -777,6 +777,12 @@ def main():
     print(f"\n  [5/5] Bedömer {len(representanter)} artiklar...")
     relevanta_repr = bedom_med_cache(representanter)
 
+    # Hamta fulltext for relevanta artiklar
+    print(f"  Hamtar fulltext for {len(relevanta_repr)} relevanta artiklar...")
+    for a in relevanta_repr:
+        if not a.get("fulltext"):
+            a["fulltext"] = hamta_text(a["url"])
+
     repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}
     grupper_relevanta = []
     for r in relevanta_repr:

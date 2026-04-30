@@ -515,8 +515,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Kort kommentar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
-      style="font-size:11px;background:none;border:1px solid #ddd;color:#999;cursor:pointer;padding:4px 10px;border-radius:2px;margin-left:auto;">
-      ✕
+      style="font-size:12px;background:none;border:1px solid #ccc;color:#999;cursor:pointer;padding:5px 12px;border-radius:2px;margin-left:auto;letter-spacing:0.3px;">
+      Ta bort
     </button>
   </div>
   {dubbletter_panel(grupp, idx)}
@@ -599,7 +599,7 @@ button:hover{{opacity:0.85}}
 <div id="rapport">
   {testlage_banner}
   <div class="header">
-    <h1>RISON &middot; Omvärldsbevakning</h1>
+    <h1>Rison &middot; Omvärldsbevakning</h1>
     <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
   <div class="stats">

@@ -647,7 +647,9 @@ Skriv ett LinkedIn-inlägg baserat på artikelns faktiska innehåll ovan. Följ 
 
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
-Innan du skriver inlägget, sök efter 1-2 aktuella svenska eller internationella källor, studier eller uttalanden från myndigheter eller branschorganisationer som stärker artikelns huvudpoäng. Väv in dessa naturligt i texten.
+Innan du skriver inlägget:
+1. Sök efter 1-2 aktuella svenska eller internationella källor, studier eller uttalanden från myndigheter eller branschorganisationer som stärker artikelns huvudpoäng. Väv in dessa naturligt i texten.
+2. För varje organisation du refererar till, sök upp deras LinkedIn-sida och inkludera rätt @-slug i texten baserat på URL:en (t.ex. linkedin.com/company/boverket → @boverket).
 
 Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
 

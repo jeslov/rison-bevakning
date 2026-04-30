@@ -499,7 +499,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
     {datum_str} {sokord_str}
   </div>
-  <div style="font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
     <a href="{url_esc}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
   </div>
   <div style="font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:8px;font-weight:300;">{escape_html(r.get('sammanfattning',''))}</div>
@@ -515,7 +515,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Kort kommentar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
-      style="font-size:12px;background:none;border:1px solid #ccc;color:#999;cursor:pointer;padding:5px 12px;border-radius:2px;margin-left:auto;letter-spacing:0.3px;">
+      style="font-size:12px;background:none;border:1px solid #aaa;color:#777;cursor:pointer;padding:5px 12px;border-radius:2px;margin-left:auto;letter-spacing:0.3px;">
       Ta bort
     </button>
   </div>
@@ -546,7 +546,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
             teman = cache.get("teman", [])
             sparad = cache.get("datum", "")[:10]
             if teman:
-                teman_tags = "".join(f'<span style="display:inline-block;background:#1a1a1a;color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;margin:3px;">{escape_html(t)}</span>' for t in teman)
+                teman_tags = "".join(f'<span style="display:inline-block;background:#293244;color:#EFEDE0;border-radius:2px;padding:3px 10px;font-size:12px;margin:3px;">{escape_html(t)}</span>' for t in teman)
                 zeitgeist_teman_html = f'<div style="max-width:760px;margin:0 auto;padding:20px 40px 24px;"><div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Veckans zeitgeist-teman (uppdaterad {sparad})</div><div>{teman_tags}</div></div>'
         except Exception:
             pass
@@ -574,7 +574,7 @@ body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100v
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
 .header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:2px solid rgba(255,255,255,0.4)}}
-.header h1{{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:1px}}
+.header h1{{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:1px}}
 .header p{{font-size:13px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
 .stats{{background:#181D27;border-bottom:2px solid rgba(255,255,255,0.2);padding:12px 40px;display:flex;gap:24px;font-size:13px;color:#8892a4;flex-wrap:wrap}}
 .stats b{{color:#EFEDE0}}

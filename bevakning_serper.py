@@ -433,6 +433,10 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     hoga  = [g for g in grupper_relevanta if g[0].get("relevansniva") == "Hog"]
     medel = [g for g in grupper_relevanta if g[0].get("relevansniva") == "Medel"]
 
+    # Las in stilreferens
+    stil_fil = Path(__file__).parent / "linkedin_stil.txt"
+    stil_text = stil_fil.read_text(encoding="utf-8").replace("`", "'").replace("\\", "\\\\") if stil_fil.exists() else ""
+
     def li_panel(li):
         if not li:
             return "<p style='color:#888;font-style:italic;padding:16px;'>Forslag kunde inte genereras.</p>"
@@ -619,19 +623,18 @@ button:hover{{opacity:0.85}}
 window.artiklar = window.artiklar || {{}};
 
 function kopiera_prompt(btn, titel, url) {{
-  const prompt = `Du ar kommunikationsansvarig pa Rison Capital och skriver ett LinkedIn-inlagg for Jesper Lovkvist, delagare.
+  const stilref = `{stil_text}`;
+  const prompt = `Du är kommunikationsansvarig på Rison Capital och skriver ett LinkedIn-inlägg för Jesper Lövkvist, delägare.
 
-Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar pa fastighetsagaren. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
+Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren. Bergvärme, BESS, värmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
 
-Ton: insiktsfull, direkt, lattl provocerande. Borjar med ovantad fraga eller pastande. Kopplar till Risons strukturella losning. Avslutar med dialog-fraga. Mal: CFO fastighetsbolag, BRF-styrelser, kommunala fastighetschefer.
+Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga:
 
-Las forst hela artikeln pa denna URL: ${{url}}
+${{stilref}}
 
-Skriv sedan ett LinkedIn-inlagg baserat pa artikelns faktiska innehall med:
-- Hook (oppningsmening som fangar uppmarksamhet)
-- 3 nyckelpoanger fran artikeln
-- Koppling till Risons erbjudande
-- Avslutande fraga som bjuder in till dialog`;
+Läs först hela artikeln på denna URL: ${{url}}
+
+Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen ovan – direkt, analytisk, utan säljiga fraser och utan generisk engagemangsfråga i slutet.`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

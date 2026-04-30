@@ -573,8 +573,8 @@ body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100v
 #login-btn{{width:100%;padding:10px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}}
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
-.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:1px solid rgba(255,255,255,0.4)}}
-.header h1{{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:500;letter-spacing:0.5px}}
+.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:2px solid rgba(255,255,255,0.4)}}
+.header h1{{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:1px}}
 .header p{{font-size:13px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
 .stats{{background:#181D27;border-bottom:2px solid rgba(255,255,255,0.2);padding:12px 40px;display:flex;gap:24px;font-size:13px;color:#8892a4;flex-wrap:wrap}}
 .stats b{{color:#EFEDE0}}

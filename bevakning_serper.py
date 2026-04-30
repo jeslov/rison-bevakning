@@ -514,6 +514,14 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
       Kort kommentar
     </button>
+    <button onclick="radera_artikel(this, '{url_esc}')"
+      style="font-size:11px;background:none;border:none;color:#bbb;cursor:pointer;padding:5px;margin-left:auto;">
+      ✕ Ta bort
+    </button>
+    <button onclick="radera_artikel(this, '{url_esc}')"
+      style="font-size:11px;background:none;border:none;color:#bbb;cursor:pointer;padding:5px;margin-left:auto;">
+      ✕ Ta bort
+    </button>
   </div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
@@ -569,10 +577,10 @@ body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100v
 #login-btn{{width:100%;padding:10px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}}
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
-.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:3px solid rgba(255,255,255,0.25)}}
+.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:1px solid rgba(255,255,255,0.4)}}
 .header h1{{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:500;letter-spacing:0.5px}}
-.header p{{font-size:11px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
-.stats{{background:#181D27;border-bottom:2px solid rgba(255,255,255,0.2);padding:10px 40px;display:flex;gap:24px;font-size:11px;color:#8892a4;flex-wrap:wrap}}
+.header p{{font-size:13px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
+.stats{{background:#181D27;border-bottom:2px solid rgba(255,255,255,0.2);padding:12px 40px;display:flex;gap:24px;font-size:13px;color:#8892a4;flex-wrap:wrap}}
 .stats b{{color:#EFEDE0}}
 .content{{max-width:760px;margin:0 auto;padding:24px 40px 32px}}
 .sokord-panel{{max-width:760px;margin:0 auto;padding:0 40px 40px}}
@@ -595,7 +603,7 @@ button:hover{{opacity:0.85}}
 <div id="rapport">
   {testlage_banner}
   <div class="header">
-    <h1>Rison Capital &middot; Omvärldsbevakning</h1>
+    <h1>RISON &middot; Omvärldsbevakning</h1>
     <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
   <div class="stats">
@@ -663,6 +671,32 @@ Avsluta med: "Läs artikeln: ${{url}}"`;
     setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#444'; }}, 2000);
   }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
+
+function radera_artikel(btn, url) {{
+  const kort = btn.closest('div[style*="border:1px solid"]');
+  if (kort) {{
+    kort.style.transition = 'opacity 0.3s';
+    kort.style.opacity = '0';
+    setTimeout(() => kort.style.display = 'none', 300);
+  }}
+  const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
+  if (!raderade.includes(url)) {{
+    raderade.push(url);
+    localStorage.setItem('raderade_artiklar', JSON.stringify(raderade));
+  }}
+}}
+
+// Dölj tidigare raderade artiklar vid sidladdning
+document.addEventListener('DOMContentLoaded', function() {{
+  const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
+  document.querySelectorAll('[onclick*="radera_artikel"]').forEach(btn => {{
+    const url = btn.getAttribute('onclick').match(/'([^']+)'\)$/)?.[1];
+    if (url && raderade.includes(url)) {{
+      const kort = btn.closest('div[style*="border:1px solid"]');
+      if (kort) kort.style.display = 'none';
+    }}
+  }});
+}});
 
 async function sha256(text) {{
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));

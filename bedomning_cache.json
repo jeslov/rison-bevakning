@@ -18,13 +18,15 @@
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 5,
-    "sammanfattning": "Artikel om hur miljöbyggnadscertifieringen hanteras i projektet Kallbäcks Terrasser i tre steg.",
-    "motivering": "Miljöbyggnadscertifiering berör energikrav och hållbar fastighetsutveckling vilket har indirekt relevans för Risons fokus på energieffektivisering i fastigheter."
+    "sammanfattning": "Artikel om hur miljöbyggnadscertifieringen hanteras i bostadsprojektet Kallbäcks Terrasser i tre steg.",
+    "motivering": "Miljöbyggnadscertifiering berör energikrav och hållbar fastighetsutveckling vilket är tangentiellt relevant för Risrons investeringsfokus."
   },
   "17a3e5ef6c3470eb8d83c7daf13ad5c2": null,
   "a4f0f741eb448f1b323331b4d1fb5227": null,
   "8216f53313a39baba480889ccd54728e": null,
   "b9033ccdf27b2aae7aa484e3cef64663": null,
+  "3470ff4ce45738528dbca266b3709187": null,
+  "0becf4b38c24c0cb09ae5d9281a367b1": null,
   "c539ce9478c27e3aeef181aa876098a6": null,
   "7793943f839b2d21ee11bd08b39eb5bc": null,
   "3e018576a10d97ac9a6d58b8643488d9": null,
@@ -35,16 +37,152 @@
   "b8520f9e3e6c4450a2c7d17a39124060": {
     "relevant": true,
     "relevansniva": "Medel",
-    "poang": 4,
-    "sammanfattning": "Fastighetsvarlden listar de 20 fastighetsbolag som har flest elbilsladdpunkter, med Fabege, Wihlborgs och Wallenstam i topp.",
-    "motivering": "Berör fastighetsbolags energiinfrastruktur men fokuserar på elbilsladdning vilket faller utanför kärnrelevansen för Risons EaaS-portfölj, dock ger viss marknadsinsikt om energiinvesterande fastighetsbolag."
+    "poang": 5,
+    "sammanfattning": "Fastighetsvarlden listar de 20 fastighetsbolag med flest elladdpunkter, med Fabege, Wihlborgs och Wallenstam i topp.",
+    "motivering": "Berör fastighetsbolagens energiinfrastruktur och hållbarhetsarbete, relevant men primärt elbilsladdning snarare än kärnområdet energieffektivisering."
   },
-  "bb3bc76ce826d2bfb42da46890f91a88": null,
-  "ecc9725d06dd9d014e346fcff96eeeda": {
+  "aeacbd13b06f249ffca4fd543c53ba43": null,
+  "37a229ae9482bc2b130b398d7bd1918d": {
+    "relevant": true,
+    "relevansniva": "Hog",
+    "poang": 8,
+    "sammanfattning": "Nytt webbverktyg möjliggör samberäkning av hela energisystemet i fastigheter för bättre beslutsunderlag vid projektering och investeringar.",
+    "motivering": "Direkt relevant för EaaS-projektering och investeringsbeslut kring integrerade energilösningar i fastigheter – stödjer Risons due diligence och kundprocesser."
+  },
+  "843217c24df8a6e9210ba8a067c76ae2": null,
+  "ffd963c3ca171420afab03d21a0ca77a": null,
+  "3460f64141dcba8d588a7e7082e39b61": null,
+  "ee35edefcff24a675ada7a229873a32d": null,
+  "2a43e548e82a93135b39dbfaa1c8fa15": null,
+  "5a1a97c65fb2574071d6f0a9cd39ab8f": {
+    "relevant": true,
+    "relevansniva": "Hog",
+    "poang": 9,
+    "sammanfattning": "Tyresö centrum, ett 45 000 kvm köpcentrum från 1965, byter ut sitt energisystem till en integrerad lösning med värmepumpar och geoenergi.",
+    "motivering": "Exakt kärncase för Rison – kommersiell fastighet genomför bergvärme/geoenergibyte med värmepumpar, relevant som marknadssignal och potentiellt affärscase för EaaS-finansiering."
+  },
+  "0e31aa9ec257c01219d6ea05e4c0019d": {
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 5,
-    "sammanfattning": "Caroline Meschke skriver debattartikel om RICS nya krav som påverkar hela fastighetsbranschen.",
-    "motivering": "RICS standarder berör ofta hållbarhet och energikrav i fastigheter vilket är relevant för Risons verksamhet, men snippeten ger otillräcklig information för att bekräfta direkt energikoppling."
-  }
+    "sammanfattning": "Riksantikvarieämbetet lyfter fram historiska byggnaders potential och hinder i energiomställningen.",
+    "motivering": "Berör energieffektivisering i befintligt byggnadsbestånd vilket är relevant för Risons marknad, men fokus på kulturarv begränsar den direkta affärsnyttan."
+  },
+  "d56f8153c9f966b7e5237ec54e33eb0d": null,
+  "2d59599f47d23f9485185eb6ebb70804": null,
+  "11ec8f967e46ee14ddb735d72e994437": null,
+  "423666fbdac0c6d5ba65d8a79d1a7a32": null,
+  "474ea5b79359c3d73b315b15f1be0b4d": null,
+  "d23b580c0c4de76728c63147cbae9545": null,
+  "d98d2cd561aa5c1228987eb0992ccc46": null,
+  "fddc703f1340e9e034edab723134bad9": null,
+  "aa6b4423c39686fbe9e6de0c5cb168a9": null,
+  "6268f513c45e4859514d60547853df85": null,
+  "269ba3f96fd9b1d7c5ebaaf7688ae85f": null,
+  "1d2ba8f9dc0a6d2946442a3ed3dd7dab": null,
+  "7814c2733d533b5f8e76f20f10c06fa8": null,
+  "72bfeaf1bf5c9f64ffb8dfd05a16e34d": null,
+  "3bad580c51e8865601766801152ba468": null,
+  "8daa1256012ca49af650fe3a001c118b": null,
+  "f122af4c60bdf253c495e7368d82359a": null,
+  "a7fab146b9790e7d1a8bde397a3bc4f1": null,
+  "e3be38ff4a3c1bff56370a8f0af17d00": null,
+  "b8a930ccb6028471c6add903abf62b84": null,
+  "61ace1adb93cd1e3b71a896fd621f6fe": null,
+  "4261623b6465135cfe921cc409b4f551": null,
+  "47ebd7662418fee248532921d2a480ab": null,
+  "d89afeedc374cc55844fd7feff302ef7": null,
+  "0768f2a3eed471dd1465093be1bd84e0": null,
+  "742f285c62a7378da23839b9da1d7139": null,
+  "74aa09acc9525fb7cb1c3db67bcfa829": null,
+  "90a064f6d006d5770853c260c1b61890": null,
+  "031f7779b1c39d3ff8dc721511918a95": null,
+  "99ec7805abcbdc1d7026907a6fba6fef": null,
+  "1dc598d751c2dc4dd81b2613aad010a5": {
+    "relevant": true,
+    "relevansniva": "Hog",
+    "poang": 9,
+    "sammanfattning": "EU förbjuder installation av gaspannor i nya byggnader från januari 2026 som del av utfasningen mot 2040.",
+    "motivering": "Direkt relevant för Rison Capital då EU:s förbud mot gaspannor driver efterfrågan på alternativa lösningar som bergvärme och värmepumpar i fastigheter, vilket är kärnan i EaaS-erbjudandet."
+  },
+  "3e309f0762c5601efe793000eccd7221": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Uppsala universitet beskriver geotermisk energi och jordens inre värme som ett växande grönt energislag.",
+    "motivering": "Berör geotermisk/bergvärme-teknik med koppling till fastighetsuppvärmning men fokuserar på storskalig geotermik snarare än bergvärme i fastigheter direkt."
+  },
+  "296e8e692694c24be166fd12ab5ec443": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Tidningen Extrakt lyfter geotermisk energi som växande grönt energislag med ny teknik som möjliggör utvinning på fler platser.",
+    "motivering": "Relevant som omvärldssignal om geotermisk energiteknikutveckling men saknar direkt koppling till fastighetsfinansiering eller EaaS."
+  },
+  "95aa60b84e0646d518d71e4e028337a5": {
+    "relevant": true,
+    "relevansniva": "Hog",
+    "poang": 7,
+    "sammanfattning": "Artikeln kopplar geotermisk energi direkt till bergvärme i svenska fastigheter och beskriver nästa generations teknologi.",
+    "motivering": "Direkt relevant då den explicit kopplar bergvärme till fastigheter och nästa generations teknik, vilket är kärnan i Rison Capitals affär."
+  },
+  "c12a5dd8d6f821f35744d82f23ac41aa": null,
+  "2f210c9ac1baf7f655a79dfd9c191f63": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Insändare argumenterar för att energistöd vid höga energipriser även bör omfatta hyresrätter.",
+    "motivering": "Berör energikostnader i hyresfastigheter vilket är relevant för Rison Capitals målmarknad, men är en opinionstext utan djupare analytiskt värde."
+  },
+  "4f64fd47b9f7bab7f93d6c60ff9e5554": {
+    "relevant": true,
+    "relevansniva": "Hog",
+    "poang": 8,
+    "sammanfattning": "Forskning från Umeå universitet visar hur AI-baserade metoder kan analysera energirenoveringars påverkan på utsläpp och kostnader i fastigheter.",
+    "motivering": "Direkt relevant för energieffektivisering i fastigheter och beslutsunderlag för investeringar, väl i linje med Rison Capitals EaaS-fokus."
+  },
+  "08ef808f15509c96d513aa7c9b8d3fca": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 4,
+    "sammanfattning": "Wallenstams stadsutvecklingsprojekt Kallebäcks Terrasser i Göteborg beskrivs med hållbarhetsfokus.",
+    "motivering": "Hållbar fastighetsutveckling är medel-relevant men snippeten ger ingen tydlig energieffektiviseringskoppling som motiverar hög prioritet."
+  },
+  "3ac60d56920a79e0bca9343e5ce5b204": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 4,
+    "sammanfattning": "Boverket utreder undantag från bygglovskrav för solcellspaneler och altaner.",
+    "motivering": "Solceller i fastigheter är relevant för Rison Capital men artikeln handlar primärt om bygglovsregler snarare än energieffektivisering eller finansiering."
+  },
+  "8a92099b04b8f36840482da37d16d63f": null,
+  "6e866845b0c138e89c381fdc8a6809cf": null,
+  "4cd7983dd8a8a51de0d8861ab1f63f40": null,
+  "e82646f2c00e500898d2d1d5056fbbc2": null,
+  "7e6aa122b95d321b76d30e8b95499892": null,
+  "7f71f594e2aba995238484b820429a48": null,
+  "11010e84e69395a81ca3e95b30eeffbf": {
+    "relevant": true,
+    "relevansniva": "Hog",
+    "poang": 8,
+    "sammanfattning": "EU-kommissionen, parlamentet och medlemsländer har enats om tidsplan för viktiga energi- och hållbarhetslagpaket före 2026.",
+    "motivering": "Direkt relevant då EU:s lagstiftningspaket sannolikt inkluderar EPBD och energikrav för byggnader som är kärnfrågor för Risons affärsmodell."
+  },
+  "04aaba89e2b65e353e6bf72cf5e80167": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Sammanställning av nya svenska lagar och förordningar inom miljö- och hållbarhetsområdet vecka 17.",
+    "motivering": "Kan innehålla regelverk relevant för energieffektivisering och fastigheter, men kräver granskning av specifikt innehåll."
+  },
+  "e0ae61af692dc41aae19c7d38d789825": null,
+  "4effa3544cca2fbf6bda614b4c421c11": null,
+  "52432ff9076784a3f13b05128b7b4be8": null,
+  "62c7258d7171e1a639a19ac16aafc2d9": null,
+  "8183c6379acda496846095fbf4c393c2": null,
+  "a438be93d898551315365a114d8d6dc8": null,
+  "75c3375b17c8de5d4b01b4d063ee2ba7": null,
+  "3aad176a9bd8407fa03c1532b73f9442": null,
+  "b0b5d2dbe9c4e1d1421ef063d46bf28c": null,
+  "a6f8ca29f0eb0316112a6f5b7418de6c": null
 }

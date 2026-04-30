@@ -366,10 +366,11 @@ Svara med JSON-lista (ingen annan text):
 # ── Testlage ──────────────────────────────────────────────────────────────────
 
 def spara_testart_artiklar(artiklar):
-    """Sparar 30 artiklar for testkorning."""
-    urval = artiklar[:30]
+    """Sparar 30 Serper-artiklar med hogst ranking for testkorning."""
+    serper_artiklar = [a for a in artiklar if a.get("kalla_typ") == "serper"]
+    urval = serper_artiklar[:30]
     TESTART_FILE.write_text(json.dumps(urval, ensure_ascii=False, indent=2))
-    print(f"  Sparade {len(urval)} testart-artiklar till {TESTART_FILE.name}")
+    print(f"  Sparade {len(urval)} Serper-testart-artiklar till {TESTART_FILE.name}")
 
 def ladda_testart_artiklar():
     """Laddar cachade testart-artiklar."""

@@ -344,7 +344,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "Kärnfull sammanfattning som täcker artikelns viktigaste poäng – Claude avgör lämplig längd baserat på artikelns komplexitet. Skriv lättbegripligt utan jargong.", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "Kärnfull sammanfattning som täcker artikelns viktigaste poäng – anpassa längden efter artikelns komplexitet. Skriv lättbegripligt utan jargong.", "motivering": "En mening"}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []

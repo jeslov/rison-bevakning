@@ -229,7 +229,7 @@ Identifiera dominerande teman och zeitgeist inom Risons fokusomraden.
 
 {chr(10).join(f"- {t}" for t in titlar[:150])}
 
-Generera 8 svenska sokord (2-3 ord) som fanger aktuella amnesomraden.
+Generera 8 svenska sokord (2-3 ord) som fanger aktuella amnesomraden specifikt inom energieffektivisering, energifinansering och energiteknik i fastigheter. Fokusera pa Risons karnomraden: bergvarme, BESS, varmepumpar, solceller, EPBD, grona obligationer, EaaS. Undvik breda fastighetstrender utan direkt energikoppling.
 Varje tema ska vara max 3 ord – ett substantiv eller kort nyckelord, inte en hel mening. Exempel: "EPBD-implementering", "bergvärme BRF", "gröna obligationer". Inte: "Ökade krav på energieffektivisering".
 
 Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3","s4","s6","s7","s8"]}}"""

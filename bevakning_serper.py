@@ -494,15 +494,16 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         kalla_typ_ikon = "📡" if r.get("kalla_typ") == "rss" else "🔍"
         datum_str  = f'<span style="font-size:11px;color:#aaa;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:10px;color:#ccc;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
-        titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
-        url_esc   = escape_html(r.get('url',''))
+        titel_esc    = escape_html(r.get('titel','')).replace("'", "\\'")
+        url_esc      = escape_html(r.get('url',''))
+        fulltext_esc = escape_html(r.get('fulltext', '') or r.get('beskrivning', ''))
         linkedin_knappar = ""
         if niva == "Hog":
             linkedin_knappar = (
-                f'<button onclick="kopiera_prompt(this, \'{titel_esc}\', \'{url_esc}\')"'
+                f'<button data-fulltext="{fulltext_esc}" onclick="kopiera_prompt(this, \'{titel_esc}\', \'{url_esc}\')"'
                 f' style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
                 f'&#128188; Kopiera LinkedIn-prompt</button>'
-                f' <button onclick="kopiera_kort_prompt(this, \'{url_esc}\')"'
+                f' <button data-fulltext="{fulltext_esc}" onclick="kopiera_kort_prompt(this, \'{url_esc}\')"'
                 f' style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
                 f'&#128172; Kort kommentar</button>'
             )
@@ -629,6 +630,7 @@ button:hover{{opacity:0.85}}
 <script>
 function kopiera_prompt(btn, titel, url) {{
   const stilref = `{stil_text}`;
+  const fulltext = btn.dataset.fulltext.replace(/`/g, "'");
   const prompt = `Du är kommunikationsansvarig på Rison Capital och skriver ett LinkedIn-inlägg för Jesper Lövkvist, delägare.
 
 Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren. Bergvärme, BESS, värmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
@@ -637,9 +639,11 @@ Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ d
 
 ${{stilref}}
 
-Läs först hela artikeln på denna URL: ${{url}}
+Här är artikelns fulltext:
 
-Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
+${{fulltext}}
+
+Skriv ett LinkedIn-inlägg baserat på artikelns faktiska innehåll ovan. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
 
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
@@ -655,11 +659,14 @@ Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
 
 function kopiera_kort_prompt(btn, url) {{
   const stilref = `{stil_text}`;
-  const prompt = `Läs artikeln på denna URL: ${{url}}
-
-Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga även i detta korta format:
+  const fulltext = btn.dataset.fulltext.replace(/`/g, "'");
+  const prompt = `Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga även i detta korta format:
 
 ${{stilref}}
+
+Här är artikelns fulltext:
+
+${{fulltext}}
 
 Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
 - Fångar artikelns viktigaste poäng i ett analytiskt perspektiv

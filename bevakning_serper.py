@@ -501,7 +501,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{escape_html(r['url'])}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Las artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, '{escape_html(r.get('titel','').replace(chr(39), ''))}')"
+    <button onclick="kopiera_prompt(this, '{escape_html(r.get('titel','').replace(chr(39), ''))}', '{escape_html(r.get('url',''))}')"
       style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
       &#128188; Kopiera LinkedIn-prompt
     </button>
@@ -618,20 +618,20 @@ button:hover{{opacity:0.85}}
 <script>
 window.artiklar = window.artiklar || {{}};
 
-function kopiera_prompt(btn, titel) {{
+function kopiera_prompt(btn, titel, url) {{
   const prompt = `Du ar kommunikationsansvarig pa Rison Capital och skriver ett LinkedIn-inlagg for Jesper Lovkvist, delagare.
 
 Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar pa fastighetsagaren. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
 
-Ton: insiktsfull, direkt, latt provocerande. Borjar med ovantad fraga eller pastande. Kopplar till Risons strukturella losning. Avslutar med dialog-fraga. Mal: CFO fastighetsbolag, BRF-styrelser, kommunala fastighetschefer.
+Ton: insiktsfull, direkt, lattl provocerande. Borjar med ovantad fraga eller pastande. Kopplar till Risons strukturella losning. Avslutar med dialog-fraga. Mal: CFO fastighetsbolag, BRF-styrelser, kommunala fastighetschefer.
 
-ARTIKEL: ${{titel}}
+Las forst hela artikeln pa denna URL: ${{url}}
 
-Generera ett LinkedIn-inlagg med:
-- Hook (oppningsmening)
+Skriv sedan ett LinkedIn-inlagg baserat pa artikelns faktiska innehall med:
+- Hook (oppningsmening som fangar uppmarksamhet)
 - 3 nyckelpoanger fran artikeln
 - Koppling till Risons erbjudande
-- Avslutande fraga`;
+- Avslutande fraga som bjuder in till dialog`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

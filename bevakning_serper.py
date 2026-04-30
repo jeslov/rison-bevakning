@@ -344,7 +344,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En mening om vad artikeln handlar om", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "Kärnfull sammanfattning som täcker artikelns viktigaste poäng – Claude avgör lämplig längd baserat på artikelns komplexitet. Skriv lättbegripligt utan jargong.", "motivering": "En mening"}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []
@@ -647,12 +647,17 @@ Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
 }}
 
 function kopiera_kort_prompt(btn, url) {{
+  const stilref = `{stil_text}`;
   const prompt = `Läs artikeln på denna URL: ${{url}}
+
+Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga även i detta korta format:
+
+${{stilref}}
 
 Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
 - Fångar artikelns viktigaste poäng i ett analytiskt perspektiv
 - Förklarar varför den är värd att läsa för någon i fastighetsbranschen
-- Är skriven i en direkt, icke-säljig ton
+- Är skriven i en direkt, icke-säljig ton i Jespers stil
 
 Avsluta med: "Läs artikeln: ${{url}}"`;
 

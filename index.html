@@ -42,7 +42,7 @@ button:hover{opacity:0.85}
   <div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används · 96 bedömningar i cache</div>
   <div class="header">
     <h1>Rison Capital &middot; Omvärldsbevakning</h1>
-    <p>30 April 2026, 15:32 &middot; 10 relevanta artiklar &middot; RSS + Google News via Serper</p>
+    <p>30 April 2026, 17:01 &middot; 10 relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
   <div class="stats">
     <span><b>0</b> RSS</span>
@@ -506,12 +506,190 @@ Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
 }
 
 function kopiera_kort_prompt(btn, url) {
+  const stilref = `VIKTIG INSTRUKTION TILL CLAUDE:
+Exemplen nedan visar Jespers ton, argumentationsstruktur och skrivsätt – inte ämnesområde.
+Plocka upp hur han bygger argument, hur han provocerar etablerade sanningar, hur han avslutar.
+Använd INTE faktatermer, branschspecifika begrepp eller konkreta förslag från exemplen –
+bara skrivsättet och rösten. Ämnet i varje inlägg du skriver ska alltid vara artikeln du fått.
+
+
+
+Dessa inlägg visar tonläge, struktur och uttryckssätt. Använd dem som mall.
+
+---
+
+EXEMPEL 1:
+
+När det är någon annan som tar investeringen för att energieffektivisera dina fastigheter så blir frågan inte längre hur du ska kunna skapa största möjliga avkastning på en egen investering. Frågan blir istället hur stor besparing du kan göra till följd av någon annans investering.
+
+Det här är en i grunden ny dynamik som branschen står helt yrvaken inför. Och det är inte konstigt eftersom Rison Capital hittills är i princip helt ensamma om att erbjuda den möjligheten.
+
+De positiva effekterna av att som fastighetsägare göra sin energiomställning med hjälp av externa investeringar är många och stora. Både för klimatet och den egna ekonomin. När man slipper använda eget kapital och lånade pengar öppnas en rad möjligheter som gör att man helt kan skifta fokus i hur man ser på utmaningen att minska sin energiförbrukning.
+
+Jämförelsen med andra finansieringsformer blir också den haltande eftersom effekterna för verksamheten är så pass olika. Direkt och indirekt. När någon annan gör investeringen så binder den inte fastighetsägarens eget kapital och varje enskild åtgärd ger dessutom en besparing från dag ett till följd av minskad energiförbrukning.
+
+Det innebär i sin tur att ju fler åtgärder du som fastighetsägare genomför desto större besparing gör du. Och i ju högre takt du gör dem, desto snabbare får du ta del av de besparingarna. Både i form av lägre kostnader och minskad klimatpåverkan.
+
+Det är viktigt, inte minst eftersom det får så många positiva följdeffekter. Varav några av de viktigaste är att:
+
+• Det binder projektkostnaderna för de åtgärder som genomförs till dagens priser.
+• Den externa investeraren kommer alltid att ha fokus på lägsta möjliga driftkostnad.
+• Lägre energiförbrukning ger högre energiklassning, vilket i sin tur ger lägre räntor och ökat fastighetsvärde.
+
+Att göra en energiomställning av hela fastigheter eller fastighetsbestånd kräver skalbarhet. Och i en affärsverksamhet så är det lönsamhet som lägger grunden för den skalbarheten. Utan den skalbarheten förblir många tänkbara lösningar just bara tänkbara. Inte praktiskt genomförbara.
+
+Men nu finns som sagt andra möjligheter. Och det är dags för fastighetsbranschen att omfamna dem.
+
+---
+
+EXEMPEL 2:
+
+Solcellerna på svenska tak sitter inte där för att de är de mest effektiva och lönsamma investeringarna för att minska en fastighets klimatpåverkan. De sitter där för att solceller har blivit ett sätt att visa att man "gör något".
+
+Om man istället varit ute efter maximal klimatnytta och den ekonomiskt mest hållbara lösningen så hade valet sällan fallit på solceller. För de allra flesta åtgärder du kan ägna dig åt inom energieffektivisering är bättre när det gäller klimateffekt per investerad krona än solceller.
+
+Det låter kanske uppseendeväckande men är faktiskt ett helt odramatiskt konstaterande. När man ställer upp kalkyler för solceller jämte andra lösningar för energieffektivisering framgår det med all önskvärd tydlighet.
+
+Under kommande år ökar kraven på att installera solceller även från EU-håll. Det är därför angeläget att påpeka för Regeringen att det finns en möjlighet att främja mer effektiva lösningar genom att inte blint följa EUs direktiv som de ser ut nu. För det finns en öppning för EU-länder att göra undantag utifrån "tekniska, ekonomiska och funktionella kriterier samt teknikneutralitet".
+
+Det här innebär inte att solceller på byggnader inte har något existensberättigande. Det har de absolut i vissa fall. Men de bör i första hand fylla sin roll i kombination med andra åtgärder som syftar till att minska energiåtgången.
+
+---
+
+EXEMPEL 3:
+
+Varför gör fler företag inte större investeringar i energieffektivisering? Även nu när kommande krav från EU i snabb takt kommer att tvinga fram dessa åtgärder?
+
+Det är ungefär som att fråga varför fler företag inte gör större investeringar i energiproduktion. Eller Bitcoin. De allra flesta företag har ett tydligt definierat uppdrag som överskuggar precis alla andra: att leverera mesta möjliga värdeutväxling till sina aktieägare genom ett obrutet fokus på sin kärnverksamhet.
+
+Nyckeltal och därmed investerbarheten och börskurs straffas obönhörligen när företagen låser upp kapital i exempelvis energieffektivisering. Och eftersom den typen av åtgärder ligger utanför kärnverksamheten så spelar det mindre roll om återbetalningstiden är aldrig så kort.
+
+I väntan på att dessa uppdrag omformuleras i takt med att lagar, regler och marknadens krav skiftar så måste dessa utmaningar lösas på annat sätt. Det är vad vi gör på Rison.
+
+---
+
+EXEMPEL 4:
+
+Här kommer ett litet medskick till alla er som ska arrangera eller besöka seminarier om energieffektivisering och renovering av fastigheter i Almedalen.
+
+Finansiering blir den riktigt tunga frågan när vi ska ta oss an de kommande årens kraftigt ökade krav på energieffektivitet i fastigheter och andra verksamheter.
+
+Praktiskt genomförbara lösningar som kapar energibehovet är såklart helt centrala, men såna finns det redan väldigt gott om. Det är bara att de inte realiseras. Tilläggsisolering, effektiva fläktsystem och solceller är inte direkt några nya uppfinningar.
+
+Skon klämmer nån annan stans. Vad vi behöver ägna mer fokus åt nu är hur dessa och många andra lösningar ska kunna komma på plats. Då är frågan om tillgången på investeringsvilligt kapital helt avgörande.
+
+Faktum är att den frågan är den allra största elefanten i rummet. Att finansieringsfrågan hittills inte varit löst är den enskilt största anledningen till att utvecklingen på området inte gått fortare.
+
+Min uppmaning blir att under veckan i alla dessa sammanhang lyfta frågan om var finansieringen av dessa enormt kapitalintensiva investeringar ska komma ifrån. Frågan måste inte bara in på dagordningen, den måste allt oftare placeras som fråga nummer ett på dagordningen.
+
+---
+
+EXEMPEL 5:
+
+Ska du energieffektivisera din verksamhet eller inte?
+
+Nu behöver du inte längre ställa åtgärder inom energieffektivisering mot andra investeringar. Frågan är inte längre om vilken avkastning du kan få på en egen investering. Den är istället hur mycket pengar du kan spara på att låta någon annan göra investeringen istället.
+
+Liknelsen blir då: vill du fortsätta köra din dieselbil med hög kostnad och klimatpåverkan eller vill du utan att göra någon egen investering få tillgång till en elbil med bättre funktioner, lägre driftkostnad och drastiskt minskad klimatpåverkan.
+
+---
+
+EXEMPEL 6:
+
+Nu behövs inga ursäkter längre!
+
+Att många företag hittills avstått från att göra mer omfattande investeringar i energieffektivisering är helt självklart utifrån ett strikt företagsekonomiskt och verksamhetsmässigt perspektiv.
+
+Men i dag ser verkligheten helt annorlunda ut. Nu finns möjligheten för företag att få väldigt många av dessa åtgärder på plats utan att behöva göra någon egen investering. Och på köpet sänka sina driftkostnader rejält.
+
+Nu behöver den här typen av beslut inte längre ställas mot andra möjliga investeringar i verksamheten eftersom det är tredje part som gör investeringen. Tidigare giltiga argument om internränta, krångel, brist på kapital och kompetens är helt plötsligt inte längre relevanta.
+
+Frågan handlar alltså inte längre om vad man kan få för avkastning på en egen investering i energieffektivisering. Den handlar istället om hur stor besparing verksamheten kan göra när man låter tredje part göra en investering i åtgärder som sänker verksamhetens kostnader och samtidigt minskar dess klimatpåverkan.
+
+Frågan blir nu istället: vilka ursäkter finns kvar för att inte göra det?
+
+---
+
+STILREGLER ATT FÖLJA:
+- Direkt och analytisk ton – skriver till branschen inifrån, inte till den
+- Provocerar etablerade sanningar eller branschen konventioner
+- Bygger argument metodiskt, steg för steg
+- Avslutar med ett påstående eller en retorisk fråga – aldrig en generisk engagemangsfråga
+- Inga tomma fraser, inga hook-formler
+- Nämner Rison sparsamt och naturligt – aldrig säljigt
+- Skriver på svenska med korrekt stavning och grammatik
+
+---
+
+EXEMPEL 7 (från annan bransch – använd bara stilen, inte innehållet):
+
+Om du som bostadsarkitekt i framtiden inte bara vill kunna försörja dig utan dessutom vill bidra till ett vettigare samhällsbyggande så är det dags att tänka nytt. Mitt tips är då att du på riktigt börjar intressera dig för hur du kan bidra till att påverka branschens ekonomiska dynamik på systemnivå.
+
+Det finns flera spår av resignation i dagens bostadsbransch. Dels har vi lägret som inte bekymrar sig särskilt mycket över annat än siffror. Utmaningen är kvantitet. Vi ska så snabbt som möjligt tillbaka till en situation där marknadens aktörer levererar produkter med den kvalitetsnivå man anser adekvat och vi övriga får tacka och ta emot.
+
+Sedan finns det andra perspektivet, som handlar om de som vill mer. Som ser nödvändigheten i att göra saker bättre och hållbarare ur ett humanistiskt, socialt, ekonomiskt och ekologiskt perspektiv. Men som ändå ofta jobbar på i staten-och-kapitalet-pragmatikernas grottekvarn ett helt yrkesliv. Ofta med hänvisning till att man från sin position inte kan påverka "systemet".
+
+Men vad de fria agenterna liksom deras påhejare ofta missar är att dessa projekt saknar själva grunden för skalbarhet. Nämligen lönsamhet för de grupper av aktörer som i dag styr och ställer.
+
+Absoluta merparten av traditionella aktörer kommer aldrig frivilligt att avstå från vinstmarginaler i den storleksordning man vant sig vid de senaste decennierna, för något högre syftes skull.
+
+Här finns en öppning. För det råder fortfarande ingen brist på kapital med låga avkastningskrav som vill finansiera rätt typ av verksamheter.
+
+Vill du ha ett större ansvar för dina projekt så är det dags att ta det. För vid det här laget borde det vara tydligt att ingen traditionell aktör frivilligt kommer att ge det till dig.
+
+Och tiden för att bli det kan faktiskt vara den allra bästa just precis nu.
+
+
+---
+
+EXEMPEL 8 (från annan bransch – använd bara stilen, inte innehållet):
+
+Under sommaren har jag postat en del på LinkedIn. Det har bland annat blivit några ganska öppenhjärtiga texter om brister jag och andra på "utsidan" har upplevt i kommunernas organisationer och arbetssätt.
+
+Det sista man vill när man skriver texter av den typen är att man ska få problemen man beskriver bekräftade från så många håll. Oberoende av varandra. Dessutom i första hand av personer som jobbar inom kommunen.
+
+De flesta som hört av sig instämmer inte bara i förekomsten av trassliga processer, silostrukturer, inkompetens och slarv. De pekar också på de dramatiskt negativa konsekvenser det får. Både när det gäller processer och slutresultat.
+
+Det är tragiskt. Man vill göra ett bra jobb men upplever att förutsättningarna inte finns.
+
+Jag skriver inte om kommunerna för mitt eget höga nöjes skull. Det är ofta rätt jobbigt att behöva vara budbäraren. Man blir lätt skjuten på när man väljer att prata öppet om problem av den här typen. Mottagaren tolkar ofta i affekt som att man avfärdar precis allt som värdelöst.
+
+Men vad återstår att göra när det finns en sådan oerhörd rädsla i branschen för att prata om dessa utmaningar och hur vi ska komma tillrätta med dem? Det är väl ändå dags att bryta med branschens stolta tradition att lida i tystnad.
+
+Steg 1 är att se problemen. Och första steget i den processen måste vara att konstatera vilka problemen är och vad den faktiska orsaken till dem är.
+
+Det behövs alldeles säkert fler duktiga planarkitekter på kommunerna. Men jag tycker att de också borde anställa betydligt fler organisationsarkitekter. Alltså fler mästare på att bygga välfungerande organisationer som de sedan inreder med processer och metoder som ger bättre förutsättningar för att kunna leverera rätt resultat.
+
+
+---
+
+EXEMPEL 9 (från annan bransch – använd bara stilen, inte innehållet):
+
+Fastighetsbranschen är till övervägande del lika med finansbranschen. Trots det är kunskaperna om investerings-, projekt- och fastighetsekonomi inom kåren i princip obefintliga.
+
+Mycket handlar om en attityd som odlats under åtskilliga decennier. Samtidigt är gnället över att man inte får det förtroende och ansvar man borde tilldelas öronbedövande runt kaffebryggarna på landets arkitektkontor. Det går inte ihop.
+
+Kunskap är makt brukar det heta. Men om man saknar tillräckliga kunskaper om det som utgör själva fundamentet för den bransch man verkar i så ska man nog inte bli överdrivet förvånad om ens roll och förtroende blir kringskuret.
+
+Det är allt för sällan man lyfter blicken. Det finns en enorm passivitet som griper omkring sig. Man upplever sig låst i en struktur som inte lämnar något utrymme till påverkan på en systemisk nivå.
+
+Fartblinda förväxlar vi det som är bråttom med det som är viktigt på riktigt. Vi bottnar inte i en analys om vad det är som skapar problemen i strukturen vi verkar i. Vi har i stället alldeles för lätt att ha överseende med saker som skaver. Att bemästra konsten att stå ut ses som en god egenskap. När det i själva verket borde vara precis tvärtom.
+
+Om branschen inte kommer till dig med den typen av projekt, uppdrag och ansvar som du tycker är lämpligt så måste det bli tvärtom. Och så här långt in i krisen är det alltmer tydligt att berget inte har några planer på att komma till Mohammed.
+
+Nu är det upp till dig att paketera ett nytt arbetssätt, baserat på alla surt förvärvade kunskaper du samlat på dig i goda tider.
+
+`;
   const prompt = `Läs artikeln på denna URL: ${url}
+
+Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga även i detta korta format:
+
+${stilref}
 
 Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
 - Fångar artikelns viktigaste poäng i ett analytiskt perspektiv
 - Förklarar varför den är värd att läsa för någon i fastighetsbranschen
-- Är skriven i en direkt, icke-säljig ton
+- Är skriven i en direkt, icke-säljig ton i Jespers stil
 
 Avsluta med: "Läs artikeln: ${url}"`;
 

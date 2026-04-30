@@ -18,8 +18,8 @@ DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
 LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
-MIN_RELEVANS      = "Medel"
-BATCH_STORLEK     = 10
+MIN_RELEVANS      = "Hog"
+BATCH_STORLEK     = 25
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
 
 # ── Källor ────────────────────────────────────────────────────────────────────
@@ -492,6 +492,16 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         sokord_str = f'<span style="font-size:10px;color:#ccc;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
+        linkedin_knappar = ""
+        if niva == "Hog":
+            linkedin_knappar = (
+                f'<button onclick="kopiera_prompt(this, \'{titel_esc}\', \'{url_esc}\')"'
+                f' style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
+                f'&#128188; Kopiera LinkedIn-prompt</button>'
+                f' <button onclick="kopiera_kort_prompt(this, \'{url_esc}\')"'
+                f' style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
+                f'&#128172; Kort kommentar</button>'
+            )
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
     <span style="font-size:11px;color:#666;font-weight:600;">{kalla_typ_ikon} {escape_html(r['kalla'])}</span>
@@ -506,14 +516,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{url_esc}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
-      style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
-      &#128188; Kopiera LinkedIn-prompt
-    </button>
-    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
-      style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
-      &#128172; Kort kommentar
-    </button>
+    {linkedin_knappar}
   </div>
   {dubbletter_panel(grupp, idx)}
 </div>"""

@@ -330,7 +330,7 @@ def basta_i_grupp(grupp):
 
 def bedom_batch(artiklar):
     lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Snippet: {a.get('beskrivning','')[:300]}"
+        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:800]}"
         for i, a in enumerate(artiklar)
     )
     prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
@@ -346,7 +346,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "Minst 3 meningar, max 6. Täck: (1) vad artikeln handlar om, (2) vad som är nytt eller anmärkningsvärt, (3) varför det är relevant för fastighetsbranschen.", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "3-5 meningar baserat på artikelns faktiska innehåll. Täck vad artikeln handlar om, vad som är nytt eller anmärkningsvärt, och varför det är relevant för fastighetsbranschen.", "motivering": "En mening"}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []

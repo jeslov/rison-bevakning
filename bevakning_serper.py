@@ -1,20 +1,31 @@
 #!/usr/bin/env python3
 """
 Rison Capital - Daglig omvarldsbevakning via Serper (Google Search)
-v2: Dubblettfiltrering fore bedomning, batch-bedomning (50/anrop),
-    annonsfilter, publiceringsdatum, sortering pa datum
+v3: Reducerad fulltext i batch (400 tecken), Claude-steget i dubblettfiltrering
+    borttaget, zeitgeist-analys (veckovis cachad)
 """
 
 import os, json, hashlib, time, re, requests
-from datetime import datetime, timezone
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
 SERPER_API_KEY    = os.environ["SERPER_API_KEY"]
 OUTPUT_FILE       = Path(__file__).parent / "index.html"
 SEEN_FILE         = Path(__file__).parent / "sedda_artiklar.json"
+ZEITGEIST_FILE    = Path(__file__).parent / "zeitgeist_cache.json"
 MIN_RELEVANS      = "Medel"
-BATCH_STORLEK     = 50
+BATCH_STORLEK     = 10
+
+# Målmedier för zeitgeist-analys
+MALMEDIER = [
+    "fastighetstidningen.se", "fastighetsnytt.se", "fastighetssverige.se",
+    "fastighetsvarlden.se", "byggvarlden.se", "byggindustrin.se",
+    "fastighetsagarna.se", "energi-miljo.se", "energi.se",
+    "energinyheter.se", "energimyndigheten.se", "aktuellhallbarhet.se",
+    "bostadsratterna.se", "hsb.se", "riksbyggen.se", "sbc.se",
+    "dagenssamhalle.se", "nyteknik.se",
+]
 
 FASTA_SOKORD = [
     "bergvärme fastighet",
@@ -65,6 +76,8 @@ Effektiva inlagg: borjar med ovantad fraga eller pakstande, kopplar omvarlden ti
 strukturella losning, avslutar med dialog-fraga. Ton: professionell men aldrig torr.
 """.strip()
 
+# ── Grundfunktioner ───────────────────────────────────────────────────────────
+
 def ladda_sedda():
     if SEEN_FILE.exists():
         return set(json.loads(SEEN_FILE.read_text()))
@@ -109,37 +122,7 @@ def claude_anrop(prompt, max_tokens=1000):
                 time.sleep(5)
     return None
 
-def generera_dynamiska_sokord():
-    datum = datetime.now().strftime("%d %B %Y")
-    manad = datetime.now().month
-    if manad in (3, 4, 5):
-        sasong = "Var: BRF-stammer vanliga, energideklarationer i fokus"
-    elif manad in (6, 7, 8):
-        sasong = "Sommar: Planering av hostinstallationer, solcellsprojekt aktiva"
-    elif manad in (9, 10, 11):
-        sasong = "Host: Uppvarmningssasong, varmepumpar och fjarvarmebyte aktuella"
-    else:
-        sasong = "Vinter: Energikostnader i fokus, arsbokslut fastighetsbolag"
-
-    prompt = f"""Du ar omvarldsanalytiker for Rison Capital. Idag ar det {datum}.
-Sasong: {sasong}
-
-Generera 5 svenska Google-sokord (2-3 naturliga svenska ord per sokning) som
-kompletterar de fasta sokorden. Fanga dagsaktuella nyheter inom energieffektivisering
-och fastighetssektorn. Format: korta naturliga ordkombinationer som "bergvärme BRF".
-
-Svara ENDAST med JSON-lista: ["sokord 1", "sokord 2", "sokord 3", "sokord 4", "sokord 5"]"""
-
-    svar = claude_anrop(prompt, max_tokens=200)
-    if not svar:
-        return []
-    try:
-        sokord = json.loads(svar)
-        return sokord if isinstance(sokord, list) else []
-    except Exception:
-        return []
-
-def sok_serper(sokord, antal=10):
+def sok_serper(sokord, antal=10, tidsfilter="qdr:w"):
     try:
         r = requests.post(
             "https://google.serper.dev/news",
@@ -152,7 +135,7 @@ def sok_serper(sokord, antal=10):
                 "gl": "se",
                 "hl": "sv",
                 "num": antal,
-                "tbs": "qdr:3d",
+                "tbs": tidsfilter,
             },
             timeout=10,
         )
@@ -171,7 +154,6 @@ def sok_serper(sokord, antal=10):
             for n in nyheter
             if n.get("title") and n.get("link")
                and "ANNONS" not in n.get("title", "").upper()
-               and "ANNONS:" not in n.get("title", "")
         ]
     except Exception:
         return []
@@ -198,7 +180,132 @@ def hamta_text(url):
     except Exception:
         return ""
 
-# ── Dubblettgruppering ────────────────────────────────────────────────────────
+# ── Zeitgeist-analys ──────────────────────────────────────────────────────────
+
+def zeitgeist_behovs_uppdatering():
+    """Kontrollerar om zeitgeist-cachen ar aldre an 7 dagar."""
+    if not ZEITGEIST_FILE.exists():
+        return True
+    try:
+        cache = json.loads(ZEITGEIST_FILE.read_text())
+        sparad = datetime.fromisoformat(cache.get("datum", "2000-01-01"))
+        return (datetime.now() - sparad).days >= 7
+    except Exception:
+        return True
+
+def uppdatera_zeitgeist():
+    """
+    Hamtar artiklar fran malmedier senaste 30 dagarna och
+    ber Claude identifiera dominerande teman och begrepp.
+    Sparar resultatet i zeitgeist_cache.json.
+    """
+    print("  Uppdaterar zeitgeist-analys (kors var 7e dag)...")
+
+    # Hamta titlar och snippets fran malmedier
+    titlar = []
+    for medium in MALMEDIER:
+        sokord = f"site:{medium} energi fastighet"
+        traff = sok_serper(sokord, antal=10, tidsfilter="qdr:m")
+        for a in traff:
+            titlar.append(f"{a['titel']} – {a['beskrivning'][:100]}")
+        time.sleep(0.2)
+
+    if not titlar:
+        print("  Inga artiklar hittades for zeitgeist-analys")
+        return []
+
+    print(f"  {len(titlar)} artiklar fran malmedier analyseras...")
+
+    prompt = f"""Du ar omvarldsanalytiker for Rison Capital.
+
+{RISON_KONTEXT}
+
+Nedan ar titlar och snippets fran svenska malmedier inom energi och fastighet
+fran de senaste 30 dagarna. Analysera vilka teman, begrepp, aktorer och
+diskussioner som dominerar just nu – zeitgeist inom Risons fokusomraden.
+
+ARTIKLAR:
+{chr(10).join(f"- {t}" for t in titlar[:150])}
+
+Baserat pa denna analys, generera 8 svenska Google-sokord (2-3 ord per sokning)
+som fanger de mest aktuella och relevanta amnesomradena for Rison just nu.
+Sokorden ska komplettera de fasta sokorden och fanga det som ar i rorelsen.
+
+Svara med JSON:
+{{
+  "teman": ["tema 1", "tema 2", "tema 3", "tema 4", "tema 5"],
+  "sokord": ["sokord 1", "sokord 2", "sokord 3", "sokord 4", "sokord 5", "sokord 6", "sokord 7", "sokord 8"]
+}}"""
+
+    svar = claude_anrop(prompt, max_tokens=500)
+    if not svar:
+        return []
+
+    try:
+        data = json.loads(svar)
+        teman  = data.get("teman", [])
+        sokord = data.get("sokord", [])
+
+        # Spara cache
+        ZEITGEIST_FILE.write_text(json.dumps({
+            "datum":  datetime.now().isoformat(),
+            "teman":  teman,
+            "sokord": sokord,
+        }, ensure_ascii=False, indent=2))
+
+        print(f"  Zeitgeist-teman: {', '.join(teman)}")
+        return sokord
+    except Exception:
+        return []
+
+def hamta_zeitgeist_sokord():
+    """Returnerar cachade zeitgeist-sokord, uppdaterar om nodvandigt."""
+    if zeitgeist_behovs_uppdatering():
+        return uppdatera_zeitgeist()
+    try:
+        cache = json.loads(ZEITGEIST_FILE.read_text())
+        sokord = cache.get("sokord", [])
+        sparad = cache.get("datum", "")[:10]
+        print(f"  Anvander cachad zeitgeist fran {sparad} ({len(sokord)} sokord)")
+        return sokord
+    except Exception:
+        return uppdatera_zeitgeist()
+
+# ── Dagsaktuella dynamiska sokord ─────────────────────────────────────────────
+
+def generera_dagsaktuella_sokord(zeitgeist_sokord):
+    """Genererar 3 dagsaktuella sokord baserat pa datum och zeitgeist."""
+    datum = datetime.now().strftime("%d %B %Y")
+    manad = datetime.now().month
+    if manad in (3, 4, 5):
+        sasong = "Var: BRF-stammer vanliga, energideklarationer i fokus"
+    elif manad in (6, 7, 8):
+        sasong = "Sommar: Planering av hostinstallationer, solcellsprojekt aktiva"
+    elif manad in (9, 10, 11):
+        sasong = "Host: Uppvarmningssasong, varmepumpar och fjarvarmebyte aktuella"
+    else:
+        sasong = "Vinter: Energikostnader i fokus, arsbokslut fastighetsbolag"
+
+    prompt = f"""Du ar omvarldsanalytiker for Rison Capital. Idag ar det {datum}.
+Sasong: {sasong}
+
+Zeitgeist-sokord som redan anvands denna vecka: {', '.join(zeitgeist_sokord)}
+
+Generera 3 dagsaktuella svenska Google-sokord (2-3 ord) som fanger
+vad som hander just idag. Ska skilja sig fran zeitgeist-sokorden ovan.
+
+Svara ENDAST med JSON-lista: ["sokord 1", "sokord 2", "sokord 3"]"""
+
+    svar = claude_anrop(prompt, max_tokens=100)
+    if not svar:
+        return []
+    try:
+        sokord = json.loads(svar)
+        return sokord if isinstance(sokord, list) else []
+    except Exception:
+        return []
+
+# ── Dubblettgruppering (bara textlikhet) ──────────────────────────────────────
 
 def titel_likhet(a, b):
     stoppord = {"och","i","på","av","för","med","som","en","ett","är","det","de",
@@ -212,8 +319,7 @@ def titel_likhet(a, b):
     return len(a_ord & b_ord) / max(len(a_ord), len(b_ord))
 
 def gruppera_dubletter(artiklar):
-    """Steg 1: Textlikhet. Steg 2: Claude slår ihop grupper om samma händelse."""
-    # Steg 1
+    """Grupperar dubletter med textlikhet – inget Claude-anrop."""
     grupper = []
     anvanda = set()
     for i, a in enumerate(artiklar):
@@ -228,87 +334,36 @@ def gruppera_dubletter(artiklar):
                 grupp.append(b)
                 anvanda.add(j)
         grupper.append(grupp)
-
-    if len(grupper) == len(artiklar):
-        return grupper  # Inga uppenbara dubletter, skippa Claude-steget
-
-    # Steg 2: Claude
-    titlar = [g[0]["titel"] for g in grupper]
-    prompt = f"""Du ar redaktor. Nedan ar numrerade artikelrubriker.
-Identifiera vilka som handlar om exakt samma nyhetshändelse (inte bara samma amne).
-
-{chr(10).join(f"{i+1}. {t}" for i, t in enumerate(titlar))}
-
-Svara med JSON dar varje element ar en lista av 1-baserade index som ska grupperas.
-Artiklar utan dubbletter ar egna grupper. Exempel: [[1,3],[2],[4,5]]
-Svara ENDAST med JSON-lista, ingen annan text."""
-
-    svar = claude_anrop(prompt, max_tokens=500)
-    if not svar:
-        return grupper
-    try:
-        gruppindex = json.loads(svar)
-        nya = []
-        for idxlista in gruppindex:
-            sammanslagen = []
-            for idx in idxlista:
-                if 1 <= idx <= len(grupper):
-                    sammanslagen.extend(grupper[idx - 1])
-            if sammanslagen:
-                nya.append(sammanslagen)
-        return nya if nya else grupper
-    except Exception:
-        return grupper
+    return grupper
 
 def basta_i_grupp(grupp):
-    """Väljer representant per grupp – longest beskrivning."""
     return max(grupp, key=lambda a: len(a.get("beskrivning", "")))
 
 # ── Batch-bedomning ───────────────────────────────────────────────────────────
 
 def bedom_batch(artiklar):
-    """Bedömer upp till 50 artiklar i ett enda Claude-anrop."""
+    """Bedömer upp till 10 artiklar med kort skarp prompt."""
     lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {a.get('fulltext', a.get('beskrivning',''))[:800]}"
+        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Snippet: {a.get('beskrivning','')[:300]}"
         for i, a in enumerate(artiklar)
     )
 
-    prompt = f"""Du ar omvarldsanalytiker for Rison Capital.
+    prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS-modell. Institutionellt kapital via SEB Nordic Energy Fund. Bergvarme, BESS/batterilager, varmepumpar, solceller, isolering. Malgrupper: BRF, kommersiella fastigheter, kommuner, industri.
 
-{RISON_KONTEXT}
+HOG relevans: bergvarme/varmepump/BESS/solceller i fastigheter, energieffektivisering BRF/kommersiella fastigheter, EPBD/energikrav byggnader, institutionellt kapital gron fastighet, EaaS-finansiering, fjarvarmebyte, energikostnad fastighet, grona obligationer fastighet.
 
-HOG relevans: finansiering/affarsmodeller energiomstallning kommersiella fastigheter,
-regulatorisk utveckling energikrav byggnader (EPBD, taxonomi, energideklarationer),
-teknologigenombrott geotermisk/BESS/varmepump for fastigheter,
-institutionellt kapital gron fastighetsutveckling, stranded assets-risk, EaaS-modeller,
-energikostnader och energiomstallning i BRF/hyresfastigheter/kommunala fastigheter.
+MEDEL relevans: hallbar fastighetsutveckling, energipolicy Sverige, fastighetsbolag energiarbete, energipriser fastighet.
 
-MEDEL relevans: trender hallbar fastighetsutveckling Sverige/Norden, policy energikrav,
-fastighetsbolag energiarbete, grona obligationer fastigheter, kommunal energiplanering,
-energipriser och deras effekt pa fastigheter.
-
-EXKLUDERA: privatbostader/villa/konsument, datakenter, karnkraft, elbilar,
-allman klimatpolitik utan fastighetskoppling, sport, underhallning, fastighetsaffarer
-utan energikoppling, annonser/pressmeddelanden utan nyhetsvardet.
+EXKLUDERA: privatbostader/villa/konsument, datakenter, karnkraft, elbilar, sport, underhallning, fastighetsaffarer utan energikoppling.
 
 Bedöm foljande {len(artiklar)} artiklar:
 
 {lista}
 
-Svara med en JSON-lista med ett objekt per artikel i samma ordning (ingen annan text):
-[
-  {{
-    "index": 1,
-    "relevant": true eller false,
-    "relevansniva": "Hog" eller "Medel" eller "Lag",
-    "poang": 1-10,
-    "sammanfattning": "2-3 meningar om vad artikeln handlar om och varfor relevant for Rison",
-    "motivering": "En mening om relevansniva"
-  }},
-  ...
-]"""
+Svara med JSON-lista (ingen annan text):
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En mening", "motivering": "En mening"}}]"""
 
-    svar = claude_anrop(prompt, max_tokens=4000)
+    svar = claude_anrop(prompt, max_tokens=3000)
     if not svar:
         return []
     try:
@@ -371,7 +426,9 @@ def sorteringsnyckel(r):
 def escape_html(s):
     return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
-def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
+# ── HTML ──────────────────────────────────────────────────────────────────────
+
+def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     datum = datetime.now().strftime("%d %B %Y, %H:%M")
     hoga  = [g for g in grupper_relevanta if g[0].get("relevansniva") == "Hog"]
     medel = [g for g in grupper_relevanta if g[0].get("relevansniva") == "Medel"]
@@ -402,14 +459,16 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
         if len(grupp) <= 1:
             return ""
         ovriga = grupp[1:]
-        items = "".join(
-            f'<div style="padding:7px 0;border-bottom:1px solid #f0f0f0;">'
-            f'<span style="font-size:11px;color:#aaa;">{escape_html(a["kalla"])}</span>'
-            f'{"&nbsp;·&nbsp;<span style=\"font-size:10px;color:#bbb;\">"+escape_html(a.get("datum",""))+"</span>" if a.get("datum") else ""}'
-            f' &nbsp;<a href="{escape_html(a["url"])}" target="_blank" style="font-size:13px;color:#666;">{escape_html(a["titel"])}</a>'
-            f'</div>'
-            for a in ovriga
-        )
+        items = ""
+        for a in ovriga:
+            datum_tag = f'&nbsp;·&nbsp;<span style="font-size:10px;color:#bbb;">{escape_html(a.get("datum",""))}</span>' if a.get("datum") else ""
+            items += (
+                f'<div style="padding:7px 0;border-bottom:1px solid #f0f0f0;">'
+                f'<span style="font-size:11px;color:#aaa;">{escape_html(a["kalla"])}</span>'
+                f'{datum_tag}'
+                f' &nbsp;<a href="{escape_html(a["url"])}" target="_blank" style="font-size:13px;color:#666;">{escape_html(a["titel"])}</a>'
+                f'</div>'
+            )
         return f"""<div style="margin-top:8px;">
   <button onclick="var e=document.getElementById('dup-{idx}');e.style.display=e.style.display==='none'?'block':'none'"
     style="font-size:11px;background:none;border:1px solid #ddd;padding:3px 10px;border-radius:20px;cursor:pointer;color:#999;">
@@ -425,15 +484,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
         niva  = r.get("relevansniva", "Medel")
         poang = r.get("poang", 0)
         faerg = "#1a7a3f" if niva == "Hog" else "#1a4a7a"
-        li    = r.get("linkedin")
-        datum_str = f'<span style="font-size:11px;color:#aaa;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
+        datum_str  = f'<span style="font-size:11px;color:#aaa;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:10px;color:#ccc;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
-        knapp = (f'<button onclick="var e=document.getElementById(\'li-{idx}\'),'
-                 f'btn=this;e.style.display=e.style.display===\'none\'?\'block\':\'none\';'
-                 f'btn.textContent=e.style.display===\'none\'?\'&#128188; LinkedIn-forslag\':\'Stang\'"'
-                 f' style="font-size:12px;background:#0077b5;color:#fff;border:none;'
-                 f'padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
-                 f'&#128188; LinkedIn-forslag</button>') if li else ""
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
     <span style="font-size:11px;color:#666;font-weight:600;">{escape_html(r['kalla'])}</span>
@@ -449,10 +501,12 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{escape_html(r['url'])}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Las artikel &rarr;</a>
-    {knapp}
+    <button onclick="kopiera_prompt(this, '{escape_html(r.get('titel','').replace(chr(39), ''))}')"
+      style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
+      &#128188; Kopiera LinkedIn-prompt
+    </button>
   </div>
   {dubbletter_panel(grupp, idx)}
-  <div id="li-{idx}" style="display:none;margin-top:14px;">{li_panel(li) if li else ''}</div>
 </div>"""
 
     def sektion_html(rubrik, grupper, start_idx, faerg):
@@ -467,11 +521,30 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord):
     med_html, _   = sektion_html("Medel relevans", medel, idx, "#1a4a7a")
     innehall = hog_html + med_html or '<p style="color:#888;text-align:center;padding:60px 0;font-size:15px;">Inga relevanta artiklar hittades idag.</p>'
 
-    alla_sokord = FASTA_SOKORD + dynamiska_sokord
+    alla_sokord = FASTA_SOKORD + zeitgeist_sokord + dynamiska_sokord
     sokord_html = "".join(
-        f'<span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">{"✨" if s in dynamiska_sokord else "🔍"} {escape_html(s)}</span>'
+        f'<span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">'
+        f'{"🌐" if s in zeitgeist_sokord else "✨" if s in dynamiska_sokord else "🔍"} {escape_html(s)}</span>'
         for s in alla_sokord
     )
+
+    # Zeitgeist-teman om de finns
+    zeitgeist_teman = ""
+    if ZEITGEIST_FILE.exists():
+        try:
+            cache = json.loads(ZEITGEIST_FILE.read_text())
+            teman = cache.get("teman", [])
+            sparad = cache.get("datum", "")[:10]
+            if teman:
+                teman_html = "".join(f'<span style="display:inline-block;background:#1a1a1a;color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;margin:3px;">{escape_html(t)}</span>' for t in teman)
+                zeitgeist_teman = f"""<div style="max-width:760px;margin:0 auto;padding:0 40px 16px;">
+  <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">
+    Veckans zeitgeist-teman (uppdaterad {sparad})
+  </div>
+  <div>{teman_html}</div>
+</div>"""
+        except Exception:
+            pass
 
     return f"""<!DOCTYPE html>
 <html lang="sv">
@@ -520,12 +593,13 @@ button:hover{{opacity:0.85}}
     <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; Google News via Serper</p>
   </div>
   <div class="stats">
-    <span><b>{stat['sokord']}</b> sokord ({stat['fasta']} fasta + {stat['dynamiska']} dynamiska)</span>
+    <span><b>{stat['sokord']}</b> sokord ({stat['fasta']} fasta + {stat['zeitgeist']} zeitgeist + {stat['dagsaktuella']} dagsaktuella)</span>
     <span><b>{stat['hittade']}</b> artiklar hittades</span>
     <span><b>{stat['efter_dubbletter']}</b> efter dubblettfiltrering</span>
     <span><b>{stat['relevanta']}</b> relevanta</span>
     <span><b>{len(hoga)}</b> hog &middot; <b>{len(medel)}</b> medel</span>
   </div>
+  {zeitgeist_teman}
   <div class="content">
     {innehall}
   </div>
@@ -535,13 +609,43 @@ button:hover{{opacity:0.85}}
       Dagens sokord (klicka for att visa)
     </div>
     <div id="sp" style="display:none;">
-      <div style="font-size:11px;color:#aaa;margin-bottom:8px;">🔍 = fast karna &nbsp; ✨ = dynamisk</div>
+      <div style="font-size:11px;color:#aaa;margin-bottom:8px;">🔍 = fast karna &nbsp; 🌐 = zeitgeist &nbsp; ✨ = dagsaktuell</div>
       {sokord_html}
     </div>
   </div>
 </div>
 
 <script>
+window.artiklar = window.artiklar || {{}};
+
+function kopiera_prompt(btn, titel) {{
+  const prompt = `Du ar kommunikationsansvarig pa Rison Capital och skriver ett LinkedIn-inlagg for Jesper Lovkvist, delagare.
+
+Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar pa fastighetsagaren. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
+
+Ton: insiktsfull, direkt, latt provocerande. Borjar med ovantad fraga eller pastande. Kopplar till Risons strukturella losning. Avslutar med dialog-fraga. Mal: CFO fastighetsbolag, BRF-styrelser, kommunala fastighetschefer.
+
+ARTIKEL: ${{titel}}
+
+Generera ett LinkedIn-inlagg med:
+- Hook (oppningsmening)
+- 3 nyckelpoanger fran artikeln
+- Koppling till Risons erbjudande
+- Avslutande fraga`;
+
+  navigator.clipboard.writeText(prompt).then(() => {{
+    const orig = btn.textContent;
+    btn.textContent = '✓ Kopierad!';
+    btn.style.background = '#1a7a3f';
+    setTimeout(() => {{
+      btn.textContent = orig;
+      btn.style.background = '#0077b5';
+    }}, 2000);
+  }}).catch(() => {{
+    alert('Kunde inte kopiera. Prova igen.');
+  }});
+}}
+
 async function sha256(text) {{
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
@@ -565,23 +669,28 @@ if (sessionStorage.getItem('auth') === '1') {{
 </body>
 </html>"""
 
+# ── Huvudflode ────────────────────────────────────────────────────────────────
+
 def main():
-    print(f"[{datetime.now():%H:%M}] Startar Rison bevakning via Serper v2")
+    print(f"[{datetime.now():%H:%M}] Startar Rison bevakning via Serper v3")
     sedda = ladda_sedda()
 
-    # Steg 1: Dynamiska sökord
-    print("\n  [1/5] Genererar dynamiska sokord...")
-    time.sleep(1.0)
-    dynamiska = generera_dynamiska_sokord()
-    if dynamiska:
-        print(f"  {len(dynamiska)} dynamiska sokord:")
-        for s in dynamiska:
+    # Steg 1: Zeitgeist-sokord (veckovis cachade)
+    print("\n  [1/6] Zeitgeist-analys...")
+    zeitgeist_sokord = hamta_zeitgeist_sokord()
+    print(f"  {len(zeitgeist_sokord)} zeitgeist-sokord")
+
+    # Steg 2: Dagsaktuella sokord
+    print("\n  [2/6] Dagsaktuella sokord...")
+    dagsaktuella = generera_dagsaktuella_sokord(zeitgeist_sokord)
+    if dagsaktuella:
+        for s in dagsaktuella:
             print(f"    ✨ {s}")
 
-    alla_sokord = FASTA_SOKORD + dynamiska
+    alla_sokord = FASTA_SOKORD + zeitgeist_sokord + dagsaktuella
 
-    # Steg 2: Sök via Serper
-    print(f"\n  [2/5] Soker ({len(alla_sokord)} sokord)...")
+    # Steg 3: Sok via Serper
+    print(f"\n  [3/6] Soker ({len(alla_sokord)} sokord)...")
     kandidater = {}
     for sokord in alla_sokord:
         time.sleep(0.3)
@@ -593,59 +702,51 @@ def main():
         print(f"  '{sokord}': {len(traff)} traff")
 
     nya = list(kandidater.values())
-    print(f"\n  {len(nya)} unika nya artiklar (annonser borttagna)")
+    print(f"\n  {len(nya)} unika nya artiklar")
 
     if not nya:
         print("  Inga nya artiklar.")
-        OUTPUT_FILE.write_text(bygg_html([], {"sokord":len(alla_sokord),"fasta":len(FASTA_SOKORD),"dynamiska":len(dynamiska),"hittade":0,"efter_dubbletter":0,"relevanta":0}, dynamiska), encoding="utf-8")
+        OUTPUT_FILE.write_text(bygg_html([], {
+            "sokord": len(alla_sokord), "fasta": len(FASTA_SOKORD),
+            "zeitgeist": len(zeitgeist_sokord), "dagsaktuella": len(dagsaktuella),
+            "hittade": 0, "efter_dubbletter": 0, "relevanta": 0
+        }, dagsaktuella, zeitgeist_sokord), encoding="utf-8")
         return
 
-    # Steg 3: Dubblettgruppering före bedömning
-    print(f"\n  [3/5] Grupperar dubletter...")
+    # Steg 4: Dubblettgruppering (bara textlikhet)
+    print(f"\n  [4/6] Grupperar dubletter...")
     grupper_alla = gruppera_dubletter(nya)
     representanter = [basta_i_grupp(g) for g in grupper_alla]
-    print(f"  {len(nya)} -> {len(representanter)} representanter efter dubblettfiltrering")
+    print(f"  {len(nya)} -> {len(representanter)} efter dubblettfiltrering")
+    # Begränsa till 25 hogst rankade under testperiod
+    representanter = representanter[:25]
+    print(f"  Begransar till {len(representanter)} hogst rankade for testkorning")
 
-    # Steg 4: Hämta fulltext för representanter
-    print(f"\n  [4/5] Hamtar fulltext och bedomer {len(representanter)} artiklar i batchar om {BATCH_STORLEK}...")
-    for a in representanter:
-        a["fulltext"] = hamta_text(a["url"])
+    # Fulltext-hamtning avstangd under testperiod – anvander snippet fran Serper
+    # for a in representanter:
+    #     a["fulltext"] = hamta_text(a["url"])
 
-    # Batch-bedömning
+    print(f"\n  [5/6] Bedomer {len(representanter)} artiklar pa snippet (testlage, batchar om {BATCH_STORLEK})...")
+
     relevanta_repr = []
     for i in range(0, len(representanter), BATCH_STORLEK):
         batch = representanter[i:i + BATCH_STORLEK]
-        print(f"  Batch {i//BATCH_STORLEK + 1}: bedomer {len(batch)} artiklar...")
+        print(f"  Batch {i//BATCH_STORLEK + 1}: {len(batch)} artiklar...")
         tid_start = time.time()
         resultat = bedom_batch(batch)
         elapsed = time.time() - tid_start
         print(f"    -> {len(resultat)} relevanta ({elapsed:.1f}s)")
         relevanta_repr.extend(resultat)
-        if i + BATCH_STORLEK < len(representanter):
-            time.sleep(2.0)
 
-    # Koppla relevanta representanter tillbaka till sina grupper
+    # Koppla tillbaka till grupper
     repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}
     grupper_relevanta = []
     for r in relevanta_repr:
         grupp = repr_url_till_grupp.get(r["url"], [r])
-        grupp[0] = r  # Ersätt representanten med berikad version
+        grupp[0] = r
         grupper_relevanta.append(grupp)
 
-    # Sortera: relevansnivå -> datum (nyast först) -> poäng
-    grupper_relevanta.sort(key=lambda g: (
-        {"Hog": 0, "Medel": 1, "Lag": 2}.get(g[0].get("relevansniva", "Lag"), 2),
-        -g[0].get("poang", 0)
-    ))
-
-    # Steg 5: LinkedIn-förslag för Hög-artiklar
-    hoga_grupper = [g for g in grupper_relevanta if g[0].get("relevansniva") == "Hog"]
-    if hoga_grupper:
-        print(f"\n  [5/5] LinkedIn-forslag for {len(hoga_grupper)} hoga artiklar...")
-        for g in hoga_grupper:
-            time.sleep(1.5)
-            print(f"  LI: {g[0]['titel'][:60]}")
-            g[0]["linkedin"] = linkedin_forslag(g[0])
+    grupper_relevanta.sort(key=lambda g: sorteringsnyckel(g[0]))
 
     hog_n = sum(1 for g in grupper_relevanta if g[0].get("relevansniva") == "Hog")
     med_n = sum(1 for g in grupper_relevanta if g[0].get("relevansniva") == "Medel")
@@ -654,16 +755,18 @@ def main():
     stat = {
         "sokord":           len(alla_sokord),
         "fasta":            len(FASTA_SOKORD),
-        "dynamiska":        len(dynamiska),
+        "zeitgeist":        len(zeitgeist_sokord),
+        "dagsaktuella":     len(dagsaktuella),
         "hittade":          len(nya),
         "efter_dubbletter": len(representanter),
         "relevanta":        len(grupper_relevanta),
     }
 
-    OUTPUT_FILE.write_text(bygg_html(grupper_relevanta, stat, dynamiska), encoding="utf-8")
+    html = bygg_html(grupper_relevanta, stat, dagsaktuella, zeitgeist_sokord)
+    OUTPUT_FILE.write_text(html, encoding="utf-8")
     print(f"  Rapport sparad: {OUTPUT_FILE}")
     spara_sedda(sedda)
-    print("  Klar. Oppna bevakning.html i webblasaren.")
+    print("  Klar. Oppna index.html i webblasaren.")
 
 if __name__ == "__main__":
     main()

@@ -17,7 +17,6 @@ ZEITGEIST_FILE    = Path(__file__).parent / "zeitgeist_cache.json"
 DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
-LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
 MIN_RELEVANS      = "Medel"
 BATCH_STORLEK     = 10
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
@@ -472,7 +471,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         for a in ovriga:
             datum_tag = f'&nbsp;·&nbsp;<span style="font-size:10px;color:#bbb;">{escape_html(a.get("datum",""))}</span>' if a.get("datum") else ""
             items += (f'<div style="padding:7px 0;border-bottom:1px solid #f0f0f0;">'
-                      f'<span style="font-size:11px;color:#aaa;">{escape_html(a["kalla"])}</span>{datum_tag}'
+                      f'<span style="font-size:11px;color:#666;">{escape_html(a["kalla"])}</span>{datum_tag}'
                       f' &nbsp;<a href="{escape_html(a["url"])}" target="_blank" style="font-size:13px;color:#666;">{escape_html(a["titel"])}</a></div>')
         return f"""<div style="margin-top:8px;">
   <button onclick="var e=document.getElementById('dup-{idx}');e.style.display=e.style.display==='none'?'block':'none'"
@@ -488,13 +487,13 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         poang = r.get("poang", 0)
         faerg = "#293244" if niva == "Hog" else "#3d5a80"
         kalla_typ_ikon = "📡" if r.get("kalla_typ") == "rss" else "🔍"
-        datum_str  = f'<span style="font-size:11px;color:#aaa;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
-        sokord_str = f'<span style="font-size:10px;color:#ccc;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
+        datum_str  = f'<span style="font-size:11px;color:#666;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
+        sokord_str = f'<span style="font-size:10px;color:#888;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
-    <span style="font-size:11px;color:#666;font-weight:600;">{kalla_typ_ikon} {escape_html(r['kalla'])}</span>
+    <span style="font-size:11px;color:#444;font-weight:600;">{kalla_typ_ikon} {escape_html(r['kalla'])}</span>
     <span style="font-size:10px;color:#fff;background:{faerg};padding:2px 8px;border-radius:20px;font-weight:600;">{niva}</span>
     <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
     {datum_str} {sokord_str}
@@ -508,11 +507,11 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     <a href="{url_esc}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
     <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.3px;">
-      &#128188; Kopiera LinkedIn-prompt
+      Kopiera LinkedIn-prompt
     </button>
     <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
       style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
-      &#128172; Kort kommentar
+      Kort kommentar
     </button>
   </div>
   {dubbletter_panel(grupp, idx)}
@@ -520,7 +519,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
 
     def sektion_html(rubrik, grupper, start_idx, faerg):
         if not grupper: return "", start_idx
-        h = f'<h2 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:{faerg};margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid rgba(255,255,255,0.2);">{rubrik} &mdash; {len(grupper)} artiklar</h2>'
+        h = f'<h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:#EFEDE0;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.25);background:#293244;padding:10px 16px;border-radius:2px;">{rubrik} &mdash; {len(grupper)} artiklar</h2>'
         for i, g in enumerate(grupper):
             h += artikel_html(g, start_idx + i)
         return h, start_idx + len(grupper)
@@ -569,11 +568,11 @@ body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100v
 #login-btn{{width:100%;padding:10px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}}
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
-.header{{background:#1a1a1a;color:#fff;padding:28px 40px}}
+.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:3px solid rgba(255,255,255,0.25)}}
 .header h1{{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:500;letter-spacing:0.5px}}
-.header p{{font-size:13px;color:#999;margin-top:5px}}
+.header p{{font-size:11px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
 .stats{{background:#181D27;border-bottom:2px solid rgba(255,255,255,0.2);padding:10px 40px;display:flex;gap:24px;font-size:11px;color:#8892a4;flex-wrap:wrap}}
-.stats b{{color:#1a1a1a}}
+.stats b{{color:#EFEDE0}}
 .content{{max-width:760px;margin:0 auto;padding:24px 40px 32px}}
 .sokord-panel{{max-width:760px;margin:0 auto;padding:0 40px 40px}}
 a:hover{{opacity:0.75}}
@@ -613,7 +612,7 @@ button:hover{{opacity:0.85}}
       Sökord (klicka för att visa)
     </div>
     <div id="sp" style="display:none;">
-      <div style="font-size:11px;color:#aaa;margin-bottom:8px;">🔍 = fast kärna &nbsp; 🌐 = zeitgeist &nbsp; ✨ = dagsaktuell</div>
+      <div style="font-size:11px;color:#666;margin-bottom:8px;">🔍 = fast kärna &nbsp; 🌐 = zeitgeist &nbsp; ✨ = dagsaktuell</div>
       {sokord_html}
     </div>
   </div>

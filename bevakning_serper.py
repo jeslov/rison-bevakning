@@ -17,8 +17,7 @@ ZEITGEIST_FILE    = Path(__file__).parent / "zeitgeist_cache.json"
 DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
-LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
-MIN_RELEVANS      = "Hog"
+MIN_RELEVANS      = "Medel"
 BATCH_STORLEK     = 10
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
 
@@ -229,10 +228,8 @@ Identifiera dominerande teman och zeitgeist inom Risons fokusomraden.
 
 {chr(10).join(f"- {t}" for t in titlar[:150])}
 
-Generera 8 svenska sokord (2-3 ord) som fanger aktuella amnesomraden specifikt inom energieffektivisering, energifinansering och energiteknik i fastigheter. Fokusera pa Risons karnomraden: bergvarme, BESS, varmepumpar, solceller, EPBD, grona obligationer, EaaS. Undvik breda fastighetstrender utan direkt energikoppling.
-Varje tema ska vara max 3 ord – ett substantiv eller kort nyckelord, inte en hel mening. Exempel: "EPBD-implementering", "bergvärme BRF", "gröna obligationer". Inte: "Ökade krav på energieffektivisering".
-
-Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3","s4","s6","s7","s8"]}}"""
+Generera 8 svenska sokord (2-3 ord) som fanger aktuella amnesomraden.
+Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3","s4","s5","s6","s7","s8"]}}"""
     svar = claude_anrop(prompt, max_tokens=400)
     if not svar:
         return []
@@ -330,7 +327,7 @@ def basta_i_grupp(grupp):
 
 def bedom_batch(artiklar):
     lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:400]}"
+        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Snippet: {a.get('beskrivning','')[:300]}"
         for i, a in enumerate(artiklar)
     )
     prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
@@ -346,7 +343,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "3-5 meningar baserat på artikelns faktiska innehåll. Täck vad artikeln handlar om, vad som är nytt eller anmärkningsvärt, och varför det är relevant för fastighetsbranschen.", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En mening om vad artikeln handlar om", "motivering": "En mening"}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []
@@ -446,8 +443,6 @@ def bedom_med_cache(representanter):
             else:
                 cache[aid] = None  # Markera som bedömd men irrelevant
 
-        time.sleep(3.0)
-
     spara_bedomning_cache(cache)
     return relevanta
 
@@ -494,19 +489,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         kalla_typ_ikon = "📡" if r.get("kalla_typ") == "rss" else "🔍"
         datum_str  = f'<span style="font-size:11px;color:#aaa;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:10px;color:#ccc;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
-        titel_esc    = escape_html(r.get('titel','')).replace("'", "\\'")
-        url_esc      = escape_html(r.get('url',''))
-        fulltext_esc = escape_html(r.get('fulltext', '') or r.get('beskrivning', ''))
-        linkedin_knappar = ""
-        if niva == "Hog":
-            linkedin_knappar = (
-                f'<button data-fulltext="{fulltext_esc}" onclick="kopiera_prompt(this, \'{titel_esc}\', \'{url_esc}\')"'
-                f' style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
-                f'&#128188; Kopiera LinkedIn-prompt</button>'
-                f' <button data-fulltext="{fulltext_esc}" onclick="kopiera_kort_prompt(this, \'{url_esc}\')"'
-                f' style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">'
-                f'&#128172; Kort kommentar</button>'
-            )
+        titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
+        url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
     <span style="font-size:11px;color:#666;font-weight:600;">{kalla_typ_ikon} {escape_html(r['kalla'])}</span>
@@ -514,26 +498,33 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
     {datum_str} {sokord_str}
   </div>
-  <div style="font-family:'EB Garamond',Georgia,serif;font-size:19px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+  <div style="font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
     <a href="{url_esc}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
   </div>
   <div style="font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:8px;font-weight:300;">{escape_html(r.get('sammanfattning',''))}</div>
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{url_esc}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    {linkedin_knappar}
+    <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
+      style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.3px;">
+      &#128188; Kopiera LinkedIn-prompt
+    </button>
+    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
+      style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
+      &#128172; Kort kommentar
+    </button>
   </div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
 
     def sektion_html(rubrik, grupper, start_idx, faerg):
         if not grupper: return "", start_idx
-        h = f'<h2 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:{faerg};margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.25);">{rubrik} &mdash; {len(grupper)} artiklar</h2>'
+        h = f'<h2 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:{faerg};margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid rgba(255,255,255,0.2);">{rubrik} &mdash; {len(grupper)} artiklar</h2>'
         for i, g in enumerate(grupper):
             h += artikel_html(g, start_idx + i)
         return h, start_idx + len(grupper)
 
-    hog_html, idx = sektion_html("Hög relevans", hoga, 0, "#1a7a3f")
+    hog_html, idx = sektion_html("Hög relevans", hoga, 0, "#293244")
     med_html, _   = sektion_html("Medel relevans", medel, idx, "#1a4a7a")
     innehall = hog_html + med_html or '<p style="color:#888;text-align:center;padding:60px 0;font-size:15px;">Inga relevanta artiklar hittades idag.</p>'
 
@@ -550,8 +541,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
             teman = cache.get("teman", [])
             sparad = cache.get("datum", "")[:10]
             if teman:
-                teman_tags = "".join(f'<span style="display:inline-block;background:#293244;color:#EFEDE0;border-radius:2px;padding:3px 10px;font-size:11px;margin:3px;letter-spacing:0.3px;">{escape_html(t)}</span>' for t in teman)
-                zeitgeist_teman_html = f'<div style="max-width:760px;margin:0 auto;padding:0 40px 16px;"><div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Veckans zeitgeist-teman (uppdaterad {sparad})</div><div>{teman_tags}</div></div>'
+                teman_tags = "".join(f'<span style="display:inline-block;background:#1a1a1a;color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;margin:3px;">{escape_html(t)}</span>' for t in teman)
+                zeitgeist_teman_html = f'<div style="max-width:760px;margin:0 auto;padding:20px 40px 24px;"><div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Veckans zeitgeist-teman (uppdaterad {sparad})</div><div>{teman_tags}</div></div>'
         except Exception:
             pass
 
@@ -565,24 +556,23 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link href='https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap' rel='stylesheet'>
 <title>Rison Bevakning</title>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:#EFEDE0;color:#181D27;min-height:100vh}}
-#login{{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#181D27}}
-#login-box{{background:#EFEDE0;padding:48px 40px;border-radius:2px;box-shadow:0 4px 32px rgba(0,0,0,0.4);text-align:center;width:340px}}
-#login-box h2{{font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:6px;color:#181D27;letter-spacing:0.5px}}
-#login-box p{{font-size:12px;color:#666;margin-bottom:24px;letter-spacing:0.5px;text-transform:uppercase}}
-#pw{{width:100%;padding:10px 14px;font-size:14px;border:1px solid #c8c5b8;border-radius:2px;outline:none;margin-bottom:12px;background:#fff}}
-#login-btn{{width:100%;padding:11px;background:#181D27;color:#EFEDE0;border:none;border-radius:2px;font-size:13px;cursor:pointer;font-weight:500;letter-spacing:1px;text-transform:uppercase}}
+body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh}}
+#login{{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f5f4f0}}
+#login-box{{background:#fff;padding:48px 40px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;width:320px}}
+#login-box h2{{font-size:18px;font-weight:700;margin-bottom:8px}}
+#login-box p{{font-size:13px;color:#888;margin-bottom:24px}}
+#pw{{width:100%;padding:10px 14px;font-size:14px;border:1px solid #ddd;border-radius:6px;outline:none;margin-bottom:12px}}
+#login-btn{{width:100%;padding:10px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}}
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
-.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:1px solid rgba(255,255,255,0.15)}}
-.header h1{{font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:0.5px}}
-.header p{{font-size:11px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
-.stats{{background:#181D27;border-bottom:1px solid rgba(255,255,255,0.15);padding:10px 40px;display:flex;gap:24px;font-size:11px;color:#8892a4;flex-wrap:wrap}}
-.stats b{{color:#EFEDE0}}
+.header{{background:#1a1a1a;color:#fff;padding:28px 40px}}
+.header h1{{font-family:'EB Garamond',Georgia,serif;font-size:28px;font-weight:500;letter-spacing:0.5px}}
+.header p{{font-size:13px;color:#999;margin-top:5px}}
+.stats{{background:#181D27;border-bottom:2px solid rgba(255,255,255,0.2);padding:10px 40px;display:flex;gap:24px;font-size:11px;color:#8892a4;flex-wrap:wrap}}
+.stats b{{color:#1a1a1a}}
 .content{{max-width:760px;margin:0 auto;padding:24px 40px 32px}}
 .sokord-panel{{max-width:760px;margin:0 auto;padding:0 40px 40px}}
 a:hover{{opacity:0.75}}
@@ -631,7 +621,6 @@ button:hover{{opacity:0.85}}
 <script>
 function kopiera_prompt(btn, titel, url) {{
   const stilref = `{stil_text}`;
-  const fulltext = btn.dataset.fulltext.replace(/`/g, "'");
   const prompt = `Du är kommunikationsansvarig på Rison Capital och skriver ett LinkedIn-inlägg för Jesper Lövkvist, delägare.
 
 Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren. Bergvärme, BESS, värmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
@@ -640,45 +629,29 @@ Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ d
 
 ${{stilref}}
 
-Här är artikelns fulltext:
+Läs först hela artikeln på denna URL: ${{url}}
 
-${{fulltext}}
-
-Skriv ett LinkedIn-inlägg baserat på artikelns faktiska innehåll ovan. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
+Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
 
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
-Innan du skriver inlägget:
-1. Sök efter 1-2 aktuella svenska eller internationella källor, studier eller uttalanden från myndigheter eller branschorganisationer som stärker artikelns huvudpoäng. Väv in dessa naturligt i texten.
-2. För varje organisation du refererar till, sök upp deras LinkedIn-sida och inkludera rätt @-slug i texten baserat på URL:en (t.ex. linkedin.com/company/boverket → @boverket).
-
-Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
-
-Lägg till artikelns URL på sista raden: ${{url}}`;
+Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;
     btn.textContent = '✓ Kopierad!';
-    btn.style.background = '#1a7a3f';
-    setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#0077b5'; }}, 2000);
+    btn.style.background = '#293244';
+    setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#293244'; }}, 2000);
   }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
 
 function kopiera_kort_prompt(btn, url) {{
-  const stilref = `{stil_text}`;
-  const fulltext = btn.dataset.fulltext.replace(/`/g, "'");
-  const prompt = `Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga även i detta korta format:
-
-${{stilref}}
-
-Här är artikelns fulltext:
-
-${{fulltext}}
+  const prompt = `Läs artikeln på denna URL: ${{url}}
 
 Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
 - Fångar artikelns viktigaste poäng i ett analytiskt perspektiv
 - Förklarar varför den är värd att läsa för någon i fastighetsbranschen
-- Är skriven i en direkt, icke-säljig ton i Jespers stil
+- Är skriven i en direkt, icke-säljig ton
 
 Avsluta med: "Läs artikeln: ${{url}}"`;
 
@@ -762,7 +735,7 @@ def main():
             traff = sok_serper(sokord, antal=10)
             for a in traff:
                 aid = artikel_id(a["url"])
-                if aid not in kandidater:
+                if aid not in sedda and aid not in kandidater:
                     kandidater[aid] = a
             if traff:
                 print(f"  '{sokord}': {len(traff)}")
@@ -791,14 +764,8 @@ def main():
     if TESTLAGE:
         representanter = representanter[:30]
 
-    # Steg 5: Hämta fulltext för alla representanter
-    print(f"\n  [5/5] Hämtar fulltext för {len(representanter)} artiklar...")
-    for a in representanter:
-        if not a.get("fulltext"):
-            a["fulltext"] = hamta_text(a["url"])
-
-    # Bedömning med cache
-    print(f"  Bedömer {len(representanter)} artiklar...")
+    # Steg 5: Bedömning med cache
+    print(f"\n  [5/5] Bedömer {len(representanter)} artiklar...")
     relevanta_repr = bedom_med_cache(representanter)
 
     repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}

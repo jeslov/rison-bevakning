@@ -1,4 +1,10 @@
-EXEMPEL PÅ JESPERS LINKEDIN-INLÄGG – STILREFERENS FÖR RISON CAPITAL
+VIKTIG INSTRUKTION TILL CLAUDE:
+Exemplen nedan visar Jespers ton, argumentationsstruktur och skrivsätt – inte ämnesområde.
+Plocka upp hur han bygger argument, hur han provocerar etablerade sanningar, hur han avslutar.
+Använd INTE faktatermer, branschspecifika begrepp eller konkreta förslag från exemplen –
+bara skrivsättet och rösten. Ämnet i varje inlägg du skriver ska alltid vara artikeln du fått.
+
+
 
 Dessa inlägg visar tonläge, struktur och uttryckssätt. Använd dem som mall.
 
@@ -104,3 +110,64 @@ STILREGLER ATT FÖLJA:
 - Inga tomma fraser, inga hook-formler
 - Nämner Rison sparsamt och naturligt – aldrig säljigt
 - Skriver på svenska med korrekt stavning och grammatik
+
+---
+
+EXEMPEL 7 (från annan bransch – använd bara stilen, inte innehållet):
+
+Om du som bostadsarkitekt i framtiden inte bara vill kunna försörja dig utan dessutom vill bidra till ett vettigare samhällsbyggande så är det dags att tänka nytt. Mitt tips är då att du på riktigt börjar intressera dig för hur du kan bidra till att påverka branschens ekonomiska dynamik på systemnivå.
+
+Det finns flera spår av resignation i dagens bostadsbransch. Dels har vi lägret som inte bekymrar sig särskilt mycket över annat än siffror. Utmaningen är kvantitet. Vi ska så snabbt som möjligt tillbaka till en situation där marknadens aktörer levererar produkter med den kvalitetsnivå man anser adekvat och vi övriga får tacka och ta emot.
+
+Sedan finns det andra perspektivet, som handlar om de som vill mer. Som ser nödvändigheten i att göra saker bättre och hållbarare ur ett humanistiskt, socialt, ekonomiskt och ekologiskt perspektiv. Men som ändå ofta jobbar på i staten-och-kapitalet-pragmatikernas grottekvarn ett helt yrkesliv. Ofta med hänvisning till att man från sin position inte kan påverka "systemet".
+
+Men vad de fria agenterna liksom deras påhejare ofta missar är att dessa projekt saknar själva grunden för skalbarhet. Nämligen lönsamhet för de grupper av aktörer som i dag styr och ställer.
+
+Absoluta merparten av traditionella aktörer kommer aldrig frivilligt att avstå från vinstmarginaler i den storleksordning man vant sig vid de senaste decennierna, för något högre syftes skull.
+
+Här finns en öppning. För det råder fortfarande ingen brist på kapital med låga avkastningskrav som vill finansiera rätt typ av verksamheter.
+
+Vill du ha ett större ansvar för dina projekt så är det dags att ta det. För vid det här laget borde det vara tydligt att ingen traditionell aktör frivilligt kommer att ge det till dig.
+
+Och tiden för att bli det kan faktiskt vara den allra bästa just precis nu.
+
+
+---
+
+EXEMPEL 8 (från annan bransch – använd bara stilen, inte innehållet):
+
+Under sommaren har jag postat en del på LinkedIn. Det har bland annat blivit några ganska öppenhjärtiga texter om brister jag och andra på "utsidan" har upplevt i kommunernas organisationer och arbetssätt.
+
+Det sista man vill när man skriver texter av den typen är att man ska få problemen man beskriver bekräftade från så många håll. Oberoende av varandra. Dessutom i första hand av personer som jobbar inom kommunen.
+
+De flesta som hört av sig instämmer inte bara i förekomsten av trassliga processer, silostrukturer, inkompetens och slarv. De pekar också på de dramatiskt negativa konsekvenser det får. Både när det gäller processer och slutresultat.
+
+Det är tragiskt. Man vill göra ett bra jobb men upplever att förutsättningarna inte finns.
+
+Jag skriver inte om kommunerna för mitt eget höga nöjes skull. Det är ofta rätt jobbigt att behöva vara budbäraren. Man blir lätt skjuten på när man väljer att prata öppet om problem av den här typen. Mottagaren tolkar ofta i affekt som att man avfärdar precis allt som värdelöst.
+
+Men vad återstår att göra när det finns en sådan oerhörd rädsla i branschen för att prata om dessa utmaningar och hur vi ska komma tillrätta med dem? Det är väl ändå dags att bryta med branschens stolta tradition att lida i tystnad.
+
+Steg 1 är att se problemen. Och första steget i den processen måste vara att konstatera vilka problemen är och vad den faktiska orsaken till dem är.
+
+Det behövs alldeles säkert fler duktiga planarkitekter på kommunerna. Men jag tycker att de också borde anställa betydligt fler organisationsarkitekter. Alltså fler mästare på att bygga välfungerande organisationer som de sedan inreder med processer och metoder som ger bättre förutsättningar för att kunna leverera rätt resultat.
+
+
+---
+
+EXEMPEL 9 (från annan bransch – använd bara stilen, inte innehållet):
+
+Fastighetsbranschen är till övervägande del lika med finansbranschen. Trots det är kunskaperna om investerings-, projekt- och fastighetsekonomi inom kåren i princip obefintliga.
+
+Mycket handlar om en attityd som odlats under åtskilliga decennier. Samtidigt är gnället över att man inte får det förtroende och ansvar man borde tilldelas öronbedövande runt kaffebryggarna på landets arkitektkontor. Det går inte ihop.
+
+Kunskap är makt brukar det heta. Men om man saknar tillräckliga kunskaper om det som utgör själva fundamentet för den bransch man verkar i så ska man nog inte bli överdrivet förvånad om ens roll och förtroende blir kringskuret.
+
+Det är allt för sällan man lyfter blicken. Det finns en enorm passivitet som griper omkring sig. Man upplever sig låst i en struktur som inte lämnar något utrymme till påverkan på en systemisk nivå.
+
+Fartblinda förväxlar vi det som är bråttom med det som är viktigt på riktigt. Vi bottnar inte i en analys om vad det är som skapar problemen i strukturen vi verkar i. Vi har i stället alldeles för lätt att ha överseende med saker som skaver. Att bemästra konsten att stå ut ses som en god egenskap. När det i själva verket borde vara precis tvärtom.
+
+Om branschen inte kommer till dig med den typen av projekt, uppdrag och ansvar som du tycker är lämpligt så måste det bli tvärtom. Och så här långt in i krisen är det alltmer tydligt att berget inte har några planer på att komma till Mohammed.
+
+Nu är det upp till dig att paketera ett nytt arbetssätt, baserat på alla surt förvärvade kunskaper du samlat på dig i goda tider.
+

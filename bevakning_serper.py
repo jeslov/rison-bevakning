@@ -651,7 +651,9 @@ Innan du skriver inlägget:
 1. Sök efter 1-2 aktuella svenska eller internationella källor, studier eller uttalanden från myndigheter eller branschorganisationer som stärker artikelns huvudpoäng. Väv in dessa naturligt i texten.
 2. För varje organisation du refererar till, sök upp deras LinkedIn-sida och inkludera rätt @-slug i texten baserat på URL:en (t.ex. linkedin.com/company/boverket → @boverket).
 
-Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
+Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
+
+Lägg till artikelns URL på sista raden: ${url}`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

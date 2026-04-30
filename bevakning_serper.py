@@ -487,14 +487,14 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         niva  = r.get("relevansniva", "Medel")
         poang = r.get("poang", 0)
         faerg = "#293244" if niva == "Hog" else "#3d5a80"
-        kalla_typ_ikon = "📡" if r.get("kalla_typ") == "rss" else "🔍"
+        kalla_typ_ikon = ""
         datum_str  = f'<span style="font-size:13px;color:#666;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:12px;color:#888;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
-    <span style="font-size:13px;color:#444;font-weight:600;">{kalla_typ_ikon} {escape_html(r['kalla'])}</span>
+    <span style="font-size:13px;color:#444;font-weight:600;">{escape_html(r['kalla'])}</span>
     <span style="font-size:10px;color:#fff;background:{faerg};padding:2px 8px;border-radius:20px;font-weight:600;">{niva}</span>
     <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
     {datum_str} {sokord_str}
@@ -515,7 +515,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Kort kommentar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
-      style="font-size:12px;background:none;border:1px solid #aaa;color:#777;cursor:pointer;padding:5px 12px;border-radius:2px;margin-left:auto;letter-spacing:0.3px;">
+      style="font-size:12px;background:#c0392b;color:#fff;border:none;cursor:pointer;padding:5px 14px;border-radius:2px;margin-left:auto;letter-spacing:0.3px;font-weight:500;">
       Ta bort
     </button>
   </div>

@@ -230,9 +230,9 @@ Identifiera dominerande teman och zeitgeist inom Risons fokusomraden.
 {chr(10).join(f"- {t}" for t in titlar[:150])}
 
 Generera 8 svenska sokord (2-3 ord) som fanger aktuella amnesomraden.
-Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3","s4","s5","s6","s7","s8"]}}
+Varje tema ska vara max 3 ord – ett substantiv eller kort nyckelord, inte en hel mening. Exempel: "EPBD-implementering", "bergvärme BRF", "gröna obligationer". Inte: "Ökade krav på energieffektivisering".
 
-Varje tema ska vara max 3 ord – ett substantiv eller kort nyckelord, inte en hel mening. Exempel: "EPBD-implementering", "bergvärme BRF", "gröna obligationer". Inte: "Ökade krav på energieffektivisering"."""
+Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3","s4","s6","s7","s8"]}}"""
     svar = claude_anrop(prompt, max_tokens=400)
     if not svar:
         return []

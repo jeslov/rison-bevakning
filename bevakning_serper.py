@@ -568,20 +568,20 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
 <title>Rison Bevakning</title>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh}}
-#login{{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f5f4f0}}
+body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#1a1a1a;min-height:100vh}}
+#login{{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#181D27}}
 #login-box{{background:#fff;padding:48px 40px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;width:320px}}
 #login-box h2{{font-size:18px;font-weight:700;margin-bottom:8px}}
 #login-box p{{font-size:13px;color:#888;margin-bottom:24px}}
 #pw{{width:100%;padding:10px 14px;font-size:14px;border:1px solid #ddd;border-radius:6px;outline:none;margin-bottom:12px}}
-#login-btn{{width:100%;padding:10px;background:#1a1a1a;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600}}
+#login-btn{{width:100%;padding:10px;background:#181D27;color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;font-weight:600;letter-spacing:0.5px}}
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
-.header{{background:#1a1a1a;color:#fff;padding:28px 40px}}
-.header h1{{font-size:22px;font-weight:700;letter-spacing:-0.5px}}
-.header p{{font-size:13px;color:#999;margin-top:5px}}
+.header{{background:#181D27;color:#fff;padding:24px 40px}}
+.header h1{{font-size:20px;font-weight:600;letter-spacing:0.5px}}
+.header p{{font-size:12px;color:#8892a4;margin-top:4px}}
 .stats{{background:#fff;border-bottom:1px solid #e8e8e8;padding:10px 40px;display:flex;gap:24px;font-size:12px;color:#666;flex-wrap:wrap}}
-.stats b{{color:#1a1a1a}}
+.stats b{{color:#181D27}}
 .content{{max-width:760px;margin:0 auto;padding:24px 40px 32px}}
 .sokord-panel{{max-width:760px;margin:0 auto;padding:0 40px 40px}}
 a:hover{{opacity:0.75}}

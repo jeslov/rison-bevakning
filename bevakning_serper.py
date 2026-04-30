@@ -16,7 +16,7 @@ SEEN_FILE         = Path(__file__).parent / "sedda_artiklar.json"
 ZEITGEIST_FILE    = Path(__file__).parent / "zeitgeist_cache.json"
 DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
-LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
+BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
 MIN_RELEVANS      = "Medel"
 BATCH_STORLEK     = 10
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
@@ -53,19 +53,29 @@ RSS_FLODEN = [
 ]
 
 FASTA_SOKORD = [
-    "bergvärme fastighet", "värmepump fastighet", "batterilager fastighet",
-    "solceller fastighet", "energilagring fastighet", "geotermisk fastighet",
-    "energieffektivisering fastighet", "energirenovering fastighet",
+    # Teknik – med och utan "fastighet"
+    "bergvärme flerbostadshus", "bergvärme BRF", "bergvärme kommersiell",
+    "värmepump byggnad", "värmepump BRF", "batterilager byggnad",
+    "solceller BRF", "solceller flerbostadshus", "energilagring byggnad",
+    "geotermisk energi Sverige",
+    # Energieffektivisering
+    "energieffektivisering byggnad", "energieffektivisering BRF",
+    "energieffektivisering flerbostadshus", "energirenovering fastighet",
     "energideklaration fastighet", "energikostnad fastighet",
-    "energiprestanda byggnad", "energieffektivisering BRF",
-    "bergvärme BRF", "energikostnad BRF", "fjärrvärme BRF",
+    "energiprestanda byggnad",
+    # Finansiering
     "gröna obligationer fastighet", "fastighetsinvestering energi",
-    "EPBD fastighet", "energikrav byggnad", "Boverket energi",
-    "klimatkrav fastighet", "fastighetsbolag energiomställning",
-    "stranded assets fastighet",
+    "EaaS energi tjänst",
+    # Regelverk
+    "EPBD byggnader Sverige", "energikrav byggnader",
+    "Boverket energi", "klimatkrav fastighet",
+    # Marknad
+    "fastighetsbolag energiomställning", "stranded assets fastighet",
+    "fjärrvärme alternativ byggnad",
     # Intresseorganisationer och myndigheter
-    "Fastighetsägarna energikrav", "Riksbyggen energi", "HSB energieffektivisering",
-    "Energimyndigheten fastighet", "Boverket byggregler", "Naturvårdsverket klimat",
+    "Fastighetsägarna energikrav", "Riksbyggen energi",
+    "HSB energieffektivisering", "Energimyndigheten byggnader",
+    "Boverket byggregler", "Naturvårdsverket klimat",
     "Hyresgästföreningen energi", "Sveriges Allmännytta energi",
 ]
 
@@ -364,7 +374,76 @@ def ladda_testart_artiklar():
     """Laddar cachade testart-artiklar."""
     return json.loads(TESTART_FILE.read_text())
 
-# ── Sortering ─────────────────────────────────────────────────────────────────
+# ── Bedömningscache ───────────────────────────────────────────────────────────
+
+def ladda_bedomning_cache():
+    """Laddar cachade bedömningar. Returnerar dict med artikel_id -> bedomning."""
+    if BEDOMNING_CACHE_FILE.exists():
+        try:
+            return json.loads(BEDOMNING_CACHE_FILE.read_text())
+        except Exception:
+            return {}
+    return {}
+
+def spara_bedomning_cache(cache):
+    BEDOMNING_CACHE_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=2))
+
+def bedom_med_cache(representanter):
+    """
+    Bedömer artiklar med cache – kör bara Claude på artiklar som inte redan bedömts.
+    Returnerar lista med relevanta artiklar.
+    """
+    cache = ladda_bedomning_cache()
+    att_bedomma = []
+    relevanta = []
+
+    # Dela upp i cachade och nya
+    for a in representanter:
+        aid = artikel_id(a["url"])
+        if aid in cache:
+            bedomning = cache[aid]
+            if bedomning:  # None = tidigare bedömd som irrelevant
+                relevanta.append({**a, **bedomning})
+        else:
+            att_bedomma.append(a)
+
+    cachade = len(representanter) - len(att_bedomma)
+    if cachade:
+        print(f"  {cachade} artiklar hämtade från cache")
+    if att_bedomma:
+        print(f"  {len(att_bedomma)} nya artiklar skickas till Claude...")
+
+    # Bedöm nya artiklar i batchar
+    for i in range(0, len(att_bedomma), BATCH_STORLEK):
+        batch = att_bedomma[i:i + BATCH_STORLEK]
+        print(f"  Batch {i//BATCH_STORLEK + 1}: {len(batch)} artiklar...")
+        tid = time.time()
+        resultat = bedom_batch(batch)
+        elapsed = time.time() - tid
+        print(f"    -> {len(resultat)} relevanta ({elapsed:.1f}s)")
+
+        # Bygg lookup för snabb sökning
+        relevanta_urls = {r["url"]: r for r in resultat}
+
+        # Uppdatera cache för alla i batchen
+        for a in batch:
+            aid = artikel_id(a["url"])
+            if a["url"] in relevanta_urls:
+                b = relevanta_urls[a["url"]]
+                # Spara bara bedömningsfälten, inte hela artikeln
+                cache[aid] = {
+                    "relevant": b.get("relevant"),
+                    "relevansniva": b.get("relevansniva"),
+                    "poang": b.get("poang"),
+                    "sammanfattning": b.get("sammanfattning"),
+                    "motivering": b.get("motivering"),
+                }
+                relevanta.append(b)
+            else:
+                cache[aid] = None  # Markera som bedömd men irrelevant
+
+    spara_bedomning_cache(cache)
+    return relevanta
 
 def sorteringsnyckel(r):
     niva = {"Hog": 0, "Medel": 1, "Lag": 2}
@@ -429,6 +508,10 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       style="font-size:12px;background:#0077b5;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
       &#128188; Kopiera LinkedIn-prompt
     </button>
+    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
+      style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
+      &#128172; Kort kommentar
+    </button>
   </div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
@@ -464,7 +547,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
 
     testlage_banner = ""
     if TESTLAGE:
-        testlage_banner = '<div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används</div>'
+        cache_storlek = len(ladda_bedomning_cache())
+        testlage_banner = f'<div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används · {cache_storlek} bedömningar i cache</div>'
 
     return f"""<!DOCTYPE html>
 <html lang="sv">
@@ -548,15 +632,33 @@ Läs först hela artikeln på denna URL: ${{url}}
 
 Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
 
-Inkludera också:
-- Max 5 relevanta LinkedIn-hashtags
-- 1-2 förslag på relevanta intresseorganisationer eller myndigheter att referera till (t.ex. Boverket, Energimyndigheten, Fastighetsägarna, Naturvårdsverket)`;
+Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
+
+Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;
     btn.textContent = '✓ Kopierad!';
     btn.style.background = '#1a7a3f';
     setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#0077b5'; }}, 2000);
+  }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
+}}
+
+function kopiera_kort_prompt(btn, url) {{
+  const prompt = `Läs artikeln på denna URL: ${{url}}
+
+Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
+- Fångar artikelns viktigaste poäng i ett analytiskt perspektiv
+- Förklarar varför den är värd att läsa för någon i fastighetsbranschen
+- Är skriven i en direkt, icke-säljig ton
+
+Avsluta med: "Läs artikeln: ${{url}}"`;
+
+  navigator.clipboard.writeText(prompt).then(() => {{
+    const orig = btn.textContent;
+    btn.textContent = '✓ Kopierad!';
+    btn.style.background = '#555';
+    setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#444'; }}, 2000);
   }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
 
@@ -661,16 +763,9 @@ def main():
     if TESTLAGE:
         representanter = representanter[:30]
 
-    # Steg 5: Batch-bedömning
-    print(f"\n  [5/5] Bedömer {len(representanter)} artiklar (batchar om {BATCH_STORLEK})...")
-    relevanta_repr = []
-    for i in range(0, len(representanter), BATCH_STORLEK):
-        batch = representanter[i:i + BATCH_STORLEK]
-        print(f"  Batch {i//BATCH_STORLEK + 1}: {len(batch)} artiklar...")
-        tid = time.time()
-        resultat = bedom_batch(batch)
-        print(f"    -> {len(resultat)} relevanta ({time.time()-tid:.1f}s)")
-        relevanta_repr.extend(resultat)
+    # Steg 5: Bedömning med cache
+    print(f"\n  [5/5] Bedömer {len(representanter)} artiklar...")
+    relevanta_repr = bedom_med_cache(representanter)
 
     repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}
     grupper_relevanta = []

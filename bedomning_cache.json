@@ -1,0 +1,50 @@
+{
+  "c174a30f928048182533fad384ddd210": null,
+  "e44b9b23546a28da1a42ff3d5460d742": null,
+  "27f3ec14ca28b57df1bbe23d0f8bba6d": null,
+  "2444b2d4d18f33dc411d1a09ec8e671e": null,
+  "67cdead0ec75349a562daf9555d9542b": null,
+  "6ae7ee00f883c5a419c4ed3b0dafdd6b": null,
+  "345d77a8c013a6f3ac2f62da0ca89e24": null,
+  "7e4428f96271a58b60f163ac47aff669": null,
+  "85f7214f373ed059704531cd0d6dceca": null,
+  "513e4a494a5a54f339172ce5fb6d307c": null,
+  "84cc401bf144972d3a4c02bbaf5e6476": null,
+  "622960c7956f620e9c54d3203fb33a6a": null,
+  "5d16d4b425f3f00b9dddf15a47357708": null,
+  "2cb7c04b19f6f010b482c4937277f490": null,
+  "92e293f90209a268b9db11a35a79c016": null,
+  "ca6b827b2423aebfbb8b405fc67c6280": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Artikel om hur miljöbyggnadscertifieringen hanteras i projektet Kallbäcks Terrasser i tre steg.",
+    "motivering": "Miljöbyggnadscertifiering berör energikrav och hållbar fastighetsutveckling vilket har indirekt relevans för Risons fokus på energieffektivisering i fastigheter."
+  },
+  "17a3e5ef6c3470eb8d83c7daf13ad5c2": null,
+  "a4f0f741eb448f1b323331b4d1fb5227": null,
+  "8216f53313a39baba480889ccd54728e": null,
+  "b9033ccdf27b2aae7aa484e3cef64663": null,
+  "c539ce9478c27e3aeef181aa876098a6": null,
+  "7793943f839b2d21ee11bd08b39eb5bc": null,
+  "3e018576a10d97ac9a6d58b8643488d9": null,
+  "e04c349a25781cdf66b3a01ae30abb04": null,
+  "9293e67c5ea8ab39654ce29f6c05aa94": null,
+  "72491ff50a829e56378751df10801cc5": null,
+  "095fdbc0037bbaf9220781e7b72933a5": null,
+  "b8520f9e3e6c4450a2c7d17a39124060": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 4,
+    "sammanfattning": "Fastighetsvarlden listar de 20 fastighetsbolag som har flest elbilsladdpunkter, med Fabege, Wihlborgs och Wallenstam i topp.",
+    "motivering": "Berör fastighetsbolags energiinfrastruktur men fokuserar på elbilsladdning vilket faller utanför kärnrelevansen för Risons EaaS-portfölj, dock ger viss marknadsinsikt om energiinvesterande fastighetsbolag."
+  },
+  "bb3bc76ce826d2bfb42da46890f91a88": null,
+  "ecc9725d06dd9d014e346fcff96eeeda": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Caroline Meschke skriver debattartikel om RICS nya krav som påverkar hela fastighetsbranschen.",
+    "motivering": "RICS standarder berör ofta hållbarhet och energikrav i fastigheter vilket är relevant för Risons verksamhet, men snippeten ger otillräcklig information för att bekräfta direkt energikoppling."
+  }
+}

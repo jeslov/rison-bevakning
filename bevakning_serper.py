@@ -755,7 +755,7 @@ def main():
             traff = sok_serper(sokord, antal=10)
             for a in traff:
                 aid = artikel_id(a["url"])
-                if aid not in sedda and aid not in kandidater:
+                if aid not in kandidater:
                     kandidater[aid] = a
             if traff:
                 print(f"  '{sokord}': {len(traff)}")

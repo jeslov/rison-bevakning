@@ -490,7 +490,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         r = grupp[0]
         niva  = r.get("relevansniva", "Medel")
         poang = r.get("poang", 0)
-        faerg = "#1a7a3f" if niva == "Hog" else "#1a4a7a"
+        faerg = "#293244" if niva == "Hog" else "#3d5a80"
         kalla_typ_ikon = "📡" if r.get("kalla_typ") == "rss" else "🔍"
         datum_str  = f'<span style="font-size:11px;color:#aaa;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:10px;color:#ccc;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
@@ -514,10 +514,10 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
     {datum_str} {sokord_str}
   </div>
-  <div style="font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.3;">
+  <div style="font-family:'EB Garamond',Georgia,serif;font-size:19px;font-weight:500;margin-bottom:8px;line-height:1.3;">
     <a href="{url_esc}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
   </div>
-  <div style="font-size:15px;color:#444;line-height:1.7;margin-bottom:8px;">{escape_html(r.get('sammanfattning',''))}</div>
+  <div style="font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:8px;font-weight:300;">{escape_html(r.get('sammanfattning',''))}</div>
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{url_esc}" target="_blank" style="font-size:12px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
@@ -528,7 +528,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
 
     def sektion_html(rubrik, grupper, start_idx, faerg):
         if not grupper: return "", start_idx
-        h = f'<h2 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:{faerg};margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid {faerg};">{rubrik} &mdash; {len(grupper)} artiklar</h2>'
+        h = f'<h2 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:{faerg};margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.25);">{rubrik} &mdash; {len(grupper)} artiklar</h2>'
         for i, g in enumerate(grupper):
             h += artikel_html(g, start_idx + i)
         return h, start_idx + len(grupper)
@@ -550,7 +550,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
             teman = cache.get("teman", [])
             sparad = cache.get("datum", "")[:10]
             if teman:
-                teman_tags = "".join(f'<span style="display:inline-block;background:#1a1a1a;color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;margin:3px;">{escape_html(t)}</span>' for t in teman)
+                teman_tags = "".join(f'<span style="display:inline-block;background:#293244;color:#EFEDE0;border-radius:2px;padding:3px 10px;font-size:11px;margin:3px;letter-spacing:0.3px;">{escape_html(t)}</span>' for t in teman)
                 zeitgeist_teman_html = f'<div style="max-width:760px;margin:0 auto;padding:0 40px 16px;"><div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Veckans zeitgeist-teman (uppdaterad {sparad})</div><div>{teman_tags}</div></div>'
         except Exception:
             pass
@@ -578,10 +578,10 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sa
 #login-btn{{width:100%;padding:11px;background:#181D27;color:#EFEDE0;border:none;border-radius:2px;font-size:13px;cursor:pointer;font-weight:500;letter-spacing:1px;text-transform:uppercase}}
 #fel{{color:#c0392b;font-size:13px;margin-top:8px;display:none}}
 #rapport{{display:none}}
-.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:1px solid rgba(255,255,255,0.08)}}
+.header{{background:#181D27;color:#fff;padding:24px 40px;border-bottom:1px solid rgba(255,255,255,0.15)}}
 .header h1{{font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:0.5px}}
 .header p{{font-size:11px;color:#8892a4;margin-top:5px;letter-spacing:0.5px;text-transform:uppercase}}
-.stats{{background:#181D27;border-bottom:1px solid rgba(255,255,255,0.08);padding:10px 40px;display:flex;gap:24px;font-size:11px;color:#8892a4;flex-wrap:wrap}}
+.stats{{background:#181D27;border-bottom:1px solid rgba(255,255,255,0.15);padding:10px 40px;display:flex;gap:24px;font-size:11px;color:#8892a4;flex-wrap:wrap}}
 .stats b{{color:#EFEDE0}}
 .content{{max-width:760px;margin:0 auto;padding:24px 40px 32px}}
 .sokord-panel{{max-width:760px;margin:0 auto;padding:0 40px 40px}}

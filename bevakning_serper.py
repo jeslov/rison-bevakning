@@ -653,7 +653,7 @@ Innan du skriver inlägget:
 
 Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
 
-Lägg till artikelns URL på sista raden: ${url}`;
+Lägg till artikelns URL på sista raden: ${{url}}`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

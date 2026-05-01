@@ -723,7 +723,7 @@ function generera_linkedin_panel(panel, action, url, fulltext) {{
     if (sepIdx > 100) text = text.substring(0, sepIdx).trim();
     text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     text = text.replace(/^---$/gm, '<hr style="border:none;border-top:1px solid #e0ddd4;margin:12px 0;">');
-    text = text.replace(/\n/g, '<br>');
+    text = text.split('\\n').join('<br>');
     const panelId = panel.id;
     panel.innerHTML = `
       <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">

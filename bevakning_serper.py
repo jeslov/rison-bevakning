@@ -515,20 +515,20 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="margin-bottom:10px;">{render_sammanfattning(r.get('sammanfattning',''))}</div>
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
-    <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
+    <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel</a>
     <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
-      style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.3px;">
+      style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;">
       Långt
     </button>
     <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
-      style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
+      style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-{idx}')" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;">
+    <button onclick="hamta_kontext(this, 'kontext-{idx}')" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
-      style="font-size:12px;background:#c0392b;color:#fff;border:none;cursor:pointer;padding:5px 14px;border-radius:2px;letter-spacing:0.3px;font-weight:500;">
+      style="font-size:12px;background:#c0392b;color:#fff;border:none;cursor:pointer;padding:6px 14px;border-radius:2px;letter-spacing:0.5px;font-weight:500;text-transform:uppercase;">
       Radera
     </button>
   </div>
@@ -726,11 +726,11 @@ function hamta_kontext(btn, panelId) {{
         + '</div>';
     }}
     panel.style.display = 'block';
-    btn.textContent = 'Redaktionell kontext';
+    btn.textContent = 'Relaterade artiklar';
     btn.disabled = false;
   }}).catch(() => {{
     panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
-    btn.textContent = 'Redaktionell kontext';
+    btn.textContent = 'Relaterade artiklar';
     btn.disabled = false;
   }});
 }}

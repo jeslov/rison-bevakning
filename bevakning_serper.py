@@ -344,7 +344,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "3-5 meningar som täcker vad artikeln handlar om, vad som är nytt eller anmärkningsvärt, och varför det är relevant för fastighetsbranschen", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En kort rubrik på max 8 ord som fångar artikelns kärna, följt av | och sedan 3-5 punkter separerade med • som listar de viktigaste poängerna", "motivering": "En mening"}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []
@@ -456,6 +456,14 @@ def escape_html(s):
 
 # ── HTML ──────────────────────────────────────────────────────────────────────
 
+def render_sammanfattning(sammf):
+    delar = sammf.split('|', 1)
+    rubrik = escape_html(delar[0].strip())
+    punkter = [escape_html(p.strip()) for p in delar[1].split('\u2022') if p.strip()] if len(delar) > 1 else []
+    li = ''.join(f'<li style="margin-bottom:4px;">{p}</li>' for p in punkter)
+    return (f'<div style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">{rubrik}</div>'
+            f'<ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;">{li}</ul>')
+
 def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
     datum = datetime.now().strftime("%d %B %Y, %H:%M")
     hoga  = [g for g in grupper_relevanta if g[0].get("relevansniva") == "Hog"]
@@ -502,7 +510,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
     <a href="{url_esc}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
   </div>
-  <div style="font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:8px;font-weight:300;">{escape_html(r.get('sammanfattning',''))}</div>
+  <div style="margin-bottom:10px;">{render_sammanfattning(r.get('sammanfattning',''))}</div>
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
     <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>

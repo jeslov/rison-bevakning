@@ -2,23 +2,23 @@
   "1dc598d751c2dc4dd81b2613aad010a5": {
     "relevant": true,
     "relevansniva": "Hog",
-    "poang": 7,
-    "sammanfattning": "EU inför förbud mot installation av gaspannor i nya byggnader från januari 2026, vilket är en del av EPBD-direktivets implementering. Detta påskyndar övergången till alternativa uppvärmningssystem som värmepumpar och bergvärme i nybyggnation. Förbudet skapar direkt marknadsdrivkraft för de lösningar Rison Capital finansierar via EaaS-modellen. Artikeln är dock publicerad på en brasiliansk sajt med låg redaktionell kvalitet, vilket minskar tillförlitligheten. Innehållet i sig är ändå regulatoriskt relevant för fastighetsenergimarknaden.",
-    "motivering": "EU:s förbud mot gaspannor i nya byggnader är en direkt regulatorisk drivkraft för värmepump- och bergvärmeinvesteringar i fastigheter, vilket är kärnan i Rison Capitals affär."
+    "poang": 6,
+    "sammanfattning": "EU förbjuder gaspannor i nya byggnader 2026 | • Förbud mot gaspannor i nya byggnader från januari 2026 • Del av EU:s EPBD-direktiv och klimatlagstiftning • Påverkar fastighetsägare och byggherrar direkt • Driver omställning mot värmepumpar och bergvärme • Relevant för EaaS-finansiering av alternativa värmesystem",
+    "motivering": "EU-förbudet mot gaspannor är direkt relevant för Risons affär då det accelererar efterfrågan på värmepumpar och bergvärme i fastigheter, men artikelkällan är en portugisiskspråkig underhållningssajt med låg trovärdighet."
   },
   "3e309f0762c5601efe793000eccd7221": {
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 5,
-    "sammanfattning": "Uppsala universitets artikel lyfter fram geotermisk energi som ett växande grönt energislag med potential att skalas upp globalt och i Sverige. Bergvärme nämns som en befintlig tillämpning av geotermisk teknik i Sverige. Artikeln är akademiskt orienterad och ger ett brett perspektiv snarare än specifika affärsmöjligheter. Relevansen för Rison Capital är indirekt – ökad uppmärksamhet kring bergvärme stärker marknadsklimat och legitimitet. Saknar konkreta kopplingar till fastighetsfinansiering eller EaaS.",
-    "motivering": "Akademisk artikel som stärker den generella berättelsen kring bergvärme som energilösning, relevant som omvärldsbevakning men utan direkt affärskoppling."
+    "sammanfattning": "Uppsala universitet om geotermisk energi på frammarsch | • Geotermisk/bergvärme lyfts som växande grönt energislag • Forskningstyngd källa ger trovärdighet åt tekniken • Ny teknik möjliggör utvinning på fler platser • Relevant för bergvärmesegmentet i Risons portfölj • Begränsat djup i tillgänglig text",
+    "motivering": "Artikeln berör bergvärme och geotermisk energi vilket är kärna i Risons affär, men texten saknar konkret innehåll och är mer av akademisk kommunikationskaraktär."
   },
   "296e8e692694c24be166fd12ab5ec443": {
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 6,
-    "sammanfattning": "Tidningen Extrakt rapporterar om det globalt ökande intresset för geotermisk energi, inklusive bergvärme i Sverige, drivet av den gröna omställningen. IEA lyfts fram som en röst för teknikens potential att bidra till energisystemet. Ny teknik möjliggör utvinning på fler platser än tidigare, vilket kan öka tillgängligheten för fastigheter. Artikeln är mer populärvetenskaplig och ger god omvärldskontext för bergvärme som energislag. Relevant för att förstå tekniktrender som påverkar Rison Capitals investeringscase.",
-    "motivering": "Ger aktuell omvärldskontext för bergvärme som energislag i tillväxt, relevant för Rison Capitals kärnverksamhet men utan direkt fastighets- eller finansieringsvinkel."
+    "sammanfattning": "Geotermisk energi som nästa stora energikälla | • IEA lyfter geotermisk energi som skalbar lösning • Ny teknik möjliggör bredare geografisk utbyggnad • Bergvärme och jordvärme används redan i Sverige • Global grön omställning driver intresset • Relevant bakgrund för Risons bergvärmeinvesteringar",
+    "motivering": "Artikeln ger relevant omvärldskontext för bergvärme som energislag och stärker investeringsnarrativet för Risons bergvärme-EaaS, men fokuserar på storskalig geotermik snarare än fastighetsspecifik bergvärme."
   },
   "559fc72c8ddcdaca50ac9e80f1b3e24e": null,
   "c12a5dd8d6f821f35744d82f23ac41aa": null,
@@ -26,39 +26,33 @@
     "relevant": true,
     "relevansniva": "Hog",
     "poang": 8,
-    "sammanfattning": "Studie från Umeå universitet visar hur AI-baserade analyser kan ge byggnads- och platsspecifika rekommendationer för energirenoveringar, med hänsyn till klimatpåverkan och kostnader. Byggnader står för 30% av världens energianvändning och en fjärdedel av globala CO2-utsläpp, vilket motiverar mer precisa renoveringsverktyg. AI-stödet kan förbättra beslutsunderlag för vilka energiåtgärder som ger bäst effekt i specifika fastigheter. Detta är direkt relevant för EaaS-modellen där rätt val av åtgärd (bergvärme, BESS, värmepump) är avgörande för lönsamhet. Publicerad i Dagens Fastigheter, en kärnmålgrupp för Rison Capital.",
-    "motivering": "AI-driven optimering av energirenoveringsåtgärder i fastigheter stärker beslutsunderlaget för EaaS-investeringar och är publicerad i en direkt relevant branschkanal."
+    "sammanfattning": "AI-analys optimerar energirenovering i byggnader | • AI ger byggnadsspecifika renoveringsrekommendationer • Byggnader står för 30% av global energianvändning • Utsläpp och kostnadseffekter av åtgärder analyseras • Plats- och användningsspecifika modeller ersätter schabloner • Direkt relevant för energieffektivisering av fastighetsbestånd",
+    "motivering": "Artikeln adresserar direkt energieffektivisering av byggnader med fokus på kostnader och utsläpp, vilket är kärnan i Risons EaaS-erbjudande till BRF och kommersiella fastigheter."
   },
   "08ef808f15509c96d513aa7c9b8d3fca": {
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 5,
-    "sammanfattning": "Artikeln beskriver hållbar stadsutveckling i Kallebäcks Terrasser i Göteborg där Wallenstam bygger tio bostadskvarter med miljöbyggnadscertifiering Silver. Wikström Installationskonsult har haft rollen som miljöbyggnadssamordnare och arbetat med energiprestanda, dagsljus och termisk komfort. Certifieringen lyfts fram som värdehöjande för fastigheten och bidrar till lägre driftkostnader. Projektet är ett exempel på energieffektiv nybyggnation inom bostadssegmentet men saknar specifik koppling till bergvärme, BESS eller EaaS-finansiering. Relevant som omvärldsexempel på energikrav i praktiken.",
-    "motivering": "Visar hur energiprestanda och miljöcertifiering driver fastighetsvärde i bostadsprojekt, relevant som marknadskontext men utan direkt EaaS- eller teknikkoppling."
+    "sammanfattning": "Wallenstam certifierar bostadskvarter med energifokus i Göteborg | • Miljöbyggnad Silver-certifiering för nytt bostadskvarter • Energiprestanda och termisk komfort i fokus • Wallenstam arbetar aktivt med klimat- och miljöpåverkan • Certifiering höjer fastighetsvärde och minskar driftkostnader • Relevant som marknadssignal men inget EaaS-innehåll",
+    "motivering": "Artikeln visar på pågående energifokus i kommersiell fastighetsutveckling och certifieringstrenden, men saknar direkt koppling till EaaS-finansiering eller specifika tekniker som bergvärme/BESS."
   },
-  "8a92099b04b8f36840482da37d16d63f": {
-    "relevant": true,
-    "relevansniva": "Medel",
-    "poang": 5,
-    "sammanfattning": "Boverket publicerar sin uppföljning av plan- och bygglagen 2025, baserat på enkätsvar från samtliga länsstyrelser och kommuner. Rapporten täcker översiktsplanering, detaljplanering, bygglov och tillsyn, och visar ökad digitalisering av planprocesser. Rapporten har indirekt relevans för fastighetsenergiarbete genom att den speglar den regulatoriska ramen som påverkar byggnation och renovering. Inga direkta energikrav eller EaaS-kopplingar nämns i tillgänglig text. Relevant primärt som omvärldsbevakning av myndighetssignaler.",
-    "motivering": "Boverkets regulatoriska uppföljning är relevant som myndighetsignal och bakgrund till byggande och energikrav, men saknar direkt energieffektiviseringsfokus i tillgänglig text."
-  },
+  "8a92099b04b8f36840482da37d16d63f": null,
   "4cd7983dd8a8a51de0d8861ab1f63f40": null,
   "e82646f2c00e500898d2d1d5056fbbc2": null,
   "7e6aa122b95d321b76d30e8b95499892": {
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 5,
-    "sammanfattning": "Artikeln beskriver hur fastighetsägare som mottagit statligt investeringsstöd (totalt 22,7 miljarder kronor utbetalat sedan 2016) nu lever under tillsyn i 15 år framåt av länsstyrelserna. För att inte riskera återbetalning av stödet håller fastighetsägare medvetet nere sina hyreshöjningar. Jurist Magnus Näll på Fastighetsägarna MittNord vittnar om oro hos mindre fastighetsägare, exempelvis de som byggt 50-tal lägenheter och fått ~20 miljoner i stöd. Energikrav ingick som villkor för stödet, vilket gör detta relevant för energieffektivisering i fastigheter. Artikeln belyser spänningen mellan energikrav, hyresreglering och finansiell riskhantering för fastighetsägare.",
-    "motivering": "Relevant då energikrav kopplat till investeringsstöd direkt påverkar fastighetsägares ekonomi och deras incitament för energieffektivisering, men ingen direkt koppling till EaaS, bergvärme eller institutionellt kapital."
+    "sammanfattning": "Investeringsstöd skapar hyreskontroll och energikrav i 15 år | • Fastighetsägare med investeringsstöd kontrolleras av länsstyrelser i 15 år • Totalt 22,7 miljarder kronor utbetalat stöd • Energikrav och hyrestak följer med stödet • Oro hos mindre fastighetsägare för återbetalningskrav • Berör indirekt energieffektiviseringskrav i befintligt bestånd",
+    "motivering": "Artikeln berör energikrav kopplade till investeringsstöd i fastigheter vilket är indirekt relevant för Risons marknad men handlar primärt om hyresreglering snarare än energieffektivisering eller EaaS-finansiering."
   },
   "7f71f594e2aba995238484b820429a48": null,
   "11010e84e69395a81ca3e95b30eeffbf": {
     "relevant": true,
     "relevansniva": "Hog",
     "poang": 7,
-    "sammanfattning": "EU-kommissionen, EU-parlamentet och rådet har enats om en tidsplan för flera viktiga lagpaket inom energi och hållbarhet, inklusive sannolikt EPBD och Omnibus-paketet. Överenskommelsen sker i samband med ett EU-toppmöte och berör centrala regleringar som styr energikrav på byggnader och hållbarhetsrapportering. Tidsplanen ger marknadsaktörer ökad förutsägbarhet kring kommande krav. För Rison Capital är detta direkt relevant eftersom EPBD driver efterfrågan på energieffektivisering i fastigheter. Artikeln är dock kortfattad och saknar detaljer om exakt vilka lagpaket som inkluderas.",
-    "motivering": "EU-tidsplan för energi- och hållbarhetslagstiftning (inkl. sannolikt EPBD) är högrelevant då det direkt styr marknadsutvecklingen för EaaS och energieffektivisering i fastigheter."
+    "sammanfattning": "EU enas om tidsplan för energi- och hållbarhetslagstiftning | • EU-kommissionen, parlamentet och rådet enats om tidsplan • Gäller viktiga lagpaket inom energi och hållbarhet • Inkluderar sannolikt EPBD och Omnibus-processen • Direkt påverkan på byggregler och energikrav • Relevant för Risons regulatoriska omvärld",
+    "motivering": "EU-tidsplanen för energi- och hållbarhetslagstiftning är direkt relevant för EPBD-implementering och de regulatoriska drivkrafter som skapar efterfrågan på Risons EaaS-lösningar, även om artikelns innehåll är begränsat."
   },
   "04aaba89e2b65e353e6bf72cf5e80167": null,
   "e0ae61af692dc41aae19c7d38d789825": null,
@@ -74,9 +68,9 @@
   "a6f8ca29f0eb0316112a6f5b7418de6c": null,
   "1bf4a72f9712b562ac510bb70c027734": {
     "relevant": true,
-    "relevansniva": "Medel",
-    "poang": 4,
-    "sammanfattning": "Artikeln behandlar batterilagring som ett medel för att öka energioberoende, ett ämne som är direkt kopplat till BESS vilket är ett av Rison Capitals kärnområden. Källan är Vietnam.vn vilket indikerar ett vietnamesiskt perspektiv och begränsad direkt applicerbarhet på svenska fastighetsmarknaden. Artikelns faktiska innehåll är svårt att bedöma då texten domineras av CSS-kod, men titeln är relevant. Batterilagring i fastighetskontext är ett växande område inom EaaS-finansiering.",
-    "motivering": "Batterilagring/BESS är ett kärnområde för Rison Capital men den geografiska källan och otydliga innehållet begränsar relevansen avsevärt."
+    "relevansniva": "Hog",
+    "poang": 6,
+    "sammanfattning": "Batterilagring ökar energioberoende | • BESS som strategisk lösning • Energioberoende via lagring • Vietnamesiskt perspektiv • Begränsad fastighetskoppling",
+    "motivering": "Artikeln berör batterilagring (BESS) som är ett kärnområde för Rison Capital, men källan är Vietnam.vn vilket begränsar den direkta relevansen för svenska fastighetsmarknaden."
   }
 }

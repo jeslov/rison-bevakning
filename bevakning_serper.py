@@ -683,7 +683,7 @@ Avsluta med: "Läs artikeln: ${{url}}"`;
 }}
 
 function hamta_kontext(btn, panelId) {{
-  const sokord = btn.getAttribute('data-sokord') || '';
+  const sokord = (btn.getAttribute('data-sokord') || '').replace(/&apos;/g, '').replace(/'/g, '');
   const panel = document.getElementById(panelId);
   if (panel.innerHTML.trim()) {{
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';

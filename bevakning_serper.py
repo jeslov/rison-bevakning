@@ -344,7 +344,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En mening om vad artikeln handlar om", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "3-5 meningar som täcker vad artikeln handlar om, vad som är nytt eller anmärkningsvärt, och varför det är relevant för fastighetsbranschen", "motivering": "En mening"}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []

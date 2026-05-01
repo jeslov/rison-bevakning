@@ -42,7 +42,7 @@ button:hover{opacity:0.85}
   <div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används · 26 bedömningar i cache</div>
   <div class="header">
     <h1>Rison &middot; Omvärldsbevakning</h1>
-    <p>01 May 2026, 17:46 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+    <p>01 May 2026, 17:50 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
   <div class="stats">
     <span><b>0</b> RSS</span>
@@ -530,12 +530,44 @@ function hamta_kontext(btn, panelId) {
     if (unika.length === 0) {
       panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Inga relaterade artiklar hittades.</p>';
     } else {
+      // Gruppera dubletter baserat på liknande titlar
+      const grupper = [];
+      const anvanda = new Set();
+      unika.forEach((a, i) => {
+        if (anvanda.has(i)) return;
+        const grupp = [a];
+        anvanda.add(i);
+        unika.forEach((b, j) => {
+          if (anvanda.has(j)) return;
+          const aOrd = new Set(a.title.toLowerCase().split(/\W+/).filter(w => w.length > 3));
+          const bOrd = new Set(b.title.toLowerCase().split(/\W+/).filter(w => w.length > 3));
+          const gemensamma = [...aOrd].filter(w => bOrd.has(w)).length;
+          if (gemensamma / Math.max(aOrd.size, bOrd.size) > 0.5) {
+            grupp.push(b);
+            anvanda.add(j);
+          }
+        });
+        grupper.push(grupp);
+      });
+
       panel.innerHTML = '<div style="border-top:1px solid #e0ddd4;padding-top:12px;margin-top:4px;">'
         + '<div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Redaktionell kontext – relaterade artiklar</div>'
-        + unika.map(a => '<div style="padding:8px 0;border-bottom:1px solid #f0ede4;">'
-          + '<div style="font-size:11px;color:#888;margin-bottom:2px;">' + (a.source || '') + ' · ' + (a.date || '') + '</div>'
-          + '<a href="' + a.link + '" target="_blank" style="font-size:14px;color:#293244;font-weight:500;text-decoration:none;">' + a.title + '</a>'
-          + '</div>').join('')
+        + grupper.map((g, gi) => {
+          const huvud = g[0];
+          const ovriga = g.slice(1);
+          const dubblettHtml = ovriga.length > 0
+            ? '<div style="margin-top:6px;">'
+              + '<button onclick="var e=document.getElementById('kd-' + gi + '-' + panelId + '');e.style.display=e.style.display==='none'?'block':'none'" style="font-size:11px;background:none;border:1px solid #ddd;padding:2px 8px;border-radius:2px;cursor:pointer;color:#999;">+' + ovriga.length + ' liknande</button>'
+              + '<div id="kd-' + gi + '-' + panelId + '" style="display:none;margin-top:6px;">'
+              + ovriga.map(b => '<div style="padding:4px 0;font-size:12px;"><span style="color:#aaa;">' + (b.source||'') + '</span> · <a href="' + b.link + '" target="_blank" style="color:#666;">' + b.title + '</a></div>').join('')
+              + '</div></div>'
+            : '';
+          return '<div style="padding:8px 0;border-bottom:1px solid #f0ede4;">'
+            + '<div style="font-size:11px;color:#888;margin-bottom:2px;">' + (huvud.source||'') + ' · ' + (huvud.date||'') + '</div>'
+            + '<a href="' + huvud.link + '" target="_blank" style="font-size:14px;color:#293244;font-weight:500;text-decoration:none;">' + huvud.title + '</a>'
+            + dubblettHtml
+            + '</div>';
+        }).join('')
         + '</div>';
     }
     panel.style.display = 'block';

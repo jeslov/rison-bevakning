@@ -40,9 +40,14 @@ button:hover{opacity:0.85}
 
 <div id="rapport">
   <div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används · 26 bedömningar i cache</div>
-  <div class="header">
-    <h1>Rison &middot; Omvärldsbevakning</h1>
-    <p>01 May 2026, 21:33 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+  <div class="header" style="display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <h1>Rison &middot; Omvärldsbevakning</h1>
+      <p>01 May 2026, 21:40 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+    </div>
+    <button onclick="kör_skript(this)" style="font-size:12px;background:none;border:1px solid rgba(255,255,255,0.4);color:#EFEDE0;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+      Kör nu
+    </button>
   </div>
   <div class="stats">
     <span><b>0</b> RSS</span>
@@ -556,6 +561,38 @@ function hamta_kontext(btn, panelId) {
   }).catch(() => {
     panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
     btn.textContent = 'Relaterade artiklar';
+    btn.disabled = false;
+  });
+}
+
+function kör_skript(btn) {
+  const token = localStorage.getItem('github_token');
+  if (!token) {
+    const t = prompt('Ange GitHub Personal Access Token (sparas i webbläsaren):');
+    if (!t) return;
+    localStorage.setItem('github_token', t);
+  }
+  btn.textContent = 'Startar...';
+  btn.disabled = true;
+  fetch('https://api.github.com/repos/jeslov/rison-bevakning/actions/workflows/bevakning.yml/dispatches', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'token ' + localStorage.getItem('github_token'),
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ref: 'main'}),
+  }).then(r => {
+    if (r.status === 204) {
+      btn.textContent = 'Startad!';
+      setTimeout(() => { btn.textContent = 'Kör nu'; btn.disabled = false; }, 3000);
+    } else {
+      btn.textContent = 'Fel – prova igen';
+      localStorage.removeItem('github_token');
+      btn.disabled = false;
+    }
+  }).catch(() => {
+    btn.textContent = 'Fel – prova igen';
     btn.disabled = false;
   });
 }

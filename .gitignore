@@ -1,0 +1,10 @@
+.env
+.env.save
+__pycache__/
+.DS_Store
+*.pyc
+bevakning.html
+bevakning_v*.py
+bevakning_rss.py
+bevakning.py
+test_djup.py

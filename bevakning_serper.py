@@ -499,6 +499,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         kalla_typ_ikon = ""
         datum_str  = f'<span style="font-size:13px;color:#666;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:12px;color:#888;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
+        kontext_sokord_js = json.dumps(r.get('kontextsokord', []))
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -523,11 +524,15 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
       Kort kommentar
     </button>
+    <button onclick="hamta_kontext(this, {kontext_sokord_js}, 'kontext-{idx}')" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;">
+      Redaktionell kontext
+    </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
       style="font-size:12px;background:#c0392b;color:#fff;border:none;cursor:pointer;padding:5px 14px;border-radius:2px;margin-left:auto;letter-spacing:0.3px;font-weight:500;">
       Ta bort
     </button>
   </div>
+  <div id="kontext-{idx}" style="display:none;margin-top:14px;"></div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
 

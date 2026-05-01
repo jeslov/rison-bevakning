@@ -654,9 +654,11 @@ Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ
 
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
-Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
+Innan du skriver inlägget:
+1. Sök upp LinkedIn-URL för varje organisation som nämns och inkludera @-slug i texten.
+2. Sök upp 1-2 aktuella källor eller studier som stärker artikelns poäng och väv in naturligt.
 
-Lägg till artikelns URL på sista raden: ${{url}}`;
+Avsluta med max 5 hashtags och artikelns URL på sista raden: ${{url}}`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

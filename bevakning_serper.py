@@ -612,9 +612,14 @@ button:hover{{opacity:0.85}}
 
 <div id="rapport">
   {testlage_banner}
-  <div class="header">
-    <h1>Rison &middot; Omvärldsbevakning</h1>
-    <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; RSS + Google News via Serper</p>
+  <div class="header" style="display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <h1>Rison &middot; Omvärldsbevakning</h1>
+      <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; RSS + Google News via Serper</p>
+    </div>
+    <button onclick="kör_skript(this)" style="font-size:12px;background:none;border:1px solid rgba(255,255,255,0.4);color:#EFEDE0;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+      Kör nu
+    </button>
   </div>
   <div class="stats">
     <span><b>{stat.get('rss_artiklar',0)}</b> RSS</span>

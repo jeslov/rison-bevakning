@@ -515,16 +515,16 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="margin-bottom:10px;">{render_sammanfattning(r.get('sammanfattning',''))}</div>
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
-    <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel</a>
-    <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
+    <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
+    <button onclick="visa_panel('linkedin-lang-{idx}', ['linkedin-kort-{idx}', 'kontext-{idx}'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
+    <button onclick="visa_panel('linkedin-kort-{idx}', ['linkedin-lang-{idx}', 'kontext-{idx}'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-{idx}')" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-{idx}', ['linkedin-lang-{idx}', 'linkedin-kort-{idx}'])" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
@@ -532,6 +532,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin"></div>
+  <div id="linkedin-kort-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin_kort"></div>
   <div id="kontext-{idx}" style="display:none;margin-top:14px;"></div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
@@ -612,9 +614,14 @@ button:hover{{opacity:0.85}}
 
 <div id="rapport">
   {testlage_banner}
-  <div class="header">
-    <h1>Rison &middot; Omvärldsbevakning</h1>
-    <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; RSS + Google News via Serper</p>
+  <div class="header" style="display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <h1>Rison &middot; Omvärldsbevakning</h1>
+      <p>{datum} &middot; {len(hoga)+len(medel)} relevanta artiklar &middot; RSS + Google News via Serper</p>
+    </div>
+    <button onclick="kör_skript(this)" style="font-size:12px;background:none;border:1px solid rgba(255,255,255,0.4);color:#EFEDE0;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+      Kör nu
+    </button>
   </div>
   <div class="stats">
     <span><b>{stat.get('rss_artiklar',0)}</b> RSS</span>
@@ -684,7 +691,65 @@ Avsluta med: "Läs artikeln: ${{url}}"`;
   }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
 
-function hamta_kontext(btn, panelId) {{
+function visa_panel(panelId, stang) {{
+  stang.forEach(id => {{
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  }});
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  if (panel.style.display === 'block') {{
+    panel.style.display = 'none';
+    return;
+  }}
+  panel.style.display = 'block';
+  if (!panel.innerHTML.trim()) {{
+    const action = panel.getAttribute('data-action');
+    const url = panel.getAttribute('data-url');
+    const fulltext = panel.getAttribute('data-fulltext');
+    if (action) generera_linkedin_panel(panel, action, url, fulltext);
+  }}
+}}
+
+function generera_linkedin_panel(panel, action, url, fulltext) {{
+  panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Genererar utkast...</p>';
+  fetch('https://risonbevakning.jesper-75b.workers.dev', {{
+    method: 'POST',
+    headers: {{'Content-Type': 'application/json'}},
+    body: JSON.stringify({{action: action, url: url, fulltext: fulltext}}),
+  }}).then(r => r.json()).then(data => {{
+    const delar = (data.text || '').split('|||');
+    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
+    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
+    const brodtext = (delar[2] || '').replace(/^BR.DTEXT:\s*/i, '').trim();
+    const panelId = panel.id;
+    panel.innerHTML = `
+      <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">
+        <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">${{action === 'linkedin_kort' ? 'Kort inlägg' : 'Långt inlägg'}}</div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Rubrik</div>
+          <div contenteditable="true" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#181D27;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{rubrik}}</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Ingress</div>
+          <div contenteditable="true" style="font-size:15px;font-weight:500;color:#293244;line-height:1.6;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{ingress}}</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
+          <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{brodtext}}</div>
+        </div>
+        <button onclick="kopiera_utkast(this, '${{panelId}}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
+      </div>`;
+  }}).catch(() => {{
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte generera utkast.</p>';
+  }});
+}}
+
+function hamta_kontext(btn, panelId, stang) {{
+  if (stang) stang.forEach(id => {{
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  }});
   const sokord = (btn.getAttribute('data-sokord') || '').replace(/&apos;/g, '').replace(/'/g, '');
   const panel = document.getElementById(panelId);
   if (panel.innerHTML.trim()) {{
@@ -698,7 +763,7 @@ function hamta_kontext(btn, panelId) {{
     fetch('https://risonbevakning.jesper-75b.workers.dev', {{
       method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
-      body: JSON.stringify({{query: q}})
+      body: JSON.stringify({{action: 'kontext', query: q}})
     }}).then(r => r.json()).then(d => d.news || [])
   );
   Promise.all(hamtningar).then(results => {{
@@ -731,6 +796,49 @@ function hamta_kontext(btn, panelId) {{
   }}).catch(() => {{
     panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
     btn.textContent = 'Relaterade artiklar';
+    btn.disabled = false;
+  }});
+}}
+
+function kopiera_utkast(btn, panelId) {{
+  const panel = document.getElementById(panelId);
+  const delar = panel.querySelectorAll('[contenteditable]');
+  const text = Array.from(delar).map(d => d.innerText).join('\\n\\n');
+  navigator.clipboard.writeText(text).then(() => {{
+    const orig = btn.textContent;
+    btn.textContent = 'Kopierad!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  }});
+}}
+
+function kör_skript(btn) {{
+  const token = localStorage.getItem('github_token');
+  if (!token) {{
+    const t = prompt('Ange GitHub Personal Access Token (sparas i webbläsaren):');
+    if (!t) return;
+    localStorage.setItem('github_token', t);
+  }}
+  btn.textContent = 'Startar...';
+  btn.disabled = true;
+  fetch('https://api.github.com/repos/jeslov/rison-bevakning/actions/workflows/bevakning.yml/dispatches', {{
+    method: 'POST',
+    headers: {{
+      'Authorization': 'token ' + localStorage.getItem('github_token'),
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    }},
+    body: JSON.stringify({{ref: 'main'}}),
+  }}).then(r => {{
+    if (r.status === 204) {{
+      btn.textContent = 'Startad!';
+      setTimeout(() => {{ btn.textContent = 'Kör nu'; btn.disabled = false; }}, 3000);
+    }} else {{
+      btn.textContent = 'Fel – prova igen';
+      localStorage.removeItem('github_token');
+      btn.disabled = false;
+    }}
+  }}).catch(() => {{
+    btn.textContent = 'Fel – prova igen';
     btn.disabled = false;
   }});
 }}

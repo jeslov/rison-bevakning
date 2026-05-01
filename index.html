@@ -42,7 +42,7 @@ button:hover{opacity:0.85}
   <div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används · 26 bedömningar i cache</div>
   <div class="header">
     <h1>Rison &middot; Omvärldsbevakning</h1>
-    <p>01 May 2026, 21:13 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+    <p>01 May 2026, 21:20 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
   <div class="stats">
     <span><b>0</b> RSS</span>
@@ -479,7 +479,9 @@ Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ
 
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
-Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.`;
+Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
+
+Lägg till artikelns URL på sista raden: ${url}`;
 
   navigator.clipboard.writeText(prompt).then(() => {
     const orig = btn.textContent;

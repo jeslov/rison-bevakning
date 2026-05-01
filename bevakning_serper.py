@@ -718,10 +718,12 @@ function generera_linkedin_panel(panel, action, url, fulltext) {{
     headers: {{'Content-Type': 'application/json'}},
     body: JSON.stringify({{action: action, url: url, fulltext: fulltext}}),
   }}).then(r => r.json()).then(data => {{
-    const delar = (data.text || '').split('|||');
-    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
-    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
-    const brodtext = (delar[2] || '').replace(/^BR.DTEXT:\s*/i, '').trim();
+    let text = data.text || '';
+    const sepIdx = text.lastIndexOf('---');
+    if (sepIdx > 100) text = text.substring(0, sepIdx).trim();
+    text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/^---$/gm, '<hr style="border:none;border-top:1px solid #e0ddd4;margin:12px 0;">');
+    text = text.replace(/\n/g, '<br>');
     const panelId = panel.id;
     panel.innerHTML = `
       <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">

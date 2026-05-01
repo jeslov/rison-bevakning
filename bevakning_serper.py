@@ -344,7 +344,7 @@ Bedöm foljande {len(artiklar)} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En kort rubrik på max 8 ord som fångar artikelns kärna, följt av | och sedan 3-5 punkter separerade med • – varje punkt ska vara 1-2 meningar med tillräckligt sammanhang för att förstå poängen utan att läsa artikeln", "motivering": "En mening"}}]"""
+[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En kort rubrik på max 8 ord som fångar artikelns kärna, följt av | och sedan 3-5 punkter separerade med • – varje punkt ska vara 1-2 meningar med tillräckligt sammanhang för att förstå poängen utan att läsa artikeln", "motivering": "En mening", "kontextsokord": ["sokord1", "sokord2", "sokord3"]}}]"""
 
     svar = claude_anrop(prompt, max_tokens=3000)
     if not svar: return []

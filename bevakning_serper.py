@@ -524,7 +524,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       style="font-size:12px;background:#444;color:#fff;border:none;padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;">
       Kort kommentar
     </button>
-    <button onclick="hamta_kontext(this, {kontext_sokord_js}, 'kontext-{idx}')" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;">
+    <button onclick="hamta_kontext(this, '{kontext_sokord_js}', 'kontext-{idx}')" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:5px 14px;border-radius:2px;cursor:pointer;font-weight:500;">
       Redaktionell kontext
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"

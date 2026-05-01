@@ -524,7 +524,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-{idx}')" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-{idx}', ['linkedin-lang-{idx}', 'linkedin-kort-{idx}'])" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"

@@ -516,12 +516,11 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-{idx}')"
-      data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}"
+    <button onclick="visa_panel('linkedin-lang-{idx}', ['linkedin-kort-{idx}', 'kontext-{idx}'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
+    <button onclick="visa_panel('linkedin-kort-{idx}', ['linkedin-lang-{idx}', 'kontext-{idx}'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
@@ -533,7 +532,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Radera
     </button>
   </div>
-  <div id="linkedin-{idx}" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin"></div>
+  <div id="linkedin-kort-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin_kort"></div>
   <div id="kontext-{idx}" style="display:none;margin-top:14px;"></div>
   {dubbletter_panel(grupp, idx)}
 </div>"""

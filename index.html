@@ -43,7 +43,7 @@ button:hover{opacity:0.85}
   <div class="header" style="display:flex;justify-content:space-between;align-items:center;">
     <div>
       <h1>Rison &middot; Omvärldsbevakning</h1>
-      <p>01 May 2026, 23:14 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+      <p>01 May 2026, 23:21 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
     </div>
     <button onclick="kör_skript(this)" style="font-size:12px;background:none;border:1px solid rgba(255,255,255,0.4);color:#EFEDE0;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kör nu
@@ -792,6 +792,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+</script>
+<script>
 async function sha256(text) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');

@@ -499,7 +499,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         kalla_typ_ikon = ""
         datum_str  = f'<span style="font-size:13px;color:#666;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:12px;color:#888;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
-        kontext_sokord_js = json.dumps(r.get('kontextsokord', []))
+        kontext_sokord_js = json.dumps(r.get('kontextsokord', [])).replace('"', "&apos;").replace("[", "").replace("]", "")
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">

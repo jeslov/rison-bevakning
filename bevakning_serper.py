@@ -503,28 +503,18 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
-  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
-    <span style="font-size:13px;color:#444;font-weight:600;">{escape_html(r['kalla'])}</span>
-    <span style="font-size:10px;color:#fff;background:{faerg};padding:2px 8px;border-radius:20px;font-weight:600;">{niva}</span>
-    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
-    {datum_str} {sokord_str}
-  </div>
-  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
-    <a href="{url_esc}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
-  </div>
-  <div style="margin-bottom:10px;">{render_sammanfattning(r.get('sammanfattning',''))}</div>
-  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="visa_panel('linkedin-lang-{idx}', ['linkedin-kort-{idx}', 'kontext-{idx}'])"
+    <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="visa_panel('linkedin-kort-{idx}', ['linkedin-lang-{idx}', 'kontext-{idx}'])"
+    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-{idx}', ['linkedin-lang-{idx}', 'linkedin-kort-{idx}'])" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, '{kontext_sokord_js}', 'kontext-{idx}')"
+      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
@@ -532,9 +522,6 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Radera
     </button>
   </div>
-  <div id="linkedin-lang-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin"></div>
-  <div id="linkedin-kort-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin_kort"></div>
-  <div id="kontext-{idx}" style="display:none;margin-top:14px;"></div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
 

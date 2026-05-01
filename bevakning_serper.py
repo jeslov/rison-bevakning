@@ -740,6 +740,38 @@ function hamta_kontext(btn, panelId) {{
   }});
 }}
 
+function kör_skript(btn) {{
+  const token = localStorage.getItem('github_token');
+  if (!token) {{
+    const t = prompt('Ange GitHub Personal Access Token (sparas i webbläsaren):');
+    if (!t) return;
+    localStorage.setItem('github_token', t);
+  }}
+  btn.textContent = 'Startar...';
+  btn.disabled = true;
+  fetch('https://api.github.com/repos/jeslov/rison-bevakning/actions/workflows/bevakning.yml/dispatches', {{
+    method: 'POST',
+    headers: {{
+      'Authorization': 'token ' + localStorage.getItem('github_token'),
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    }},
+    body: JSON.stringify({{ref: 'main'}}),
+  }}).then(r => {{
+    if (r.status === 204) {{
+      btn.textContent = 'Startad!';
+      setTimeout(() => {{ btn.textContent = 'Kör nu'; btn.disabled = false; }}, 3000);
+    }} else {{
+      btn.textContent = 'Fel – prova igen';
+      localStorage.removeItem('github_token');
+      btn.disabled = false;
+    }}
+  }}).catch(() => {{
+    btn.textContent = 'Fel – prova igen';
+    btn.disabled = false;
+  }});
+}}
+
 function radera_artikel(btn, url) {{
   const kort = btn.closest('div[style*="border:1px solid"]');
   if (kort) {{

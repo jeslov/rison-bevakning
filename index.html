@@ -43,7 +43,7 @@ button:hover{opacity:0.85}
   <div class="header" style="display:flex;justify-content:space-between;align-items:center;">
     <div>
       <h1>Rison &middot; Omvärldsbevakning</h1>
-      <p>01 May 2026, 23:57 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+      <p>02 May 2026, 00:04 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
     </div>
     <button onclick="kör_skript(this)" style="font-size:12px;background:none;border:1px solid rgba(255,255,255,0.4);color:#EFEDE0;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kör nu
@@ -58,18 +58,28 @@ button:hover{opacity:0.85}
   </div>
   
   <div class="content"><h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:#EFEDE0;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.25);background:#293244;padding:10px 16px;border-radius:2px;">Hög relevans &mdash; 4 artiklar</h2><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Dagens Fastigheter</span>
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Hog</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">8/10</span>
+    <span style="font-size:13px;color:#666;">För 6 dagar sedan</span> <span style="font-size:12px;color:#888;">via: energirenovering fastighet</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" target="_blank" style="color:#1a1a1a;text-decoration:none;">AI visar hur energirenovering kan påverka utsläpp och kostnader</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">AI-analys optimerar energirenoveringar i byggnader</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">Umeå universitets forskning visar hur AI kan ge byggnadspecifika rekommendationer för energirenoveringar, med hänsyn till klimatpåverkan, kostnader och användningsmönster.</li><li style="margin-bottom:4px;">Byggnader står för 30 % av världens energianvändning och mer än en fjärdedel av globala koldioxidutsläpp, vilket motiverar precisionsverktyg för renoveringsplanering.</li><li style="margin-bottom:4px;">AI-baserade analysmodeller kan ersätta förenklade kategoriseringsmodeller och ge bättre beslutsunderlag för fastighetsägare och finansiärer.</li><li style="margin-bottom:4px;">Tekniken är relevant för EaaS-aktörer som behöver bedöma energibesparingspotential och avkastning innan investering i enskilda fastigheter.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">AI-driven renoveringsanalys är direkt tillämpbar i Risons due diligence och strukturering av EaaS-affärer för BRF och kommersiella fastigheter.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'AI visar hur energirenovering kan påverka utsläpp och kostnader', 'https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader')"
+    <button onclick="visa_panel('linkedin-lang-0', ['linkedin-kort-0', 'kontext-0'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader')"
+    <button onclick="visa_panel('linkedin-kort-0', ['linkedin-lang-0', 'kontext-0'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;energirenovering&apos;, &apos;AI fastighetsbed\u00f6mning&apos;, &apos;energieffektivisering byggnader&apos;', 'kontext-0')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-0', ['linkedin-lang-0', 'linkedin-kort-0'])" data-sokord="&apos;energirenovering&apos;, &apos;AI fastighetsbed\u00f6mning&apos;, &apos;energieffektivisering byggnader&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader')"
@@ -77,20 +87,33 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-0" style="display:none;margin-top:14px;" data-url="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" data-fulltext="Forskning från Umeå universitet beskriver hur AI-baserade metoder kan användas för att analysera energirenoveringar och deras påverkan på utsläpp,..." data-action="linkedin"></div>
+  <div id="linkedin-kort-0" style="display:none;margin-top:14px;" data-url="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" data-fulltext="Forskning från Umeå universitet beskriver hur AI-baserade metoder kan användas för att analysera energirenoveringar och deras påverkan på utsläpp,..." data-action="linkedin_kort"></div>
+  <div id="kontext-0" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Uppsala universitet</span>
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Hog</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">7/10</span>
+    <span style="font-size:13px;color:#666;">För 3 dagar sedan</span> <span style="font-size:12px;color:#888;">via: geotermisk energi Sverige</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" target="_blank" style="color:#1a1a1a;text-decoration:none;">Värme från jordens inre – ett grönt energislag på frammarsch</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">Uppsala universitet lyfter geotermisk energi som framtidskälla</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">Uppsala universitets forskning presenterar geotermisk energi, inklusive bergvärme, som ett växande grönt energislag med stor potential.</li><li style="margin-bottom:4px;">Ny teknik gör det möjligt att utvinna jordvärme på fler platser än tidigare, vilket kan bredda marknaden för bergvärmelösningar i svenska fastigheter.</li><li style="margin-bottom:4px;">Artikeln signalerar akademiskt och institutionellt intresse för geotermisk energi, vilket stärker teknikens legitimitet gentemot investerare.</li><li style="margin-bottom:4px;">Uppsala universitets kommunikation når beslutsfattare och kan påverka policy och finansieringsviljan för bergvärme.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Akademisk legitimering av bergvärme som energikälla stärker investeringscase för Risons EaaS-erbjudande inom bergvärmesegmentet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'Värme från jordens inre – ett grönt energislag på frammarsch', 'https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch')"
+    <button onclick="visa_panel('linkedin-lang-1', ['linkedin-kort-1', 'kontext-1'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch')"
+    <button onclick="visa_panel('linkedin-kort-1', ['linkedin-lang-1', 'kontext-1'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;gr\u00f6n uppv\u00e4rmning&apos;', 'kontext-1')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-1', ['linkedin-lang-1', 'linkedin-kort-1'])" data-sokord="&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;gr\u00f6n uppv\u00e4rmning&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch')"
@@ -98,20 +121,33 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-1" style="display:none;margin-top:14px;" data-url="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" data-fulltext="Nästan 6 000 grader. Så het är jordens inre kärna. Redan idag nyttjas jordens värme i geotermala kraftverk i till exempel Island och många svenska..." data-action="linkedin"></div>
+  <div id="linkedin-kort-1" style="display:none;margin-top:14px;" data-url="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" data-fulltext="Nästan 6 000 grader. Så het är jordens inre kärna. Redan idag nyttjas jordens värme i geotermala kraftverk i till exempel Island och många svenska..." data-action="linkedin_kort"></div>
+  <div id="kontext-1" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Tidningen Extrakt</span>
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Hog</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">7/10</span>
+    <span style="font-size:13px;color:#666;">För 2 dagar sedan</span> <span style="font-size:12px;color:#888;">via: geotermisk energi Sverige</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" target="_blank" style="color:#1a1a1a;text-decoration:none;">Jordens värme kan bli nästa stora energikälla</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">Geotermisk energi lyfts som nästa stora energikälla</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">Tidningen Extrakt rapporterar om det globalt ökande intresset för geotermisk energi i takt med den gröna omställningen, med IEA som källa.</li><li style="margin-bottom:4px;">I Sverige används geotermisk energi redan i form av jordvärme och bergvärme, och tekniken väntas kunna byggas ut kraftigt.</li><li style="margin-bottom:4px;">Ny borrnings- och utviningsteknik gör att geotermisk energi kan etableras på platser som tidigare var olämpliga, vilket ökar marknadspotentialen i Sverige.</li><li style="margin-bottom:4px;">Artikeln är publicerad i en trovärdig sakjournalistisk kanal vilket ger god spridning bland beslutsfattare inom energi och fastighet.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Direkt relevant för Risons bergvärmesatsning – stärker marknadsnarrativet och kan användas i investerarkommunikation om teknikens skalbarhet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'Jordens värme kan bli nästa stora energikälla', 'https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/')"
+    <button onclick="visa_panel('linkedin-lang-2', ['linkedin-kort-2', 'kontext-2'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/')"
+    <button onclick="visa_panel('linkedin-kort-2', ['linkedin-lang-2', 'kontext-2'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;energiomst\u00e4llning fastighet&apos;', 'kontext-2')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-2', ['linkedin-lang-2', 'linkedin-kort-2'])" data-sokord="&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;energiomst\u00e4llning fastighet&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/')"
@@ -119,20 +155,33 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-2" style="display:none;margin-top:14px;" data-url="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" data-fulltext="Geotermisk energi lyfts fram som ett växande grönt energislag. Med ny teknik kan värmen under jordytan utvinnas på betydligt fler platser än tidigare." data-action="linkedin"></div>
+  <div id="linkedin-kort-2" style="display:none;margin-top:14px;" data-url="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" data-fulltext="Geotermisk energi lyfts fram som ett växande grönt energislag. Med ny teknik kan värmen under jordytan utvinnas på betydligt fler platser än tidigare." data-action="linkedin_kort"></div>
+  <div id="kontext-2" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Aktuell Hållbarhet</span>
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Hog</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">7/10</span>
+    <span style="font-size:13px;color:#666;">För 3 dagar sedan</span> <span style="font-size:12px;color:#888;">via: Riksbyggen energi</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="color:#1a1a1a;text-decoration:none;">EU-enighet om tidsplan för viktiga lagpaket</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">EU enas om tidsplan för energi- och hållbarhetslagstiftning</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">EU-kommissionen, parlamentet och medlemsländerna har enats om tidsplaner för flera viktiga lagpaket inom energi och hållbarhet.</li><li style="margin-bottom:4px;">Paketen inkluderar sannolikt EPBD och Omnibus-relaterad lagstiftning som direkt påverkar energikrav på byggnader.</li><li style="margin-bottom:4px;">Tidsplanen skapar klarhet för fastighetsmarknaden om när krav på energieffektivisering träder i kraft.</li><li style="margin-bottom:4px;">För institutionella investerare som SEB Nordic Energy Fund ger tydligare EU-lagstiftning bättre planeringshorisont för gröna fastighetsinvesteringar.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">EU:s tidsplan för energi- och hållbarhetslagstiftning, inklusive EPBD, är direkt relevant för Risons marknad för energieffektivisering i fastigheter och institutionellt kapital.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'EU-enighet om tidsplan för viktiga lagpaket', 'https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/')"
+    <button onclick="visa_panel('linkedin-lang-3', ['linkedin-kort-3', 'kontext-3'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/')"
+    <button onclick="visa_panel('linkedin-kort-3', ['linkedin-lang-3', 'kontext-3'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;EPBD&apos;, &apos;EU energilagstiftning&apos;, &apos;Omnibus h\u00e5llbarhet byggnader&apos;', 'kontext-3')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-3', ['linkedin-lang-3', 'linkedin-kort-3'])" data-sokord="&apos;EPBD&apos;, &apos;EU energilagstiftning&apos;, &apos;Omnibus h\u00e5llbarhet byggnader&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/')"
@@ -140,20 +189,33 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-3" style="display:none;margin-top:14px;" data-url="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" data-fulltext="EU-kommissionen, EU-parlamentet och medlemsländerna har enats om en tidsplan för viktiga lagpaket inom energi och hållbarhet som ska vara klara innan 2026." data-action="linkedin"></div>
+  <div id="linkedin-kort-3" style="display:none;margin-top:14px;" data-url="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" data-fulltext="EU-kommissionen, EU-parlamentet och medlemsländerna har enats om en tidsplan för viktiga lagpaket inom energi och hållbarhet som ska vara klara innan 2026." data-action="linkedin_kort"></div>
+  <div id="kontext-3" style="display:none;margin-top:14px;"></div>
   
 </div><h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:#EFEDE0;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.25);background:#293244;padding:10px 16px;border-radius:2px;">Medel relevans &mdash; 3 artiklar</h2><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Mix Vale</span>
+    <span style="font-size:10px;color:#fff;background:#3d5a80;padding:2px 8px;border-radius:20px;font-weight:600;">Medel</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">5/10</span>
+    <span style="font-size:13px;color:#666;">För 1 dag sedan</span> <span style="font-size:12px;color:#888;">via: värmepump byggnad</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" target="_blank" style="color:#1a1a1a;text-decoration:none;">EU förbjuder installation av gaspannor i nya byggnader från och med januari 2026</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">EU förbjuder gaspannor i nya byggnader 2026</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">EU inför förbud mot installation av gaspannor i nya byggnader från januari 2026, vilket är en del av EPBD-direktivets genomförande.</li><li style="margin-bottom:4px;">Förbudet driver fastighetsägare och byggherrar mot alternativa uppvärmningslösningar som värmepumpar och bergvärme.</li><li style="margin-bottom:4px;">Regeländringen påverkar nybyggnation direkt men sätter även press på renovering av befintligt bestånd.</li><li style="margin-bottom:4px;">Källan är en brasiliansk innehållssajt med låg redaktionell tyngd, vilket begränsar artikelns tillförlitlighet.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">EU-reglering om gaspanneförbud är direkt relevant för EaaS-finansiering av alternativa uppvärmningslösningar i fastigheter, men källans låga kvalitet sänker värdet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" target="_blank" style="font-size:14px;color:#3d5a80;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'EU förbjuder installation av gaspannor i nya byggnader från och med januari 2026', 'https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/')"
+    <button onclick="visa_panel('linkedin-lang-4', ['linkedin-kort-4', 'kontext-4'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/')"
+    <button onclick="visa_panel('linkedin-kort-4', ['linkedin-lang-4', 'kontext-4'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;EPBD&apos;, &apos;gaspannef\u00f6rbud&apos;, &apos;v\u00e4rmepump&apos;', 'kontext-4')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-4', ['linkedin-lang-4', 'linkedin-kort-4'])" data-sokord="&apos;EPBD&apos;, &apos;gaspannef\u00f6rbud&apos;, &apos;v\u00e4rmepump&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/')"
@@ -161,20 +223,33 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-4" style="display:none;margin-top:14px;" data-url="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" data-fulltext="União Europeia har satt en ambitiös tidslinje för att fasa ut traditionella gaspannor i europeiska hem. Tidsfristen är 2040, men förändringar börjar långt..." data-action="linkedin"></div>
+  <div id="linkedin-kort-4" style="display:none;margin-top:14px;" data-url="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" data-fulltext="União Europeia har satt en ambitiös tidslinje för att fasa ut traditionella gaspannor i europeiska hem. Tidsfristen är 2040, men förändringar börjar långt..." data-action="linkedin_kort"></div>
+  <div id="kontext-4" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Mynewsdesk</span>
+    <span style="font-size:10px;color:#fff;background:#3d5a80;padding:2px 8px;border-radius:20px;font-weight:600;">Medel</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">5/10</span>
+    <span style="font-size:13px;color:#666;">För 1 dag sedan</span> <span style="font-size:12px;color:#888;">via: energiprestanda byggnad</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" target="_blank" style="color:#1a1a1a;text-decoration:none;">Hållbar stadsutveckling i Kallebäck</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">Wallenstam certifierar bostäder enligt Miljöbyggnad Silver</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">Fastighetsbolaget Wallenstam certifierar kvarter inom Kallebäcks Terrasser i Göteborg enligt Miljöbyggnad Silver, med fokus på energiprestanda, dagsljus och termisk komfort.</li><li style="margin-bottom:4px;">Wikström installationskonsult har agerat miljöbyggnadssamordnare och balanserat energikrav mot arkitektoniska förutsättningar i ett tätt bebyggt område.</li><li style="margin-bottom:4px;">Certifieringen lyfts fram som ett sätt att höja fastighetsvärde, marknadsattraktivitet och minska driftkostnader – argument som är relevanta för EaaS-finansiering.</li><li style="margin-bottom:4px;">Projektet illustrerar hur etablerade fastighetsbolag arbetar med energicertifiering som strategisk fråga snarare än enbart regeluppfyllnad.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Illustrerar hur kommersiella fastighetsägare integrerar energikrav i projektutveckling, relevant som marknadskontext för Risons EaaS-erbjudande.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" target="_blank" style="font-size:14px;color:#3d5a80;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'Hållbar stadsutveckling i Kallebäck', 'https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news')"
+    <button onclick="visa_panel('linkedin-lang-5', ['linkedin-kort-5', 'kontext-5'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news')"
+    <button onclick="visa_panel('linkedin-kort-5', ['linkedin-lang-5', 'kontext-5'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;Milj\u00f6byggnad&apos;, &apos;energiprestanda fastighet&apos;, &apos;Wallenstam&apos;', 'kontext-5')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-5', ['linkedin-lang-5', 'linkedin-kort-5'])" data-sokord="&apos;Milj\u00f6byggnad&apos;, &apos;energiprestanda fastighet&apos;, &apos;Wallenstam&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news')"
@@ -182,20 +257,33 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-5" style="display:none;margin-top:14px;" data-url="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" data-fulltext="Kallebäcks Terrasser är ett pågående stadsutvecklingsprojekt i Göteborg, drivet av fastighetsbolaget Wallenstam. I Kvarteret 2 har Wikström haft rollen som." data-action="linkedin"></div>
+  <div id="linkedin-kort-5" style="display:none;margin-top:14px;" data-url="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" data-fulltext="Kallebäcks Terrasser är ett pågående stadsutvecklingsprojekt i Göteborg, drivet av fastighetsbolaget Wallenstam. I Kvarteret 2 har Wikström haft rollen som." data-action="linkedin_kort"></div>
+  <div id="kontext-5" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">Fastighetstidningen</span>
+    <span style="font-size:10px;color:#fff;background:#3d5a80;padding:2px 8px;border-radius:20px;font-weight:600;">Medel</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">5/10</span>
+    <span style="font-size:13px;color:#666;">För 6 dagar sedan</span> <span style="font-size:12px;color:#888;">via: Fastighetsägarna energikrav</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" target="_blank" style="color:#1a1a1a;text-decoration:none;">Hyror hålls tillbaka för att inte riskera återbetalning av investeringsstöd</a>
+  </div>
+  <div style="margin-bottom:10px;"><div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:500;color:#181D27;margin-bottom:8px;">Investeringsstöd skapar hyresbegränsningar för fastighetsägare</div><ul style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;padding-left:18px;margin:0;"><li style="margin-bottom:4px;">Fastighetsägare som mottagit investeringsstöd (totalt 22,7 mdr kr) riskerar återbetalningskrav vid länsstyrelsernas tillsyn under 15 år.</li><li style="margin-bottom:4px;">Stödet kom med tuffa energikrav och tak för hyreshöjningar, vilket begränsar fastighetsägarnas ekonomiska handlingsutrymme.</li><li style="margin-bottom:4px;">Mindre aktörer är särskilt utsatta – en 50-lägenhetsfastighet kan ha fått ~20 mkr i stöd som kan krävas tillbaka.</li><li style="margin-bottom:4px;">Reglerna påverkar direkt lönsamhetskalkylen för energieffektiviserade hyresfastigheter, relevant för EaaS-finansiering där hyresintäkter är del av återbetalningsmodellen.</li></ul></div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Artikeln berör energikrav och ekonomiska villkor kopplade till hyresfastigheter, med indirekt relevans för EaaS-finansieringsmodeller där hyresnivåer påverkar lönsamhet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" target="_blank" style="font-size:14px;color:#3d5a80;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, 'Hyror hålls tillbaka för att inte riskera återbetalning av investeringsstöd', 'https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/')"
+    <button onclick="visa_panel('linkedin-lang-6', ['linkedin-kort-6', 'kontext-6'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/')"
+    <button onclick="visa_panel('linkedin-kort-6', ['linkedin-lang-6', 'kontext-6'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '&apos;investeringsst\u00f6d fastighet&apos;, &apos;energikrav hyresfastighet&apos;, &apos;fastighets\u00e4gare tillsyn&apos;', 'kontext-6')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-6', ['linkedin-lang-6', 'linkedin-kort-6'])" data-sokord="&apos;investeringsst\u00f6d fastighet&apos;, &apos;energikrav hyresfastighet&apos;, &apos;fastighets\u00e4gare tillsyn&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/')"
@@ -203,6 +291,9 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-6" style="display:none;margin-top:14px;" data-url="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" data-fulltext="Investeringsstödet infördes 2016 och de sista pengarna i potten betalades ut under 2025. För regeringens del är det ett avslutat kapitel men hos de 21..." data-action="linkedin"></div>
+  <div id="linkedin-kort-6" style="display:none;margin-top:14px;" data-url="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" data-fulltext="Investeringsstödet infördes 2016 och de sista pengarna i potten betalades ut under 2025. För regeringens del är det ett avslutat kapitel men hos de 21..." data-action="linkedin_kort"></div>
+  <div id="kontext-6" style="display:none;margin-top:14px;"></div>
   
 </div></div>
   <div class="sokord-panel">
@@ -486,304 +577,100 @@ ${stilref}
 
 Läs först hela artikeln på denna URL: ${url}
 
-VIKTIGT innan du skriver:
-1. Sök på webben efter LinkedIn-URL för varje organisation som nämns. Inkludera @-slug i texten.
-2. Sök upp 1-2 aktuella källor, studier eller uttalanden som stärker artikelns poäng. Väv in naturligt.
+Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
 
-Skriv ett LinkedIn-inlägg med tydliga radbrytningar mellan rubrik, ingress och brödtext.
-Direkt och analytisk ton. Kommentera artikeln, referera den inte.
-Avsluta med påstående, aldrig generisk engagemangsfråga.
-Avsluta med max 5 hashtags och artikelns URL på sista raden.`;
+Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
+
+Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
+
+Lägg till artikelns URL på sista raden: ${url}`;
 
   navigator.clipboard.writeText(prompt).then(() => {
     const orig = btn.textContent;
-    btn.textContent = 'Kopierad!';
-    btn.style.background = '#1a7a3f';
+    btn.textContent = '✓ Kopierad!';
+    btn.style.background = '#293244';
     setTimeout(() => { btn.textContent = orig; btn.style.background = '#293244'; }, 2000);
-  }).catch(() => alert('Kunde inte kopiera.'));
+  }).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }
 
 function kopiera_kort_prompt(btn, url) {
-  const stilref = `VIKTIG INSTRUKTION TILL CLAUDE:
-Exemplen nedan visar Jespers ton, argumentationsstruktur och skrivsätt – inte ämnesområde.
-Plocka upp hur han bygger argument, hur han provocerar etablerade sanningar, hur han avslutar.
-Använd INTE faktatermer, branschspecifika begrepp eller konkreta förslag från exemplen –
-bara skrivsättet och rösten. Ämnet i varje inlägg du skriver ska alltid vara artikeln du fått.
+  const prompt = `Läs artikeln på denna URL: ${url}
 
+Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
+- Fångar artikelns viktigaste poäng i ett analytiskt perspektiv
+- Förklarar varför den är värd att läsa för någon i fastighetsbranschen
+- Är skriven i en direkt, icke-säljig ton
 
-
-Dessa inlägg visar tonläge, struktur och uttryckssätt. Använd dem som mall.
-
----
-
-EXEMPEL 1:
-
-När det är någon annan som tar investeringen för att energieffektivisera dina fastigheter så blir frågan inte längre hur du ska kunna skapa största möjliga avkastning på en egen investering. Frågan blir istället hur stor besparing du kan göra till följd av någon annans investering.
-
-Det här är en i grunden ny dynamik som branschen står helt yrvaken inför. Och det är inte konstigt eftersom Rison Capital hittills är i princip helt ensamma om att erbjuda den möjligheten.
-
-De positiva effekterna av att som fastighetsägare göra sin energiomställning med hjälp av externa investeringar är många och stora. Både för klimatet och den egna ekonomin. När man slipper använda eget kapital och lånade pengar öppnas en rad möjligheter som gör att man helt kan skifta fokus i hur man ser på utmaningen att minska sin energiförbrukning.
-
-Jämförelsen med andra finansieringsformer blir också den haltande eftersom effekterna för verksamheten är så pass olika. Direkt och indirekt. När någon annan gör investeringen så binder den inte fastighetsägarens eget kapital och varje enskild åtgärd ger dessutom en besparing från dag ett till följd av minskad energiförbrukning.
-
-Det innebär i sin tur att ju fler åtgärder du som fastighetsägare genomför desto större besparing gör du. Och i ju högre takt du gör dem, desto snabbare får du ta del av de besparingarna. Både i form av lägre kostnader och minskad klimatpåverkan.
-
-Det är viktigt, inte minst eftersom det får så många positiva följdeffekter. Varav några av de viktigaste är att:
-
-• Det binder projektkostnaderna för de åtgärder som genomförs till dagens priser.
-• Den externa investeraren kommer alltid att ha fokus på lägsta möjliga driftkostnad.
-• Lägre energiförbrukning ger högre energiklassning, vilket i sin tur ger lägre räntor och ökat fastighetsvärde.
-
-Att göra en energiomställning av hela fastigheter eller fastighetsbestånd kräver skalbarhet. Och i en affärsverksamhet så är det lönsamhet som lägger grunden för den skalbarheten. Utan den skalbarheten förblir många tänkbara lösningar just bara tänkbara. Inte praktiskt genomförbara.
-
-Men nu finns som sagt andra möjligheter. Och det är dags för fastighetsbranschen att omfamna dem.
-
----
-
-EXEMPEL 2:
-
-Solcellerna på svenska tak sitter inte där för att de är de mest effektiva och lönsamma investeringarna för att minska en fastighets klimatpåverkan. De sitter där för att solceller har blivit ett sätt att visa att man "gör något".
-
-Om man istället varit ute efter maximal klimatnytta och den ekonomiskt mest hållbara lösningen så hade valet sällan fallit på solceller. För de allra flesta åtgärder du kan ägna dig åt inom energieffektivisering är bättre när det gäller klimateffekt per investerad krona än solceller.
-
-Det låter kanske uppseendeväckande men är faktiskt ett helt odramatiskt konstaterande. När man ställer upp kalkyler för solceller jämte andra lösningar för energieffektivisering framgår det med all önskvärd tydlighet.
-
-Under kommande år ökar kraven på att installera solceller även från EU-håll. Det är därför angeläget att påpeka för Regeringen att det finns en möjlighet att främja mer effektiva lösningar genom att inte blint följa EUs direktiv som de ser ut nu. För det finns en öppning för EU-länder att göra undantag utifrån "tekniska, ekonomiska och funktionella kriterier samt teknikneutralitet".
-
-Det här innebär inte att solceller på byggnader inte har något existensberättigande. Det har de absolut i vissa fall. Men de bör i första hand fylla sin roll i kombination med andra åtgärder som syftar till att minska energiåtgången.
-
----
-
-EXEMPEL 3:
-
-Varför gör fler företag inte större investeringar i energieffektivisering? Även nu när kommande krav från EU i snabb takt kommer att tvinga fram dessa åtgärder?
-
-Det är ungefär som att fråga varför fler företag inte gör större investeringar i energiproduktion. Eller Bitcoin. De allra flesta företag har ett tydligt definierat uppdrag som överskuggar precis alla andra: att leverera mesta möjliga värdeutväxling till sina aktieägare genom ett obrutet fokus på sin kärnverksamhet.
-
-Nyckeltal och därmed investerbarheten och börskurs straffas obönhörligen när företagen låser upp kapital i exempelvis energieffektivisering. Och eftersom den typen av åtgärder ligger utanför kärnverksamheten så spelar det mindre roll om återbetalningstiden är aldrig så kort.
-
-I väntan på att dessa uppdrag omformuleras i takt med att lagar, regler och marknadens krav skiftar så måste dessa utmaningar lösas på annat sätt. Det är vad vi gör på Rison.
-
----
-
-EXEMPEL 4:
-
-Här kommer ett litet medskick till alla er som ska arrangera eller besöka seminarier om energieffektivisering och renovering av fastigheter i Almedalen.
-
-Finansiering blir den riktigt tunga frågan när vi ska ta oss an de kommande årens kraftigt ökade krav på energieffektivitet i fastigheter och andra verksamheter.
-
-Praktiskt genomförbara lösningar som kapar energibehovet är såklart helt centrala, men såna finns det redan väldigt gott om. Det är bara att de inte realiseras. Tilläggsisolering, effektiva fläktsystem och solceller är inte direkt några nya uppfinningar.
-
-Skon klämmer nån annan stans. Vad vi behöver ägna mer fokus åt nu är hur dessa och många andra lösningar ska kunna komma på plats. Då är frågan om tillgången på investeringsvilligt kapital helt avgörande.
-
-Faktum är att den frågan är den allra största elefanten i rummet. Att finansieringsfrågan hittills inte varit löst är den enskilt största anledningen till att utvecklingen på området inte gått fortare.
-
-Min uppmaning blir att under veckan i alla dessa sammanhang lyfta frågan om var finansieringen av dessa enormt kapitalintensiva investeringar ska komma ifrån. Frågan måste inte bara in på dagordningen, den måste allt oftare placeras som fråga nummer ett på dagordningen.
-
----
-
-EXEMPEL 5:
-
-Ska du energieffektivisera din verksamhet eller inte?
-
-Nu behöver du inte längre ställa åtgärder inom energieffektivisering mot andra investeringar. Frågan är inte längre om vilken avkastning du kan få på en egen investering. Den är istället hur mycket pengar du kan spara på att låta någon annan göra investeringen istället.
-
-Liknelsen blir då: vill du fortsätta köra din dieselbil med hög kostnad och klimatpåverkan eller vill du utan att göra någon egen investering få tillgång till en elbil med bättre funktioner, lägre driftkostnad och drastiskt minskad klimatpåverkan.
-
----
-
-EXEMPEL 6:
-
-Nu behövs inga ursäkter längre!
-
-Att många företag hittills avstått från att göra mer omfattande investeringar i energieffektivisering är helt självklart utifrån ett strikt företagsekonomiskt och verksamhetsmässigt perspektiv.
-
-Men i dag ser verkligheten helt annorlunda ut. Nu finns möjligheten för företag att få väldigt många av dessa åtgärder på plats utan att behöva göra någon egen investering. Och på köpet sänka sina driftkostnader rejält.
-
-Nu behöver den här typen av beslut inte längre ställas mot andra möjliga investeringar i verksamheten eftersom det är tredje part som gör investeringen. Tidigare giltiga argument om internränta, krångel, brist på kapital och kompetens är helt plötsligt inte längre relevanta.
-
-Frågan handlar alltså inte längre om vad man kan få för avkastning på en egen investering i energieffektivisering. Den handlar istället om hur stor besparing verksamheten kan göra när man låter tredje part göra en investering i åtgärder som sänker verksamhetens kostnader och samtidigt minskar dess klimatpåverkan.
-
-Frågan blir nu istället: vilka ursäkter finns kvar för att inte göra det?
-
----
-
-STILREGLER ATT FÖLJA:
-- Direkt och analytisk ton – skriver till branschen inifrån, inte till den
-- Provocerar etablerade sanningar eller branschen konventioner
-- Bygger argument metodiskt, steg för steg
-- Avslutar med ett påstående eller en retorisk fråga – aldrig en generisk engagemangsfråga
-- Inga tomma fraser, inga hook-formler
-- Nämner Rison sparsamt och naturligt – aldrig säljigt
-- Skriver på svenska med korrekt stavning och grammatik
-
----
-
-EXEMPEL 7 (från annan bransch – använd bara stilen, inte innehållet):
-
-Om du som bostadsarkitekt i framtiden inte bara vill kunna försörja dig utan dessutom vill bidra till ett vettigare samhällsbyggande så är det dags att tänka nytt. Mitt tips är då att du på riktigt börjar intressera dig för hur du kan bidra till att påverka branschens ekonomiska dynamik på systemnivå.
-
-Det finns flera spår av resignation i dagens bostadsbransch. Dels har vi lägret som inte bekymrar sig särskilt mycket över annat än siffror. Utmaningen är kvantitet. Vi ska så snabbt som möjligt tillbaka till en situation där marknadens aktörer levererar produkter med den kvalitetsnivå man anser adekvat och vi övriga får tacka och ta emot.
-
-Sedan finns det andra perspektivet, som handlar om de som vill mer. Som ser nödvändigheten i att göra saker bättre och hållbarare ur ett humanistiskt, socialt, ekonomiskt och ekologiskt perspektiv. Men som ändå ofta jobbar på i staten-och-kapitalet-pragmatikernas grottekvarn ett helt yrkesliv. Ofta med hänvisning till att man från sin position inte kan påverka "systemet".
-
-Men vad de fria agenterna liksom deras påhejare ofta missar är att dessa projekt saknar själva grunden för skalbarhet. Nämligen lönsamhet för de grupper av aktörer som i dag styr och ställer.
-
-Absoluta merparten av traditionella aktörer kommer aldrig frivilligt att avstå från vinstmarginaler i den storleksordning man vant sig vid de senaste decennierna, för något högre syftes skull.
-
-Här finns en öppning. För det råder fortfarande ingen brist på kapital med låga avkastningskrav som vill finansiera rätt typ av verksamheter.
-
-Vill du ha ett större ansvar för dina projekt så är det dags att ta det. För vid det här laget borde det vara tydligt att ingen traditionell aktör frivilligt kommer att ge det till dig.
-
-Och tiden för att bli det kan faktiskt vara den allra bästa just precis nu.
-
-
----
-
-EXEMPEL 8 (från annan bransch – använd bara stilen, inte innehållet):
-
-Under sommaren har jag postat en del på LinkedIn. Det har bland annat blivit några ganska öppenhjärtiga texter om brister jag och andra på "utsidan" har upplevt i kommunernas organisationer och arbetssätt.
-
-Det sista man vill när man skriver texter av den typen är att man ska få problemen man beskriver bekräftade från så många håll. Oberoende av varandra. Dessutom i första hand av personer som jobbar inom kommunen.
-
-De flesta som hört av sig instämmer inte bara i förekomsten av trassliga processer, silostrukturer, inkompetens och slarv. De pekar också på de dramatiskt negativa konsekvenser det får. Både när det gäller processer och slutresultat.
-
-Det är tragiskt. Man vill göra ett bra jobb men upplever att förutsättningarna inte finns.
-
-Jag skriver inte om kommunerna för mitt eget höga nöjes skull. Det är ofta rätt jobbigt att behöva vara budbäraren. Man blir lätt skjuten på när man väljer att prata öppet om problem av den här typen. Mottagaren tolkar ofta i affekt som att man avfärdar precis allt som värdelöst.
-
-Men vad återstår att göra när det finns en sådan oerhörd rädsla i branschen för att prata om dessa utmaningar och hur vi ska komma tillrätta med dem? Det är väl ändå dags att bryta med branschens stolta tradition att lida i tystnad.
-
-Steg 1 är att se problemen. Och första steget i den processen måste vara att konstatera vilka problemen är och vad den faktiska orsaken till dem är.
-
-Det behövs alldeles säkert fler duktiga planarkitekter på kommunerna. Men jag tycker att de också borde anställa betydligt fler organisationsarkitekter. Alltså fler mästare på att bygga välfungerande organisationer som de sedan inreder med processer och metoder som ger bättre förutsättningar för att kunna leverera rätt resultat.
-
-
----
-
-EXEMPEL 9 (från annan bransch – använd bara stilen, inte innehållet):
-
-Fastighetsbranschen är till övervägande del lika med finansbranschen. Trots det är kunskaperna om investerings-, projekt- och fastighetsekonomi inom kåren i princip obefintliga.
-
-Mycket handlar om en attityd som odlats under åtskilliga decennier. Samtidigt är gnället över att man inte får det förtroende och ansvar man borde tilldelas öronbedövande runt kaffebryggarna på landets arkitektkontor. Det går inte ihop.
-
-Kunskap är makt brukar det heta. Men om man saknar tillräckliga kunskaper om det som utgör själva fundamentet för den bransch man verkar i så ska man nog inte bli överdrivet förvånad om ens roll och förtroende blir kringskuret.
-
-Det är allt för sällan man lyfter blicken. Det finns en enorm passivitet som griper omkring sig. Man upplever sig låst i en struktur som inte lämnar något utrymme till påverkan på en systemisk nivå.
-
-Fartblinda förväxlar vi det som är bråttom med det som är viktigt på riktigt. Vi bottnar inte i en analys om vad det är som skapar problemen i strukturen vi verkar i. Vi har i stället alldeles för lätt att ha överseende med saker som skaver. Att bemästra konsten att stå ut ses som en god egenskap. När det i själva verket borde vara precis tvärtom.
-
-Om branschen inte kommer till dig med den typen av projekt, uppdrag och ansvar som du tycker är lämpligt så måste det bli tvärtom. Och så här långt in i krisen är det alltmer tydligt att berget inte har några planer på att komma till Mohammed.
-
-Nu är det upp till dig att paketera ett nytt arbetssätt, baserat på alla surt förvärvade kunskaper du samlat på dig i goda tider.
-
-
----
-
-EXEMPEL 10 (från annan bransch – använd bara stilen, inte innehållet):
-
-Bostadsarkitekternas budgetar och timarvoden är nedtryckta sedan åtskilliga år tillbaka. Löneutvecklingen har under samma period istället dragit iväg rejält uppåt. Vad vi fått uppleva under hösten och våren är nog dessvärre bara försmaken av en helt ny verklighet.
-
-Refrängen från uppdragsgivarna är vid det här laget välbekant: Det finns inga pengar. Ni måste pressa budget och timpriser. Jobba på speck.
-
-Det är ett race to the bottom. Många arkitektkontor, framför allt små och medelstora, kommer att gå omkull.
-
-Det är inte rimligt att varken hoppas eller tro att projektutvecklare yrvaket ska börja spendera igen. Varför skulle de det när så många duktiga kontor står med mössan i hand och inte är beredda att ta en för laget?
-
-Din intäktspotential handlar ytterst om det förädlingsvärde din uppdragsgivare ser att du tillför. Och i den ekvationen belönas den som äger och samtidigt tar ekonomisk risk rundligt. Alla andra aktörer i ekvationen är sugfiskar på projektägaren och kompenseras därefter.
-
-Så med händerna kring strupen kan vi välja att hålla god min ända tills syret tar helt slut. Eller utforska nya försörjningssätt.
-
----
-
-EXEMPEL 11 (från annan bransch – använd bara stilen, inte innehållet):
-
-Beklämmande att tänka på alla som höll igen för ett och ett halvt år sen och inte beskrev vad man så tydligt kunde se skulle resultera i dagens fria fall för arkitektbranschen.
-
-Det gäller nästan utan undantag företagsledare på alla arkitektkontor där stora delar av personalen under de gångna åren fått gå under tystnad. Det gäller Sveriges Arkitekter som allt för länge teg om hur allvarlig man faktiskt såg att situationen var.
-
-Branschen behöver friare tänkare och mer ryggrad. Nu.
-
-Om det är någonstans dessa nybakade studenter bör rikta sitt fokus och kraft så är det på hur man kan bidra till nya sätt för branschen som helhet att jobba. Att grotta ner sig i ännu större expertis i den sedan decennier allt snävare fåran där arkitekter plöjer kommer bara att leda till större studieskulder, inte fler jobberbjudanden.
-
-Framtiden hör den till som kan få ihop hela kedjan från idé till färdiga projekt med maximal värdeutväxling. Det kräver en förståelse för hela branschens grundläggande mekanik, incitamentsstruktur, syn på risk och arbetsmetoder.
-
----
-
-EXEMPEL 12 (från annan bransch – använd bara stilen, inte innehållet):
-
-Många av landets kommuner borde fråga sig varför man inte oftare får raka kritiska synpunkter från projektutvecklare och arkitekter. I många fall tror man sig kanske få höra det mesta, men, I've got news for you.
-
-Förklaringen är lika enkel som skrämmande. Man är livrädd. Vetskapen om vem som faktiskt håller i taktpinnen skrämmer till tystnad.
-
-Kritiken handlar ofta om stökiga icke transparenta processer och grumliga beslutsgrunder. Alltför personberoende hantering av projekt och beslut. Godtycke. Slarv. Perspektivlöshet.
-
-Finns det en väg framåt? Självfallet. Det handlar om tydlighet, struktur, förutsägbarhet och samarbetsförmåga. De kommuner som vågar se dessa utmaningar har också möjligheten att arbeta strategiskt för att skapa den tryggheten.
-
----
-
-EXEMPEL 13 (från annan bransch – använd bara stilen, inte innehållet):
-
-I dag är det som att slentriansägningen att arkitektonisk kvalitet inte handlar om stil har upphöjts till en absolut sanning. I alla fall i arkitektkretsar. Men så är det ju inte nödvändigtvis.
-
-Frågan måste ställas på sin spets: vad finns det att vänta för positiva effekter när begreppen stil och skönhet effektivt rensas ut från kommunernas formaliserade hantering av stadsbyggnadsprocessen?
-
-Det luddiga försvarstalet handlar ofta om att "skönhet" är ett subjektivt begrepp och således omätbart. Vad är det för nys? Klart det går att mäta. I sitt sammanhang.
-
-Skönhet och stil är kvalitets- och beständighetsfrågor. Och därmed också viktiga hållbarhetsfrågor. Det är därför hög tid att ta dem på största allvar igen.
-
----
-
-EXEMPEL 14 (från annan bransch – använd bara stilen, inte innehållet):
-
-Kommunernas självbild, invanda arbetssätt och kompetens – vad sätter de för förutsättningar för våra möjligheter att på ett meningsfullt sätt inkludera medborgare i dialog och samskapande?
-
-Man talar om å ena sidan government as a vending machine och å andra sidan government as a platform. Varuautomaten handlar om det traditionella perspektivet: vi som medborgare stoppar in skattepengar, drar i spaken och sedan väntar vi snällt på vad som kommer ut.
-
-Plattformen handlar om att istället öppna upp för att fånga upp de möjligheter som ny teknik och ett nytt förhållningssätt kan ge.
-
-För mig är det en ren självklarhet att kommunerna bör röra sig mot plattformen i sitt förhållnings- och arbetssätt. Dessutom gärna i snabb takt. Allt annat är ett strategiskt misstag.
-
-Att skapa ett arbetssätt mer åt det här hållet har länge varit fullt möjligt. Utmaningen är inte teknisk. Men ytterst handlar detta om attityd, handlingskraft och inte minst tro och vilja.
-
----
-
-EXEMPEL 15 (från annan bransch – använd bara stilen, inte innehållet):
-
-Skammen kring idiotfrågor är urbota dum.
-
-Även om det i sammanhanget är helt orimligt att begära att man ska förstå komplexa samband eller ha sakkunskap så avstår vi allt för ofta från att ställa förtydligande frågor.
-
-Det handlar inte sällan om en förlamande rädsla för att framstå som för junior, obildad, korkad eller inkompetent. Fenomenet är så djupt rotat i den svenska mentaliteten att frågor, alldeles oavsett hur raka och sakliga de är, ofta tolkas som ett ifrågasättande.
-
-De som ställer dessa frågor gör ofta gruppen en tjänst. Om man inte förstått alls eller tycker att något behöver förtydligas så är man väldigt sällan ensam om det.
-
-Att våga och orka ställa rätt frågor är en superkraft. Det är världens allra mest framgångsrika ledare och nytänkare överens om.
-
-`;
-  const prompt = `Du är kommunikationsansvarig på Rison Capital och skriver ett kort LinkedIn-inlägg för Jesper Lövkvist, delägare.
-
-Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren.
-
-Här är exempel på tidigare inlägg – följ stilen noga:
-
-${stilref}
-
-Läs artikeln på denna URL: ${url}
-
-Skriv ett kort LinkedIn-inlägg (max 5 meningar) med rubrik, ingress och brödtext.
-Direkt ton. Sök upp och inkludera @-slug för relevanta organisationer.
-Avsluta med max 3 hashtags och artikelns URL.`;
+Avsluta med: "Läs artikeln: ${url}"`;
 
   navigator.clipboard.writeText(prompt).then(() => {
     const orig = btn.textContent;
-    btn.textContent = 'Kopierad!';
-    btn.style.background = '#1a7a3f';
-    setTimeout(() => { btn.textContent = orig; btn.style.background = '#555'; }, 2000);
-  }).catch(() => alert('Kunde inte kopiera.'));
+    btn.textContent = '✓ Kopierad!';
+    btn.style.background = '#555';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = '#444'; }, 2000);
+  }).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }
 
-function hamta_kontext(btn, sokord, panelId) {
+function visa_panel(panelId, stang) {
+  stang.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  if (panel.style.display === 'block') {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = 'block';
+  if (!panel.innerHTML.trim()) {
+    const action = panel.getAttribute('data-action');
+    const url = panel.getAttribute('data-url');
+    const fulltext = panel.getAttribute('data-fulltext');
+    if (action) generera_linkedin_panel(panel, action, url, fulltext);
+  }
+}
+
+function generera_linkedin_panel(panel, action, url, fulltext) {
+  panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Genererar utkast...</p>';
+  fetch('https://risonbevakning.jesper-75b.workers.dev', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: action, url: url, fulltext: fulltext}),
+  }).then(r => r.json()).then(data => {
+    const delar = (data.text || '').split('|||');
+    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
+    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
+    const brodtext = (delar[2] || '').replace(/^BR.DTEXT:\s*/i, '').trim();
+    const panelId = panel.id;
+    panel.innerHTML = `
+      <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">
+        <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">${action === 'linkedin_kort' ? 'Kort inlägg' : 'Långt inlägg'}</div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Rubrik</div>
+          <div contenteditable="true" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#181D27;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${rubrik}</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Ingress</div>
+          <div contenteditable="true" style="font-size:15px;font-weight:500;color:#293244;line-height:1.6;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${ingress}</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
+          <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${brodtext}</div>
+        </div>
+        <button onclick="kopiera_utkast(this, '${panelId}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
+      </div>`;
+  }).catch(() => {
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte generera utkast.</p>';
+  });
+}
+
+function hamta_kontext(btn, panelId, stang) {
+  if (stang) stang.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const sokord = (btn.getAttribute('data-sokord') || '').replace(/&apos;/g, '').replace(/'/g, '');
   const panel = document.getElementById(panelId);
   if (panel.innerHTML.trim()) {
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
@@ -792,20 +679,31 @@ function hamta_kontext(btn, sokord, panelId) {
   btn.textContent = 'Hämtar...';
   btn.disabled = true;
   const fragor = sokord ? sokord.split(',').filter(s => s.trim()) : [];
-  Promise.all(fragor.map(q =>
+  const hamtningar = fragor.map(q =>
     fetch('https://risonbevakning.jesper-75b.workers.dev', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({action: 'kontext', query: q})
     }).then(r => r.json()).then(d => d.news || [])
-  )).then(results => {
+  );
+  Promise.all(hamtningar).then(results => {
     const alla = results.flat();
-    const unika = alla.filter((a, i) => alla.findIndex(b => b.link === a.link) === i).slice(0, 8);
+    const unika = alla.filter((a, i) => {
+      if (alla.findIndex(b => b.link === a.link) !== i) return false;
+      const aTitel = a.title.toLowerCase().replace(/[^a-zåäö0-9]/g, ' ');
+      return !alla.slice(0, i).some(b => {
+        const bTitel = b.title.toLowerCase().replace(/[^a-zåäö0-9]/g, ' ');
+        const aOrd = new Set(aTitel.split(' ').filter(w => w.length > 4));
+        const bOrd = new Set(bTitel.split(' ').filter(w => w.length > 4));
+        const overlap = [...aOrd].filter(w => bOrd.has(w)).length;
+        return overlap / Math.max(aOrd.size, bOrd.size) > 0.6;
+      });
+    }).slice(0, 8);
     if (unika.length === 0) {
       panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Inga relaterade artiklar hittades.</p>';
     } else {
       panel.innerHTML = '<div style="border-top:1px solid #e0ddd4;padding-top:12px;margin-top:4px;">'
-        + '<div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Relaterade artiklar</div>'
+        + '<div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Redaktionell kontext – relaterade artiklar</div>'
         + unika.map(a => '<div style="padding:8px 0;border-bottom:1px solid #f0ede4;">'
           + '<div style="font-size:11px;color:#888;margin-bottom:2px;">' + (a.source||'') + ' · ' + (a.date||'') + '</div>'
           + '<a href="' + a.link + '" target="_blank" style="font-size:14px;color:#293244;font-weight:500;text-decoration:none;">' + a.title + '</a>'
@@ -816,30 +714,27 @@ function hamta_kontext(btn, sokord, panelId) {
     btn.textContent = 'Relaterade artiklar';
     btn.disabled = false;
   }).catch(() => {
-    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta artiklar.</p>';
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
     btn.textContent = 'Relaterade artiklar';
     btn.disabled = false;
   });
 }
 
-function radera_artikel(btn, url) {
-  const kort = btn.closest('div[id^="artikel"]') || btn.parentElement.parentElement.parentElement;
-  if (kort) {
-    kort.style.transition = 'opacity 0.3s';
-    kort.style.opacity = '0';
-    setTimeout(() => kort.style.display = 'none', 300);
-  }
-  const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
-  if (!raderade.includes(url)) {
-    raderade.push(url);
-    localStorage.setItem('raderade_artiklar', JSON.stringify(raderade));
-  }
+function kopiera_utkast(btn, panelId) {
+  const panel = document.getElementById(panelId);
+  const delar = panel.querySelectorAll('[contenteditable]');
+  const text = Array.from(delar).map(d => d.innerText).join('\n\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Kopierad!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
 }
 
 function kör_skript(btn) {
   const token = localStorage.getItem('github_token');
   if (!token) {
-    const t = prompt('Ange GitHub Personal Access Token:');
+    const t = prompt('Ange GitHub Personal Access Token (sparas i webbläsaren):');
     if (!t) return;
     localStorage.setItem('github_token', t);
   }
@@ -868,38 +763,32 @@ function kör_skript(btn) {
   });
 }
 
+function radera_artikel(btn, url) {
+  const kort = btn.closest('div[style*="border:1px solid"]');
+  if (kort) {
+    kort.style.transition = 'opacity 0.3s';
+    kort.style.opacity = '0';
+    setTimeout(() => kort.style.display = 'none', 300);
+  }
+  const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
+  if (!raderade.includes(url)) {
+    raderade.push(url);
+    localStorage.setItem('raderade_artiklar', JSON.stringify(raderade));
+  }
+}
+
+// Dölj tidigare raderade artiklar vid sidladdning
 document.addEventListener('DOMContentLoaded', function() {
   const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
   document.querySelectorAll('[onclick*="radera_artikel"]').forEach(btn => {
-    const match = btn.getAttribute('onclick').match(/'([^']+)'\)$/);
-    if (match && raderade.includes(match[1])) {
-      const kort = btn.closest('div[style*="border:1px solid #e8e8e8"]');
+    const url = btn.getAttribute('onclick').match(/'([^']+)'\)$/)?.[1];
+    if (url && raderade.includes(url)) {
+      const kort = btn.closest('div[style*="border:1px solid"]');
       if (kort) kort.style.display = 'none';
     }
   });
 });
 
-async function sha256(text) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-async function logga_in() {
-  const pw = document.getElementById('pw').value;
-  const hash = await sha256(pw);
-  if (hash === '8d13224db15d8e30881ae4fe4f030228cdcd5de58692f72d481a0a3df89d939f') {
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('rapport').style.display = 'block';
-    sessionStorage.setItem('auth', '1');
-  } else {
-    document.getElementById('fel').style.display = 'block';
-  }
-}
-if (sessionStorage.getItem('auth') === '1') {
-  document.getElementById('login').style.display = 'none';
-  document.getElementById('rapport').style.display = 'block';
-}
-</script>
-<script>
 async function sha256(text) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');

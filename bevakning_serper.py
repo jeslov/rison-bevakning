@@ -742,6 +742,64 @@ function hamta_kontext(btn, panelId) {{
   }});
 }}
 
+function generera_linkedin(btn, panelId) {{
+  const panel = document.getElementById(panelId);
+  if (panel.innerHTML.trim()) {{
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    return;
+  }}
+  btn.textContent = 'Genererar...';
+  btn.disabled = true;
+  const url = btn.getAttribute('data-url');
+  const fulltext = btn.getAttribute('data-fulltext');
+  fetch('https://risonbevakning.jesper-75b.workers.dev', {{
+    method: 'POST',
+    headers: {{'Content-Type': 'application/json'}},
+    body: JSON.stringify({{action: 'linkedin', url: url, fulltext: fulltext}}),
+  }}).then(r => r.json()).then(data => {{
+    const delar = (data.text || '').split('|||');
+    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
+    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
+    const brodtext = (delar[2] || '').replace(/^BRÖDTEXT:\s*/i, '').trim();
+    panel.innerHTML = `
+      <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">
+        <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">LinkedIn-utkast</div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Rubrik</div>
+          <div contenteditable="true" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#181D27;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{rubrik}}</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Ingress</div>
+          <div contenteditable="true" style="font-size:15px;font-weight:500;color:#293244;line-height:1.6;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{ingress}}</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
+          <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{brodtext}}</div>
+        </div>
+        <button onclick="kopiera_utkast(this, '${panelId}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
+      </div>`;
+    panel.style.display = 'block';
+    btn.textContent = 'Långt';
+    btn.disabled = false;
+  }}).catch(() => {{
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte generera utkast.</p>';
+    panel.style.display = 'block';
+    btn.textContent = 'Långt';
+    btn.disabled = false;
+  }});
+}}
+
+function kopiera_utkast(btn, panelId) {{
+  const panel = document.getElementById(panelId);
+  const delar = panel.querySelectorAll('[contenteditable]');
+  const text = Array.from(delar).map(d => d.innerText).join('\n\n');
+  navigator.clipboard.writeText(text).then(() => {{
+    const orig = btn.textContent;
+    btn.textContent = 'Kopierad!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  }});
+}}
+
 function kör_skript(btn) {{
   const token = localStorage.getItem('github_token');
   if (!token) {{

@@ -690,7 +690,7 @@ function hamta_kontext(btn, sokord, panelId) {{
   }}
   btn.textContent = 'Hämtar...';
   btn.disabled = true;
-  const fragor = sokord.length > 0 ? sokord : [btn.closest('div').querySelector('a').textContent];
+  const fragor = sokord ? sokord.split(',').filter(s => s.trim()) : [];
   const hamtningar = fragor.map(q =>
     fetch('https://risonbevakning.jesper-75b.workers.dev', {{
       method: 'POST',

@@ -682,6 +682,46 @@ Avsluta med: "Läs artikeln: ${{url}}"`;
   }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
 
+function hamta_kontext(btn, sokord, panelId) {{
+  const panel = document.getElementById(panelId);
+  if (panel.innerHTML.trim()) {{
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    return;
+  }}
+  btn.textContent = 'Hämtar...';
+  btn.disabled = true;
+  const fragor = sokord.length > 0 ? sokord : [btn.closest('div').querySelector('a').textContent];
+  const hamtningar = fragor.map(q =>
+    fetch('https://risonbevakning.jesper-75b.workers.dev', {{
+      method: 'POST',
+      headers: {{'Content-Type': 'application/json'}},
+      body: JSON.stringify({{query: q}})
+    }}).then(r => r.json()).then(d => d.news || [])
+  );
+  Promise.all(hamtningar).then(results => {{
+    const alla = results.flat();
+    const unika = alla.filter((a, i) => alla.findIndex(b => b.link === a.link) === i).slice(0, 8);
+    if (unika.length === 0) {{
+      panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Inga relaterade artiklar hittades.</p>';
+    }} else {{
+      panel.innerHTML = '<div style="border-top:1px solid #e0ddd4;padding-top:12px;margin-top:4px;">'
+        + '<div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Redaktionell kontext – relaterade artiklar</div>'
+        + unika.map(a => '<div style="padding:8px 0;border-bottom:1px solid #f0ede4;">'
+          + '<div style="font-size:11px;color:#888;margin-bottom:2px;">' + (a.source || '') + ' · ' + (a.date || '') + '</div>'
+          + '<a href="' + a.link + '" target="_blank" style="font-size:14px;color:#293244;font-weight:500;text-decoration:none;">' + a.title + '</a>'
+          + '</div>').join('')
+        + '</div>';
+    }}
+    panel.style.display = 'block';
+    btn.textContent = 'Redaktionell kontext';
+    btn.disabled = false;
+  }}).catch(() => {{
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
+    btn.textContent = 'Redaktionell kontext';
+    btn.disabled = false;
+  }});
+}}
+
 function radera_artikel(btn, url) {{
   const kort = btn.closest('div[style*="border:1px solid"]');
   if (kort) {{

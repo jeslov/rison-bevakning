@@ -439,6 +439,7 @@ def bedom_med_cache(representanter):
                     "poang": b.get("poang"),
                     "sammanfattning": b.get("sammanfattning"),
                     "motivering": b.get("motivering"),
+                    "kontextsokord": b.get("kontextsokord", []),
                 }
                 relevanta.append(b)
             else:

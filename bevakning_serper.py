@@ -792,7 +792,7 @@ function generera_linkedin(btn, panelId) {{
 function kopiera_utkast(btn, panelId) {{
   const panel = document.getElementById(panelId);
   const delar = panel.querySelectorAll('[contenteditable]');
-  const text = Array.from(delar).map(d => d.innerText).join('\n\n');
+  const text = Array.from(delar).map(d => d.innerText).join('\\n\\n');
   navigator.clipboard.writeText(text).then(() => {{
     const orig = btn.textContent;
     btn.textContent = 'Kopierad!';

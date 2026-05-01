@@ -43,7 +43,7 @@ button:hover{opacity:0.85}
   <div class="header" style="display:flex;justify-content:space-between;align-items:center;">
     <div>
       <h1>Rison &middot; Omvärldsbevakning</h1>
-      <p>01 May 2026, 22:07 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+      <p>01 May 2026, 22:22 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
     </div>
     <button onclick="kör_skript(this)" style="font-size:12px;background:none;border:1px solid rgba(255,255,255,0.4);color:#EFEDE0;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kör nu
@@ -71,16 +71,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">AI-driven renoveringsanalys är direkt tillämpbar i Risons due diligence och strukturering av EaaS-affärer för BRF och kommersiella fastigheter.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-0')"
-      data-url="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" data-fulltext="Forskning från Umeå universitet beskriver hur AI-baserade metoder kan användas för att analysera energirenoveringar och deras påverkan på utsläpp,..."
+    <button onclick="visa_panel('linkedin-lang-0', ['linkedin-kort-0', 'kontext-0'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader')"
+    <button onclick="visa_panel('linkedin-kort-0', ['linkedin-lang-0', 'kontext-0'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-0')" data-sokord="&apos;energirenovering&apos;, &apos;AI fastighetsbed\u00f6mning&apos;, &apos;energieffektivisering byggnader&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-0', ['linkedin-lang-0', 'linkedin-kort-0'])" data-sokord="&apos;energirenovering&apos;, &apos;AI fastighetsbed\u00f6mning&apos;, &apos;energieffektivisering byggnader&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader')"
@@ -88,7 +87,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-0" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-0" style="display:none;margin-top:14px;" data-url="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" data-fulltext="Forskning från Umeå universitet beskriver hur AI-baserade metoder kan användas för att analysera energirenoveringar och deras påverkan på utsläpp,..." data-action="linkedin"></div>
+  <div id="linkedin-kort-0" style="display:none;margin-top:14px;" data-url="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" data-fulltext="Forskning från Umeå universitet beskriver hur AI-baserade metoder kan användas för att analysera energirenoveringar och deras påverkan på utsläpp,..." data-action="linkedin_kort"></div>
   <div id="kontext-0" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -105,16 +105,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Akademisk legitimering av bergvärme som energikälla stärker investeringscase för Risons EaaS-erbjudande inom bergvärmesegmentet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-1')"
-      data-url="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" data-fulltext="Nästan 6 000 grader. Så het är jordens inre kärna. Redan idag nyttjas jordens värme i geotermala kraftverk i till exempel Island och många svenska..."
+    <button onclick="visa_panel('linkedin-lang-1', ['linkedin-kort-1', 'kontext-1'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch')"
+    <button onclick="visa_panel('linkedin-kort-1', ['linkedin-lang-1', 'kontext-1'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-1')" data-sokord="&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;gr\u00f6n uppv\u00e4rmning&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-1', ['linkedin-lang-1', 'linkedin-kort-1'])" data-sokord="&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;gr\u00f6n uppv\u00e4rmning&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch')"
@@ -122,7 +121,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-1" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-1" style="display:none;margin-top:14px;" data-url="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" data-fulltext="Nästan 6 000 grader. Så het är jordens inre kärna. Redan idag nyttjas jordens värme i geotermala kraftverk i till exempel Island och många svenska..." data-action="linkedin"></div>
+  <div id="linkedin-kort-1" style="display:none;margin-top:14px;" data-url="https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch" data-fulltext="Nästan 6 000 grader. Så het är jordens inre kärna. Redan idag nyttjas jordens värme i geotermala kraftverk i till exempel Island och många svenska..." data-action="linkedin_kort"></div>
   <div id="kontext-1" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -139,16 +139,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Direkt relevant för Risons bergvärmesatsning – stärker marknadsnarrativet och kan användas i investerarkommunikation om teknikens skalbarhet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-2')"
-      data-url="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" data-fulltext="Geotermisk energi lyfts fram som ett växande grönt energislag. Med ny teknik kan värmen under jordytan utvinnas på betydligt fler platser än tidigare."
+    <button onclick="visa_panel('linkedin-lang-2', ['linkedin-kort-2', 'kontext-2'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/')"
+    <button onclick="visa_panel('linkedin-kort-2', ['linkedin-lang-2', 'kontext-2'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-2')" data-sokord="&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;energiomst\u00e4llning fastighet&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-2', ['linkedin-lang-2', 'linkedin-kort-2'])" data-sokord="&apos;bergv\u00e4rme&apos;, &apos;geotermisk energi&apos;, &apos;energiomst\u00e4llning fastighet&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/')"
@@ -156,7 +155,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-2" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-2" style="display:none;margin-top:14px;" data-url="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" data-fulltext="Geotermisk energi lyfts fram som ett växande grönt energislag. Med ny teknik kan värmen under jordytan utvinnas på betydligt fler platser än tidigare." data-action="linkedin"></div>
+  <div id="linkedin-kort-2" style="display:none;margin-top:14px;" data-url="https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/" data-fulltext="Geotermisk energi lyfts fram som ett växande grönt energislag. Med ny teknik kan värmen under jordytan utvinnas på betydligt fler platser än tidigare." data-action="linkedin_kort"></div>
   <div id="kontext-2" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -173,16 +173,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">EU:s tidsplan för energi- och hållbarhetslagstiftning, inklusive EPBD, är direkt relevant för Risons marknad för energieffektivisering i fastigheter och institutionellt kapital.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="font-size:14px;color:#293244;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-3')"
-      data-url="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" data-fulltext="EU-kommissionen, EU-parlamentet och medlemsländerna har enats om en tidsplan för viktiga lagpaket inom energi och hållbarhet som ska vara klara innan 2026."
+    <button onclick="visa_panel('linkedin-lang-3', ['linkedin-kort-3', 'kontext-3'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/')"
+    <button onclick="visa_panel('linkedin-kort-3', ['linkedin-lang-3', 'kontext-3'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-3')" data-sokord="&apos;EPBD&apos;, &apos;EU energilagstiftning&apos;, &apos;Omnibus h\u00e5llbarhet byggnader&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-3', ['linkedin-lang-3', 'linkedin-kort-3'])" data-sokord="&apos;EPBD&apos;, &apos;EU energilagstiftning&apos;, &apos;Omnibus h\u00e5llbarhet byggnader&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/')"
@@ -190,7 +189,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-3" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-3" style="display:none;margin-top:14px;" data-url="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" data-fulltext="EU-kommissionen, EU-parlamentet och medlemsländerna har enats om en tidsplan för viktiga lagpaket inom energi och hållbarhet som ska vara klara innan 2026." data-action="linkedin"></div>
+  <div id="linkedin-kort-3" style="display:none;margin-top:14px;" data-url="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" data-fulltext="EU-kommissionen, EU-parlamentet och medlemsländerna har enats om en tidsplan för viktiga lagpaket inom energi och hållbarhet som ska vara klara innan 2026." data-action="linkedin_kort"></div>
   <div id="kontext-3" style="display:none;margin-top:14px;"></div>
   
 </div><h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:#EFEDE0;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.25);background:#293244;padding:10px 16px;border-radius:2px;">Medel relevans &mdash; 3 artiklar</h2><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -207,16 +207,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">EU-reglering om gaspanneförbud är direkt relevant för EaaS-finansiering av alternativa uppvärmningslösningar i fastigheter, men källans låga kvalitet sänker värdet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" target="_blank" style="font-size:14px;color:#3d5a80;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-4')"
-      data-url="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" data-fulltext="União Europeia har satt en ambitiös tidslinje för att fasa ut traditionella gaspannor i europeiska hem. Tidsfristen är 2040, men förändringar börjar långt..."
+    <button onclick="visa_panel('linkedin-lang-4', ['linkedin-kort-4', 'kontext-4'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/')"
+    <button onclick="visa_panel('linkedin-kort-4', ['linkedin-lang-4', 'kontext-4'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-4')" data-sokord="&apos;EPBD&apos;, &apos;gaspannef\u00f6rbud&apos;, &apos;v\u00e4rmepump&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-4', ['linkedin-lang-4', 'linkedin-kort-4'])" data-sokord="&apos;EPBD&apos;, &apos;gaspannef\u00f6rbud&apos;, &apos;v\u00e4rmepump&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/')"
@@ -224,7 +223,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-4" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-4" style="display:none;margin-top:14px;" data-url="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" data-fulltext="União Europeia har satt en ambitiös tidslinje för att fasa ut traditionella gaspannor i europeiska hem. Tidsfristen är 2040, men förändringar börjar långt..." data-action="linkedin"></div>
+  <div id="linkedin-kort-4" style="display:none;margin-top:14px;" data-url="https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/" data-fulltext="União Europeia har satt en ambitiös tidslinje för att fasa ut traditionella gaspannor i europeiska hem. Tidsfristen är 2040, men förändringar börjar långt..." data-action="linkedin_kort"></div>
   <div id="kontext-4" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -241,16 +241,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Illustrerar hur kommersiella fastighetsägare integrerar energikrav i projektutveckling, relevant som marknadskontext för Risons EaaS-erbjudande.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" target="_blank" style="font-size:14px;color:#3d5a80;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-5')"
-      data-url="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" data-fulltext="Kallebäcks Terrasser är ett pågående stadsutvecklingsprojekt i Göteborg, drivet av fastighetsbolaget Wallenstam. I Kvarteret 2 har Wikström haft rollen som."
+    <button onclick="visa_panel('linkedin-lang-5', ['linkedin-kort-5', 'kontext-5'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news')"
+    <button onclick="visa_panel('linkedin-kort-5', ['linkedin-lang-5', 'kontext-5'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-5')" data-sokord="&apos;Milj\u00f6byggnad&apos;, &apos;energiprestanda fastighet&apos;, &apos;Wallenstam&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-5', ['linkedin-lang-5', 'linkedin-kort-5'])" data-sokord="&apos;Milj\u00f6byggnad&apos;, &apos;energiprestanda fastighet&apos;, &apos;Wallenstam&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news')"
@@ -258,7 +257,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-5" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-5" style="display:none;margin-top:14px;" data-url="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" data-fulltext="Kallebäcks Terrasser är ett pågående stadsutvecklingsprojekt i Göteborg, drivet av fastighetsbolaget Wallenstam. I Kvarteret 2 har Wikström haft rollen som." data-action="linkedin"></div>
+  <div id="linkedin-kort-5" style="display:none;margin-top:14px;" data-url="https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news" data-fulltext="Kallebäcks Terrasser är ett pågående stadsutvecklingsprojekt i Göteborg, drivet av fastighetsbolaget Wallenstam. I Kvarteret 2 har Wikström haft rollen som." data-action="linkedin_kort"></div>
   <div id="kontext-5" style="display:none;margin-top:14px;"></div>
   
 </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -275,16 +275,15 @@ button:hover{opacity:0.85}
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">Artikeln berör energikrav och ekonomiska villkor kopplade till hyresfastigheter, med indirekt relevans för EaaS-finansieringsmodeller där hyresnivåer påverkar lönsamhet.</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" target="_blank" style="font-size:14px;color:#3d5a80;font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="generera_linkedin(this, 'linkedin-6')"
-      data-url="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" data-fulltext="Investeringsstödet infördes 2016 och de sista pengarna i potten betalades ut under 2025. För regeringens del är det ett avslutat kapitel men hos de 21..."
+    <button onclick="visa_panel('linkedin-lang-6', ['linkedin-kort-6', 'kontext-6'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, 'https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/')"
+    <button onclick="visa_panel('linkedin-kort-6', ['linkedin-lang-6', 'kontext-6'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, 'kontext-6')" data-sokord="&apos;investeringsst\u00f6d fastighet&apos;, &apos;energikrav hyresfastighet&apos;, &apos;fastighets\u00e4gare tillsyn&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-6', ['linkedin-lang-6', 'linkedin-kort-6'])" data-sokord="&apos;investeringsst\u00f6d fastighet&apos;, &apos;energikrav hyresfastighet&apos;, &apos;fastighets\u00e4gare tillsyn&apos;" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, 'https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/')"
@@ -292,7 +291,8 @@ button:hover{opacity:0.85}
       Radera
     </button>
   </div>
-  <div id="linkedin-6" style="display:none;margin-top:14px;"></div>
+  <div id="linkedin-lang-6" style="display:none;margin-top:14px;" data-url="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" data-fulltext="Investeringsstödet infördes 2016 och de sista pengarna i potten betalades ut under 2025. För regeringens del är det ett avslutat kapitel men hos de 21..." data-action="linkedin"></div>
+  <div id="linkedin-kort-6" style="display:none;margin-top:14px;" data-url="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" data-fulltext="Investeringsstödet infördes 2016 och de sista pengarna i potten betalades ut under 2025. För regeringens del är det ett avslutat kapitel men hos de 21..." data-action="linkedin_kort"></div>
   <div id="kontext-6" style="display:none;margin-top:14px;"></div>
   
 </div></div>
@@ -528,7 +528,65 @@ Avsluta med: "Läs artikeln: ${url}"`;
   }).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }
 
-function hamta_kontext(btn, panelId) {
+function visa_panel(panelId, stang) {
+  stang.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  if (panel.style.display === 'block') {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = 'block';
+  if (!panel.innerHTML.trim()) {
+    const action = panel.getAttribute('data-action');
+    const url = panel.getAttribute('data-url');
+    const fulltext = panel.getAttribute('data-fulltext');
+    if (action) generera_linkedin_panel(panel, action, url, fulltext);
+  }
+}
+
+function generera_linkedin_panel(panel, action, url, fulltext) {
+  panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Genererar utkast...</p>';
+  fetch('https://risonbevakning.jesper-75b.workers.dev', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: action, url: url, fulltext: fulltext}),
+  }).then(r => r.json()).then(data => {
+    const delar = (data.text || '').split('|||');
+    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
+    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
+    const brodtext = (delar[2] || '').replace(/^BR.DTEXT:\s*/i, '').trim();
+    const panelId = panel.id;
+    panel.innerHTML = `
+      <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">
+        <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">${action === 'linkedin_kort' ? 'Kort inlägg' : 'Långt inlägg'}</div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Rubrik</div>
+          <div contenteditable="true" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#181D27;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${rubrik}</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Ingress</div>
+          <div contenteditable="true" style="font-size:15px;font-weight:500;color:#293244;line-height:1.6;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${ingress}</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
+          <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${brodtext}</div>
+        </div>
+        <button onclick="kopiera_utkast(this, '${panelId}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
+      </div>`;
+  }).catch(() => {
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte generera utkast.</p>';
+  });
+}
+
+function hamta_kontext(btn, panelId, stang) {
+  if (stang) stang.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
   const sokord = (btn.getAttribute('data-sokord') || '').replace(/&apos;/g, '').replace(/'/g, '');
   const panel = document.getElementById(panelId);
   if (panel.innerHTML.trim()) {
@@ -575,53 +633,6 @@ function hamta_kontext(btn, panelId) {
   }).catch(() => {
     panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
     btn.textContent = 'Relaterade artiklar';
-    btn.disabled = false;
-  });
-}
-
-function generera_linkedin(btn, panelId) {
-  const panel = document.getElementById(panelId);
-  if (panel.innerHTML.trim()) {
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-    return;
-  }
-  btn.textContent = 'Genererar...';
-  btn.disabled = true;
-  const url = btn.getAttribute('data-url');
-  const fulltext = btn.getAttribute('data-fulltext');
-  fetch('https://risonbevakning.jesper-75b.workers.dev', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({action: 'linkedin', url: url, fulltext: fulltext}),
-  }).then(r => r.json()).then(data => {
-    const delar = (data.text || '').split('|||');
-    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
-    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
-    const brodtext = (delar[2] || '').replace(/^BRÖDTEXT:\s*/i, '').trim();
-    panel.innerHTML = `
-      <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">
-        <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">LinkedIn-utkast</div>
-        <div style="margin-bottom:12px;">
-          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Rubrik</div>
-          <div contenteditable="true" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#181D27;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${rubrik}</div>
-        </div>
-        <div style="margin-bottom:12px;">
-          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Ingress</div>
-          <div contenteditable="true" style="font-size:15px;font-weight:500;color:#293244;line-height:1.6;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${ingress}</div>
-        </div>
-        <div style="margin-bottom:16px;">
-          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
-          <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${brodtext}</div>
-        </div>
-        <button onclick="kopiera_utkast(this, '${panelId}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
-      </div>`;
-    panel.style.display = 'block';
-    btn.textContent = 'Långt';
-    btn.disabled = false;
-  }).catch(() => {
-    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte generera utkast.</p>';
-    panel.style.display = 'block';
-    btn.textContent = 'Långt';
     btn.disabled = false;
   });
 }

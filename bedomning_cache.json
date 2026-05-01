@@ -3,70 +3,64 @@
     "relevant": true,
     "relevansniva": "Hog",
     "poang": 7,
-    "sammanfattning": "EU förbjuder installation av gaspannor i nya byggnader från januari 2026 som del av EPBD-implementering.",
-    "motivering": "Direkt relevant för Risons marknad då förbudet driver efterfrågan på bergvärme och värmepumpar i fastigheter, men källan är opålitlig och innehållet fragmentariskt."
+    "sammanfattning": "EU förbjuder installation av gaspannor i nya byggnader från januari 2026, vilket driver omställning till alternativa uppvärmningslösningar.",
+    "motivering": "Direkt relevant för Risons verksamhet då förbudet mot gaspannor accelererar efterfrågan på värmepumpar och bergvärme i fastigheter – dock kommer artikeln från en lågkvalitativ brasiliansk källa med begränsat djup."
   },
   "3e309f0762c5601efe793000eccd7221": {
     "relevant": true,
-    "relevansniva": "Hog",
-    "poang": 8,
-    "sammanfattning": "Uppsala universitet rapporterar om geotermisk energi som ett växande grönt energislag.",
-    "motivering": "Hög relevans för Risons kärnverksamhet kring bergvärme i fastigheter, och universitetskällan ger trovärdig forskningsbakgrund till investeringsberättelsen."
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Uppsala universitet lyfter fram geotermisk energi som ett växande grönt energislag på frammarsch.",
+    "motivering": "Relevant som bakgrundsinformation om bergvärme/geotermisk teknik men artikeltexten är för kortfattad för att bedöma konkret relevans för fastighetssegmentet."
   },
   "296e8e692694c24be166fd12ab5ec443": {
     "relevant": true,
-    "relevansniva": "Hog",
-    "poang": 8,
-    "sammanfattning": "Tidningen Extrakt beskriver geotermisk energi som en potentiellt stor framtida energikälla.",
-    "motivering": "Direkt relevant för Risons bergvärmefokus och stärker det omvärldsmässiga narrativet om geotermins tillväxt som investeringstema."
-  },
-  "559fc72c8ddcdaca50ac9e80f1b3e24e": {
-    "relevant": true,
     "relevansniva": "Medel",
-    "poang": 5,
-    "sammanfattning": "MSN-artikel om geotermisk energi och dess potential som grön revolution.",
-    "motivering": "Relevant tema men källan MSN ger inget substantiellt innehåll att bedöma, vilket begränsar värdet trots topikens relevans för bergvärme."
+    "poang": 6,
+    "sammanfattning": "Geotermisk energi lyfts fram som nästa stora energikälla med ny teknik som möjliggör utvinning på fler platser, inklusive bergvärme i Sverige.",
+    "motivering": "Relevant för Risons fokus på bergvärme i fastigheter och ger marknadsperspektiv på teknikutveckling, men handlar primärt om storskalig geotermik snarare än fastighetsnära bergvärme."
   },
+  "559fc72c8ddcdaca50ac9e80f1b3e24e": null,
   "c12a5dd8d6f821f35744d82f23ac41aa": null,
   "4f64fd47b9f7bab7f93d6c60ff9e5554": {
     "relevant": true,
     "relevansniva": "Hog",
     "poang": 8,
-    "sammanfattning": "AI-stödd analys vid Umeå universitet visar hur energirenoveringar påverkar utsläpp och kostnader i fastigheter.",
-    "motivering": "Direkt relevant för Risons EaaS-modell och BRF/kommersiella fastigheter, då AI-driven energirenovering stärker investeringscaset för energieffektivisering."
+    "sammanfattning": "Studie från Umeå universitet visar hur AI-baserade analyser kan ge byggnadsspecifika rekommendationer för energirenoveringar med hänsyn till utsläpp och kostnader.",
+    "motivering": "Hög relevans för Risons arbete med energieffektivisering i fastigheter då AI-verktyg för att optimera renoveringsåtgärder direkt stödjer investeringsbeslut och EaaS-strukturering."
   },
   "08ef808f15509c96d513aa7c9b8d3fca": {
     "relevant": true,
     "relevansniva": "Medel",
     "poang": 5,
-    "sammanfattning": "Pressmeddelande om hållbar stadsutveckling i Kallebäck, Göteborg, med installationskonsult involverad.",
-    "motivering": "Hållbar stadsutveckling med installationsperspektiv är medel-relevant för Risons marknad men saknar tydlig koppling till EaaS, bergvärme eller specifika energieffektiviseringslösningar."
+    "sammanfattning": "Wallenstams bostadsprojekt Kallebäcks Terrasser i Göteborg miljöcertifieras med fokus på energiprestanda och Miljöbyggnad Silver.",
+    "motivering": "Relevant som exempel på energieffektivitetskrav och miljöcertifiering i kommersiell fastighetsutveckling, men saknar direkt koppling till bergvärme, BESS eller EaaS-finansiering."
   },
   "8a92099b04b8f36840482da37d16d63f": {
     "relevant": true,
     "relevansniva": "Medel",
-    "poang": 5,
-    "sammanfattning": "Boverkets uppföljning av plan- och bygglagen 2025 rapporteras av BYGGnyheter.",
-    "motivering": "Boverket är en nyckelaktör för energikrav i byggnader och PBL-uppföljning kan beröra energiregler, men utan synligt innehåll är relevansen svår att bedöma exakt."
+    "poang": 4,
+    "sammanfattning": "Boverket publicerar sin årliga uppföljning av plan- och bygglagstiftningen 2025 med statistik över planering, bygglov och tillsyn.",
+    "motivering": "Begränsat relevant då rapporten berör regelverk för byggnation men saknar specifikt fokus på energikrav eller energieffektivisering i fastigheter."
   },
   "4cd7983dd8a8a51de0d8861ab1f63f40": null,
   "e82646f2c00e500898d2d1d5056fbbc2": null,
-  "7e6aa122b95d321b76d30e8b95499892": null,
+  "7e6aa122b95d321b76d30e8b95499892": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Fastighetsägare med investeringsstöd håller tillbaka hyreshöjningar för att undvika återbetalningskrav, med tillsyn från länsstyrelser i 15 år.",
+    "motivering": "Berör energikrav på fastigheter och ekonomiska villkor för fastighetsägare, men handlar primärt om hyresreglering och investeringsstöd snarare än EaaS/energieffektivisering direkt."
+  },
   "7f71f594e2aba995238484b820429a48": null,
   "11010e84e69395a81ca3e95b30eeffbf": {
     "relevant": true,
     "relevansniva": "Hog",
     "poang": 8,
-    "sammanfattning": "EU-kommissionen, parlamentet och medlemsländerna har enats om en tidsplan för viktiga energi- och hållbarhetslagpaket.",
-    "motivering": "EU:s lagstiftningsprocess för energi och hållbarhet, sannolikt inkluderande EPBD och energikrav, är direkt relevant för Rison Capitals verksamhet och portföljplanering."
+    "sammanfattning": "EU-kommissionen, parlamentet och medlemsländer har enats om tidsplaner för viktiga lagpaket inom energi och hållbarhet, inklusive sannolikt EPBD-relaterade direktiv.",
+    "motivering": "EU-lagstiftning inom energi och hållbarhet är direkt relevant för EPBD-implementering och energikrav på byggnader som driver Risons marknad."
   },
-  "04aaba89e2b65e353e6bf72cf5e80167": {
-    "relevant": true,
-    "relevansniva": "Medel",
-    "poang": 5,
-    "sammanfattning": "Sammanställning av nya svenska lagar och förordningar inom miljö- och hållbarhetsområdet för vecka 17.",
-    "motivering": "Nya regelverk kan beröra energikrav på byggnader och EaaS-finansiering, men textens innehåll är för begränsat för att bedöma direkt relevans."
-  },
+  "04aaba89e2b65e353e6bf72cf5e80167": null,
   "e0ae61af692dc41aae19c7d38d789825": null,
   "a2c7b6762ac87d4856d7da59d9943252": null,
   "4effa3544cca2fbf6bda614b4c421c11": null,
@@ -78,11 +72,5 @@
   "b0b5d2dbe9c4e1d1421ef063d46bf28c": null,
   "3aad176a9bd8407fa03c1532b73f9442": null,
   "a6f8ca29f0eb0316112a6f5b7418de6c": null,
-  "1bf4a72f9712b562ac510bb70c027734": {
-    "relevant": true,
-    "relevansniva": "Medel",
-    "poang": 5,
-    "sammanfattning": "Artikel om batterilagring som medel för att öka energioberoende.",
-    "motivering": "Batterilagring (BESS) är ett av Rison Capitals kärnområden, men artikeln kommer från Vietnam.vn vilket indikerar vietnamesiskt fokus utan direkt relevans för svenska fastigheter eller institutionellt kapital."
-  }
+  "1bf4a72f9712b562ac510bb70c027734": null
 }

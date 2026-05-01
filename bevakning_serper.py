@@ -328,7 +328,7 @@ def basta_i_grupp(grupp):
 
 def bedom_batch(artiklar):
     lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:600]}"
+        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:2000]}"
         for i, a in enumerate(artiklar)
     )
     prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.

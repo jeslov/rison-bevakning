@@ -516,7 +516,8 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
   <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
+    <button onclick="generera_linkedin(this, 'linkedin-{idx}')"
+      data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
@@ -532,6 +533,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Radera
     </button>
   </div>
+  <div id="linkedin-{idx}" style="display:none;margin-top:14px;"></div>
   <div id="kontext-{idx}" style="display:none;margin-top:14px;"></div>
   {dubbletter_panel(grupp, idx)}
 </div>"""

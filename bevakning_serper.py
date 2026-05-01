@@ -701,7 +701,17 @@ function hamta_kontext(btn, panelId) {{
   );
   Promise.all(hamtningar).then(results => {{
     const alla = results.flat();
-    const unika = alla.filter((a, i) => alla.findIndex(b => b.link === a.link) === i).slice(0, 8);
+    const unika = alla.filter((a, i) => {{
+      if (alla.findIndex(b => b.link === a.link) !== i) return false;
+      const aTitel = a.title.toLowerCase().replace(/[^a-zåäö0-9]/g, ' ');
+      return !alla.slice(0, i).some(b => {{
+        const bTitel = b.title.toLowerCase().replace(/[^a-zåäö0-9]/g, ' ');
+        const aOrd = new Set(aTitel.split(' ').filter(w => w.length > 4));
+        const bOrd = new Set(bTitel.split(' ').filter(w => w.length > 4));
+        const overlap = [...aOrd].filter(w => bOrd.has(w)).length;
+        return overlap / Math.max(aOrd.size, bOrd.size) > 0.6;
+      }});
+    }}).slice(0, 8);
     if (unika.length === 0) {{
       panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Inga relaterade artiklar hittades.</p>';
     }} else {{

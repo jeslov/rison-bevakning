@@ -328,7 +328,7 @@ def basta_i_grupp(grupp):
 
 def bedom_batch(artiklar):
     lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Snippet: {a.get('beskrivning','')[:300]}"
+        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:600]}"
         for i, a in enumerate(artiklar)
     )
     prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
@@ -795,8 +795,11 @@ def main():
     if TESTLAGE:
         representanter = representanter[:30]
 
-    # Steg 5: Bedömning med cache
-    print(f"\n  [5/5] Bedömer {len(representanter)} artiklar...")
+    # Steg 5: Hämta fulltext och bedöm
+    print(f"\n  [5/5] Hämtar fulltext för {len(representanter)} artiklar...")
+    for a in representanter:
+        if not a.get("fulltext"):
+            a["fulltext"] = hamta_text(a["url"])
     relevanta_repr = bedom_med_cache(representanter)
 
     repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}

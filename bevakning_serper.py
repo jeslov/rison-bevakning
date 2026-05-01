@@ -503,18 +503,28 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")
         url_esc   = escape_html(r.get('url',''))
         return f"""<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:13px;color:#444;font-weight:600;">{escape_html(r['kalla'])}</span>
+    <span style="font-size:10px;color:#fff;background:{faerg};padding:2px 8px;border-radius:20px;font-weight:600;">{niva}</span>
+    <span style="font-size:10px;color:#fff;background:#555;padding:2px 8px;border-radius:20px;">{poang}/10</span>
+    {datum_str} {sokord_str}
+  </div>
+  <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:8px;line-height:1.3;">
+    <a href="{url_esc}" target="_blank" style="color:#1a1a1a;text-decoration:none;">{escape_html(r['titel'])}</a>
+  </div>
+  <div style="margin-bottom:10px;">{render_sammanfattning(r.get('sammanfattning',''))}</div>
+  <div style="font-size:13px;color:#888;font-style:italic;margin-bottom:12px;">{escape_html(r.get('motivering',''))}</div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap;">
     <a href="{url_esc}" target="_blank" style="font-size:14px;color:{faerg};font-weight:600;text-decoration:none;">Läs artikel &rarr;</a>
-    <button onclick="kopiera_prompt(this, '{titel_esc}', '{url_esc}')"
+    <button onclick="visa_panel('linkedin-lang-{idx}', ['linkedin-kort-{idx}', 'kontext-{idx}'])"
       style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Långt
     </button>
-    <button onclick="kopiera_kort_prompt(this, '{url_esc}')"
+    <button onclick="visa_panel('linkedin-kort-{idx}', ['linkedin-lang-{idx}', 'kontext-{idx}'])"
       style="font-size:12px;background:#555;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Kort
     </button>
-    <button onclick="hamta_kontext(this, '{kontext_sokord_js}', 'kontext-{idx}')"
-      style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
+    <button onclick="hamta_kontext(this, 'kontext-{idx}', ['linkedin-lang-{idx}', 'linkedin-kort-{idx}'])" data-sokord="{kontext_sokord_js}" style="font-size:12px;background:#3d5a80;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">
       Relaterade artiklar
     </button>
     <button onclick="radera_artikel(this, '{url_esc}')"
@@ -522,6 +532,9 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
       Radera
     </button>
   </div>
+  <div id="linkedin-lang-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin"></div>
+  <div id="linkedin-kort-{idx}" style="display:none;margin-top:14px;" data-url="{url_esc}" data-fulltext="{escape_html(r.get('fulltext','') or r.get('beskrivning',''))[:3000]}" data-action="linkedin_kort"></div>
+  <div id="kontext-{idx}" style="display:none;margin-top:14px;"></div>
   {dubbletter_panel(grupp, idx)}
 </div>"""
 
@@ -644,48 +657,100 @@ ${{stilref}}
 
 Läs först hela artikeln på denna URL: ${{url}}
 
-VIKTIGT innan du skriver:
-1. Sök på webben efter LinkedIn-URL för varje organisation som nämns. Inkludera @-slug i texten.
-2. Sök upp 1-2 aktuella källor, studier eller uttalanden som stärker artikelns poäng. Väv in naturligt.
+Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
 
-Skriv ett LinkedIn-inlägg med tydliga radbrytningar mellan rubrik, ingress och brödtext.
-Direkt och analytisk ton. Kommentera artikeln, referera den inte.
-Avsluta med påstående, aldrig generisk engagemangsfråga.
-Avsluta med max 5 hashtags och artikelns URL på sista raden.`;
+Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
+
+Avsluta med max 5 relevanta LinkedIn-hashtags på en egen rad.
+
+Lägg till artikelns URL på sista raden: ${{url}}`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;
-    btn.textContent = 'Kopierad!';
-    btn.style.background = '#1a7a3f';
+    btn.textContent = '✓ Kopierad!';
+    btn.style.background = '#293244';
     setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#293244'; }}, 2000);
-  }}).catch(() => alert('Kunde inte kopiera.'));
+  }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
 
 function kopiera_kort_prompt(btn, url) {{
-  const stilref = `{stil_text}`;
-  const prompt = `Du är kommunikationsansvarig på Rison Capital och skriver ett kort LinkedIn-inlägg för Jesper Lövkvist, delägare.
+  const prompt = `Läs artikeln på denna URL: ${{url}}
 
-Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren.
+Skriv en kort, kärnfull LinkedIn-kommentar på 2-4 meningar som:
+- Fångar artikelns viktigaste poäng i ett analytiskt perspektiv
+- Förklarar varför den är värd att läsa för någon i fastighetsbranschen
+- Är skriven i en direkt, icke-säljig ton
 
-Här är exempel på tidigare inlägg – följ stilen noga:
-
-${{stilref}}
-
-Läs artikeln på denna URL: ${{url}}
-
-Skriv ett kort LinkedIn-inlägg (max 5 meningar) med rubrik, ingress och brödtext.
-Direkt ton. Sök upp och inkludera @-slug för relevanta organisationer.
-Avsluta med max 3 hashtags och artikelns URL.`;
+Avsluta med: "Läs artikeln: ${{url}}"`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;
-    btn.textContent = 'Kopierad!';
-    btn.style.background = '#1a7a3f';
-    setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#555'; }}, 2000);
-  }}).catch(() => alert('Kunde inte kopiera.'));
+    btn.textContent = '✓ Kopierad!';
+    btn.style.background = '#555';
+    setTimeout(() => {{ btn.textContent = orig; btn.style.background = '#444'; }}, 2000);
+  }}).catch(() => alert('Kunde inte kopiera. Prova igen.'));
 }}
 
-function hamta_kontext(btn, sokord, panelId) {{
+function visa_panel(panelId, stang) {{
+  stang.forEach(id => {{
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  }});
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  if (panel.style.display === 'block') {{
+    panel.style.display = 'none';
+    return;
+  }}
+  panel.style.display = 'block';
+  if (!panel.innerHTML.trim()) {{
+    const action = panel.getAttribute('data-action');
+    const url = panel.getAttribute('data-url');
+    const fulltext = panel.getAttribute('data-fulltext');
+    if (action) generera_linkedin_panel(panel, action, url, fulltext);
+  }}
+}}
+
+function generera_linkedin_panel(panel, action, url, fulltext) {{
+  panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Genererar utkast...</p>';
+  fetch('https://risonbevakning.jesper-75b.workers.dev', {{
+    method: 'POST',
+    headers: {{'Content-Type': 'application/json'}},
+    body: JSON.stringify({{action: action, url: url, fulltext: fulltext}}),
+  }}).then(r => r.json()).then(data => {{
+    const delar = (data.text || '').split('|||');
+    const rubrik = (delar[0] || '').replace(/^RUBRIK:\s*/i, '').trim();
+    const ingress = (delar[1] || '').replace(/^INGRESS:\s*/i, '').trim();
+    const brodtext = (delar[2] || '').replace(/^BR.DTEXT:\s*/i, '').trim();
+    const panelId = panel.id;
+    panel.innerHTML = `
+      <div style="background:#f8f7f3;border:1px solid #e0ddd4;border-radius:2px;padding:20px;margin-top:8px;">
+        <div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">${{action === 'linkedin_kort' ? 'Kort inlägg' : 'Långt inlägg'}}</div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Rubrik</div>
+          <div contenteditable="true" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#181D27;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{rubrik}}</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Ingress</div>
+          <div contenteditable="true" style="font-size:15px;font-weight:500;color:#293244;line-height:1.6;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{ingress}}</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
+          <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{brodtext}}</div>
+        </div>
+        <button onclick="kopiera_utkast(this, '${{panelId}}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
+      </div>`;
+  }}).catch(() => {{
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte generera utkast.</p>';
+  }});
+}}
+
+function hamta_kontext(btn, panelId, stang) {{
+  if (stang) stang.forEach(id => {{
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  }});
+  const sokord = (btn.getAttribute('data-sokord') || '').replace(/&apos;/g, '').replace(/'/g, '');
   const panel = document.getElementById(panelId);
   if (panel.innerHTML.trim()) {{
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
@@ -694,20 +759,31 @@ function hamta_kontext(btn, sokord, panelId) {{
   btn.textContent = 'Hämtar...';
   btn.disabled = true;
   const fragor = sokord ? sokord.split(',').filter(s => s.trim()) : [];
-  Promise.all(fragor.map(q =>
+  const hamtningar = fragor.map(q =>
     fetch('https://risonbevakning.jesper-75b.workers.dev', {{
       method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
       body: JSON.stringify({{action: 'kontext', query: q}})
     }}).then(r => r.json()).then(d => d.news || [])
-  )).then(results => {{
+  );
+  Promise.all(hamtningar).then(results => {{
     const alla = results.flat();
-    const unika = alla.filter((a, i) => alla.findIndex(b => b.link === a.link) === i).slice(0, 8);
+    const unika = alla.filter((a, i) => {{
+      if (alla.findIndex(b => b.link === a.link) !== i) return false;
+      const aTitel = a.title.toLowerCase().replace(/[^a-zåäö0-9]/g, ' ');
+      return !alla.slice(0, i).some(b => {{
+        const bTitel = b.title.toLowerCase().replace(/[^a-zåäö0-9]/g, ' ');
+        const aOrd = new Set(aTitel.split(' ').filter(w => w.length > 4));
+        const bOrd = new Set(bTitel.split(' ').filter(w => w.length > 4));
+        const overlap = [...aOrd].filter(w => bOrd.has(w)).length;
+        return overlap / Math.max(aOrd.size, bOrd.size) > 0.6;
+      }});
+    }}).slice(0, 8);
     if (unika.length === 0) {{
       panel.innerHTML = '<p style="color:#888;padding:12px;font-size:13px;">Inga relaterade artiklar hittades.</p>';
     }} else {{
       panel.innerHTML = '<div style="border-top:1px solid #e0ddd4;padding-top:12px;margin-top:4px;">'
-        + '<div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Relaterade artiklar</div>'
+        + '<div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Redaktionell kontext – relaterade artiklar</div>'
         + unika.map(a => '<div style="padding:8px 0;border-bottom:1px solid #f0ede4;">'
           + '<div style="font-size:11px;color:#888;margin-bottom:2px;">' + (a.source||'') + ' · ' + (a.date||'') + '</div>'
           + '<a href="' + a.link + '" target="_blank" style="font-size:14px;color:#293244;font-weight:500;text-decoration:none;">' + a.title + '</a>'
@@ -718,30 +794,27 @@ function hamta_kontext(btn, sokord, panelId) {{
     btn.textContent = 'Relaterade artiklar';
     btn.disabled = false;
   }}).catch(() => {{
-    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta artiklar.</p>';
+    panel.innerHTML = '<p style="color:#c0392b;padding:12px;font-size:13px;">Kunde inte hämta kontext.</p>';
     btn.textContent = 'Relaterade artiklar';
     btn.disabled = false;
   }});
 }}
 
-function radera_artikel(btn, url) {{
-  const kort = btn.closest('div[id^="artikel"]') || btn.parentElement.parentElement.parentElement;
-  if (kort) {{
-    kort.style.transition = 'opacity 0.3s';
-    kort.style.opacity = '0';
-    setTimeout(() => kort.style.display = 'none', 300);
-  }}
-  const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
-  if (!raderade.includes(url)) {{
-    raderade.push(url);
-    localStorage.setItem('raderade_artiklar', JSON.stringify(raderade));
-  }}
+function kopiera_utkast(btn, panelId) {{
+  const panel = document.getElementById(panelId);
+  const delar = panel.querySelectorAll('[contenteditable]');
+  const text = Array.from(delar).map(d => d.innerText).join('\\n\\n');
+  navigator.clipboard.writeText(text).then(() => {{
+    const orig = btn.textContent;
+    btn.textContent = 'Kopierad!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  }});
 }}
 
 function kör_skript(btn) {{
   const token = localStorage.getItem('github_token');
   if (!token) {{
-    const t = prompt('Ange GitHub Personal Access Token:');
+    const t = prompt('Ange GitHub Personal Access Token (sparas i webbläsaren):');
     if (!t) return;
     localStorage.setItem('github_token', t);
   }}
@@ -770,38 +843,32 @@ function kör_skript(btn) {{
   }});
 }}
 
+function radera_artikel(btn, url) {{
+  const kort = btn.closest('div[style*="border:1px solid"]');
+  if (kort) {{
+    kort.style.transition = 'opacity 0.3s';
+    kort.style.opacity = '0';
+    setTimeout(() => kort.style.display = 'none', 300);
+  }}
+  const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
+  if (!raderade.includes(url)) {{
+    raderade.push(url);
+    localStorage.setItem('raderade_artiklar', JSON.stringify(raderade));
+  }}
+}}
+
+// Dölj tidigare raderade artiklar vid sidladdning
 document.addEventListener('DOMContentLoaded', function() {{
   const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
   document.querySelectorAll('[onclick*="radera_artikel"]').forEach(btn => {{
-    const match = btn.getAttribute('onclick').match(/'([^']+)'\)$/);
-    if (match && raderade.includes(match[1])) {{
-      const kort = btn.closest('div[style*="border:1px solid #e8e8e8"]');
+    const url = btn.getAttribute('onclick').match(/'([^']+)'\)$/)?.[1];
+    if (url && raderade.includes(url)) {{
+      const kort = btn.closest('div[style*="border:1px solid"]');
       if (kort) kort.style.display = 'none';
     }}
   }});
 }});
 
-async function sha256(text) {{
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}}
-async function logga_in() {{
-  const pw = document.getElementById('pw').value;
-  const hash = await sha256(pw);
-  if (hash === '8d13224db15d8e30881ae4fe4f030228cdcd5de58692f72d481a0a3df89d939f') {{
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('rapport').style.display = 'block';
-    sessionStorage.setItem('auth', '1');
-  }} else {{
-    document.getElementById('fel').style.display = 'block';
-  }}
-}}
-if (sessionStorage.getItem('auth') === '1') {{
-  document.getElementById('login').style.display = 'none';
-  document.getElementById('rapport').style.display = 'block';
-}}
-</script>
-<script>
 async function sha256(text) {{
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');

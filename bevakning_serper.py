@@ -659,7 +659,7 @@ STEG 1 – Gör detta FÖRST innan du skriver ett enda ord:
 - Sök på webben efter 1-2 aktuella rapporter eller studier som stärker artikelns huvudpoäng.
 
 STEG 2 – Skriv inlägget:
-- Max 300 tecken inklusive blanksteg
+- Max 3000 tecken inklusive blanksteg
 - Rubrik, sedan radbrytning, sedan brödtext
 - Inkludera @-slug för ALLA organisationer du hittade i steg 1
 - Avsluta med exakt 3-5 hashtags på egen rad

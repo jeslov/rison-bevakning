@@ -776,7 +776,7 @@ function generera_linkedin(btn, panelId) {{
           <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Brödtext</div>
           <div contenteditable="true" style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;border:1px solid transparent;padding:4px;border-radius:2px;outline:none;white-space:pre-wrap;" onfocus="this.style.border='1px solid #ccc'" onblur="this.style.border='1px solid transparent'">${{brodtext}}</div>
         </div>
-        <button onclick="kopiera_utkast(this, '${panelId}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
+        <button onclick="kopiera_utkast(this, '${{panelId}}')" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;">Kopiera allt</button>
       </div>`;
     panel.style.display = 'block';
     btn.textContent = 'Långt';

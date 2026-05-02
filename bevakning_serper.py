@@ -670,12 +670,7 @@ STEG 3 – Lägg till slugs:
 - Ersätt organisationsnamnen med @slug direkt i texten.
 - Lista alla hittade slugs i slutet: SLUGS: {{"Organisation": "slug"}}
 
-STEG 2 – Skriv inlägget:
-- Max 3000 tecken inklusive blanksteg
-- Rubrik, sedan radbrytning, sedan brödtext
-- Inkludera @-slug för ALLA organisationer du hittade i steg 1
-- Avsluta med exakt 3-5 hashtags på egen rad
-- Sista raden: artikelns URL: ${{url}}`;
+Svara ENDAST med den slutliga versionen av inlägget – inga mellansteg, inga förklaringar, ingen motivering. Max 3000 tecken. Rubrik, radbrytning, brödtext, hashtags, URL.`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

@@ -676,7 +676,7 @@ Gör följande i exakt denna ordning:
 
 3. LÄGG TILL SLUGS: Gå igenom det färdiga utkastet och identifiera organisationer som nämns i texten. Sök LinkedIn-URL bara för dessa. Ersätt med @slug. Avsluta med hashtags och artikelns URL på sista raden.
 
-Svara ENDAST med det färdiga inlägget. Inga mellansteg, inga förklaringar.\`;
+Svara ENDAST med det färdiga inlägget. Inga mellansteg, inga förklaringar.`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

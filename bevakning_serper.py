@@ -656,8 +656,6 @@ Dra inga slutsatser som inte stöds direkt av artikeln. Undvik förenklingar och
 
 Inlägget ska alltid peka på en konkret möjlig väg framåt – hur kan de fakta, insikter eller lösningar som nämns i artikeln användas för att komma framåt? Var specifik. Undvik flummiga eller alltför spekulativa slutsatser.
 
-Avsluta prompten med ett separat stycke märkt "DUBBELKOLLA:" där du listar 1-3 påståenden i utkastet som användaren bör verifiera innan publicering – exempelvis faktapåståenden, statistik eller den föreslagna vägen framåt.
-
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
 STEG 1 – Gör detta FÖRST innan du skriver ett enda ord:

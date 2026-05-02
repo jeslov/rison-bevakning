@@ -705,7 +705,7 @@ function hamta_kontext(btn, panelId) {{
     fetch('https://risonbevakning.jesper-75b.workers.dev', {{
       method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
-      body: JSON.stringify({{query: q}})
+      body: JSON.stringify({{action: 'kontext', query: q}})
     }}).then(r => r.json()).then(d => d.news || [])
   );
   Promise.all(hamtningar).then(results => {{

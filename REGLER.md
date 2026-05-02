@@ -21,6 +21,7 @@
 
 ## Generella arbetsregler
 - Aldrig skriva om hela block – gör minimala ändringar
+- Syntaxkontroll körs alltid av Claude INNAN kod föreslås och EFTER att ändring bekräftats – aldrig av Jesper
 - Aldrig generera HTML utan att syntaxkontroll passerat
 - Aldrig föreslå nedladdning av filer – gör ändringar direkt i terminalen
 - Om Jesper påtalar fel i arbetssättet – addera ny regel i denna fil omedelbart

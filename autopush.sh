@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~/rison-bevakning
 echo "Bevakar ändringar i ~/rison-bevakning..."
-fswatch -o -r . --exclude='.git' --exclude='__pycache__' --exclude='.DS_Store' . | while read; do
+fswatch -o -r . --exclude='.git' --exclude='__pycache__' --exclude='.DS_Store' --exclude='autopush.log' . | while read; do
     sleep 2
     git add -A
     if git diff --staged --quiet; then

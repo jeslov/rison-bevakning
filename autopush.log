@@ -1,1 +1,19 @@
 Bevakar ändringar i ~/rison-bevakning...
+[main fb03c13] [code] Auto-commit 2026-05-02 15:56 [md5:cdb73d93e5b3632b0992cdc5aae69e13]
+ Committer: ”Jesper <jesperlovkvist@mac.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 2 insertions(+)
+ create mode 100644 autopush.log
+To https://github.com/jeslov/rison-bevakning.git
+   b80528d..fb03c13  main -> main
+Pushad 15:56 [code]

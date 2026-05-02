@@ -656,7 +656,7 @@ Gör följande i exakt denna ordning:
 
 1. VERIFIERA: Sök på webben och kontrollera artikelns centrala faktapåståenden mot oberoende källor. Om något inte håller – utelämna eller tona ner det i utkastet.
 
-2. SKRIV UTKASTET: Baserat på verifierade fakta. Direkt och analytisk ton. Analysera och kommentera – referera inte artikeln. Peka på en konkret väg framåt baserad på artikelns innehåll. Inga flummiga slutsatser. Avsluta med påstående eller retorisk fråga – aldrig generisk engagemangsfråga. Max 3000 tecken. Skriv organisationsnamn i klartext – inga @-slugs ännu.
+2. SKRIV UTKASTET: Börja med en kort rubrik på max 8 ord. Sedan brödtext baserat på verifierade fakta – direkt och analytisk ton. Analysera och kommentera, referera inte artikeln. Väv in relevanta organisationer, myndigheter eller studier naturligt när det stärker argumentet. Peka på en konkret väg framåt. Inga flummiga slutsatser. Avsluta med påstående eller retorisk fråga – aldrig generisk engagemangsfråga. Max 3000 tecken. Skriv organisationsnamn i klartext – inga @-slugs ännu.
 
 3. LÄGG TILL SLUGS: Gå igenom det färdiga utkastet. Sök LinkedIn-URL för varje organisation som nämns. Ersätt organisationsnamnen med @slug i texten. Avsluta med hashtags och artikelns URL på sista raden.
 

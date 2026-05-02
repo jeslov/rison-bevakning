@@ -668,7 +668,7 @@ STEG 3 – Lägg till LinkedIn-slugs:
 - Identifiera alla organisationer, myndigheter och företag som nämns i utkastet.
 - Sök på webben: "[organisationsnamn] LinkedIn" och extrahera slug från URL:en (linkedin.com/company/SLUG).
 - Ersätt organisationsnamnen med @slug i utkastet.
-- Lista alla hittade slugs i slutet av svaret i formatet: SLUGS: {"Boverket": "boverket", "Energimyndigheten": "energimyndigheten"}
+- Lista alla hittade slugs i slutet av svaret i formatet: SLUGS: {{"Boverket": "boverket", "Energimyndigheten": "energimyndigheten"}}
 
 STEG 2 – Skriv inlägget:
 - Max 3000 tecken inklusive blanksteg

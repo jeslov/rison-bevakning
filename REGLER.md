@@ -25,3 +25,29 @@
 - Aldrig generera HTML utan att syntaxkontroll passerat
 - Aldrig föreslå nedladdning av filer – gör ändringar direkt i terminalen
 - Om Jesper påtalar fel i arbetssättet – addera ny regel i denna fil omedelbart
+
+## Versionssynk
+- Läs alltid checksumman från senaste git-commit i sessionsstart: `git -C ~/rison-bevakning log --oneline -1`
+- Om checksumman inte matchar – kör `sed -n` på relevanta rader innan någon ändring föreslås
+- Aldrig anta att filen ser ut på ett visst sätt – verifiera alltid
+
+## HTML-generering
+- Ge alltid hela HTML-genereringskommandot i samma svarsblock som ändringen
+- Aldrig lämna Jesper att fråga efter det separat
+
+## Cache-hantering
+- Påminn alltid om vilka cache-filer som behöver rensas när en ändring påverkar bedömningar eller sökord:
+  - Prompt-ändringar → rensa bedomning_cache.json
+  - Zeitgeist-prompt → rensa zeitgeist_cache.json
+  - Dagsaktuella-prompt → rensa dagsaktuella_cache.json
+
+## Feldiagnostik
+- Kör alltid `sed -n` och `grep` för att hitta exakt vad som finns i filen innan en fix föreslås
+- Aldrig be Jesper debugga – det är Claudes ansvar
+
+## Cloudflare Worker
+- Spara alltid senaste fungerande Worker-kod här nedan så att den kan återställas utan att leta
+- Uppdatera efter varje lyckad deploy
+
+### Senaste fungerande Worker-kod
+Se Cloudflare dashboard: risonbevakning.jesper-75b.workers.dev

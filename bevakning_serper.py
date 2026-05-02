@@ -658,10 +658,17 @@ Inlägget ska alltid peka på en konkret möjlig väg framåt – hur kan de fak
 
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
-STEG 1 – Gör detta FÖRST innan du skriver ett enda ord:
-- Sök på webben: "[organisationsnamn] LinkedIn" för VARJE organisation, myndighet och företag som nämns i artikeln. Notera exakt slug från URL:en (linkedin.com/company/SLUG).
-- Sök på webben och verifiera de centrala faktapåståendena i artikeln mot oberoende källor. Om ett påstående inte kan verifieras eller är mer osäkert än artikeln antyder – tona ner det eller utelämna det i utkastet.
-- Sök på webben efter oberoende källor som bekräftar, nyanserar eller ger kontext till artikelns påståenden om möjliga lösningar eller vägar framåt. Inkludera bara sådana som håller vid granskning.
+STEG 1 – Verifiera fakta innan du skriver:
+- Sök på webben och verifiera de centrala faktapåståendena i artikeln mot oberoende källor. Om ett påstående inte kan verifieras eller är mer osäkert än artikeln antyder – tona ner det eller utelämna det.
+- Sök efter oberoende källor som bekräftar, nyanserar eller ger kontext till artikelns påståenden om möjliga lösningar. Inkludera bara sådana som håller vid granskning.
+
+STEG 2 – Skriv utkastet.
+
+STEG 3 – Lägg till LinkedIn-slugs:
+- Identifiera alla organisationer, myndigheter och företag som nämns i utkastet.
+- Sök på webben: "[organisationsnamn] LinkedIn" och extrahera slug från URL:en (linkedin.com/company/SLUG).
+- Ersätt organisationsnamnen med @slug i utkastet.
+- Lista alla hittade slugs i slutet av svaret i formatet: SLUGS: {"Boverket": "boverket", "Energimyndigheten": "energimyndigheten"}
 
 STEG 2 – Skriv inlägget:
 - Max 3000 tecken inklusive blanksteg

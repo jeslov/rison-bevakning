@@ -8,3 +8,4 @@ bevakning_v*.py
 bevakning_rss.py
 bevakning.py
 test_djup.py
+.checksum

@@ -50,6 +50,18 @@ Påminn alltid när ändring påverkar bedömningar eller sökord:
 | Zeitgeist-prompt | \`zeitgeist_cache.json\` |
 | Dagsaktuella-prompt | \`dagsaktuella_cache.json\` |
 
+## Auto-tillåtna kommandon
+Följande kommandon kräver inte godkännande:
+- Läsoperationer: md5, sed -n, grep, head, tail, cat, ls, wc, git status, git log, git diff, git show
+- Syntaxkontroll: python3 -c "import py_compile..."
+- Skriptkörning: python3 bevakning_serper.py
+- Git-operationer (auto-commit redan godkänd): git add, git commit, git push
+
+Kommandon som ALLTID kräver explicit godkännande:
+- Destruktiva git-operationer: git reset --hard, git push --force, git rebase
+- Filborttagning: rm (även cache-filer)
+- Operationer utanför ~/rison-bevakning/
+
 ## Cloudflare Worker
 Senaste fungerande Worker-kod finns i Cloudflare dashboard:
 \`risonbevakning.jesper-75b.workers.dev\`

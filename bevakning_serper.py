@@ -644,33 +644,21 @@ function kopiera_prompt(btn, titel, url) {{
 
 Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren. Bergvärme, BESS, värmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
 
-Här är exempel på tidigare inlägg som visar Jespers ton och stil – följ den noga:
+Här är exempel på Jespers ton och stil – följ den noga:
 
 ${{stilref}}
 
-Läs först hela artikeln på denna URL: ${{url}}
+Läs hela artikeln: ${{url}}
 
-Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
+Gör följande i exakt denna ordning:
 
-Dra inga slutsatser som inte stöds direkt av artikeln. Undvik förenklingar och tendentiösa tolkningar. Om artikeln är nyanserad ska inlägget återspegla det. En välgrundad poäng är alltid bättre än en överdrift.
+1. VERIFIERA: Sök på webben och kontrollera artikelns centrala faktapåståenden mot oberoende källor. Om något inte håller – utelämna eller tona ner det i utkastet.
 
-Inlägget ska alltid peka på en konkret möjlig väg framåt – hur kan de fakta, insikter eller lösningar som nämns i artikeln användas för att komma framåt? Var specifik. Undvik flummiga eller alltför spekulativa slutsatser.
+2. SKRIV UTKASTET: Baserat på verifierade fakta. Direkt och analytisk ton. Analysera och kommentera – referera inte artikeln. Peka på en konkret väg framåt baserad på artikelns innehåll. Inga flummiga slutsatser. Avsluta med påstående eller retorisk fråga – aldrig generisk engagemangsfråga. Max 3000 tecken. Skriv organisationsnamn i klartext – inga @-slugs ännu.
 
-Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
+3. LÄGG TILL SLUGS: Gå igenom det färdiga utkastet. Sök LinkedIn-URL för varje organisation som nämns. Ersätt organisationsnamnen med @slug i texten. Avsluta med hashtags och artikelns URL på sista raden.
 
-STEG 1 – Verifiera fakta:
-- Sök på webben och verifiera de centrala faktapåståendena i artikeln mot oberoende källor. Om ett påstående inte kan verifieras – tona ner det eller utelämna det.
-- Sök efter oberoende källor som bekräftar eller nyanserar artikelns påståenden om möjliga lösningar. Inkludera bara sådana som håller.
-
-STEG 2 – Skriv utkastet utan @-slugs. Skriv ut organisationsnamnen i klartext.
-
-STEG 3 – Lägg till slugs:
-- Gå igenom utkastet och identifiera alla organisationer, myndigheter och företag.
-- Sök på webben: "[organisationsnamn] LinkedIn" och extrahera slug från URL:en (linkedin.com/company/SLUG).
-- Ersätt organisationsnamnen med @slug direkt i texten.
-- Lista alla hittade slugs i slutet: SLUGS: {{"Organisation": "slug"}}
-
-Svara ENDAST med den slutliga versionen av inlägget – inga mellansteg, inga förklaringar, ingen motivering. Max 3000 tecken. Rubrik, radbrytning, brödtext, hashtags, URL.`;
+Svara ENDAST med det färdiga inlägget. Inga mellansteg, inga förklaringar.`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

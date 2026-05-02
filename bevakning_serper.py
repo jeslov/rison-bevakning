@@ -652,6 +652,8 @@ Läs först hela artikeln på denna URL: ${{url}}
 
 Skriv sedan ett LinkedIn-inlägg baserat på artikelns faktiska innehåll. Följ stilen i exemplen – direkt och analytisk. Inlägget ska analysera och kommentera, inte referera artikeln. Undvik säljiga fraser. Avsluta med ett påstående eller en retorisk fråga, aldrig en generisk engagemangsfråga.
 
+Dra inga slutsatser som inte stöds direkt av artikeln. Undvik förenklingar och tendentiösa tolkningar. Om artikeln är nyanserad ska inlägget återspegla det. En välgrundad poäng är alltid bättre än en överdrift.
+
 Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter eller studier i texten när det stärker ett argument – inte som en lista i slutet.
 
 STEG 1 – Gör detta FÖRST innan du skriver ett enda ord:

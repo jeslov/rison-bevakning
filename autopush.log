@@ -34,3 +34,20 @@ After doing this, you may fix the identity used for this commit with:
 To https://github.com/jeslov/rison-bevakning.git
    fb03c13..efc4a6b  main -> main
 Pushad 15:57 [report]
+[main 2a6024f] [report] Auto-commit 2026-05-02 15:57 [md5:cdb73d93e5b3632b0992cdc5aae69e13]
+ Committer: ”Jesper <jesperlovkvist@mac.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 24 insertions(+), 7 deletions(-)
+To https://github.com/jeslov/rison-bevakning.git
+   efc4a6b..2a6024f  main -> main
+Pushad 15:57 [report]

@@ -662,7 +662,8 @@ Väv naturligt in referenser till relevanta intresseorganisationer, myndigheter 
 
 STEG 1 – Gör detta FÖRST innan du skriver ett enda ord:
 - Sök på webben: "[organisationsnamn] LinkedIn" för VARJE organisation, myndighet och företag som nämns i artikeln. Notera exakt slug från URL:en (linkedin.com/company/SLUG).
-- Sök på webben efter 1-2 aktuella rapporter eller studier som stärker artikelns huvudpoäng.
+- Sök på webben och verifiera de centrala faktapåståendena i artikeln mot oberoende källor. Om ett påstående inte kan verifieras eller är mer osäkert än artikeln antyder – tona ner det eller utelämna det i utkastet.
+- Sök på webben efter oberoende källor som bekräftar, nyanserar eller ger kontext till artikelns påståenden om möjliga lösningar eller vägar framåt. Inkludera bara sådana som håller vid granskning.
 
 STEG 2 – Skriv inlägget:
 - Max 3000 tecken inklusive blanksteg

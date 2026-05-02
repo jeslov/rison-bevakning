@@ -42,7 +42,7 @@ button:hover{opacity:0.85}
   <div style="background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:700;">TESTLÄGE – cachade artiklar används · 26 bedömningar i cache</div>
   <div class="header">
     <h1>Rison &middot; Omvärldsbevakning</h1>
-    <p>02 May 2026, 11:17 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
+    <p>02 May 2026, 11:23 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
   <div class="stats">
     <span><b>0</b> RSS</span>
@@ -578,12 +578,7 @@ STEG 3 – Lägg till slugs:
 - Ersätt organisationsnamnen med @slug direkt i texten.
 - Lista alla hittade slugs i slutet: SLUGS: {"Organisation": "slug"}
 
-STEG 2 – Skriv inlägget:
-- Max 3000 tecken inklusive blanksteg
-- Rubrik, sedan radbrytning, sedan brödtext
-- Inkludera @-slug för ALLA organisationer du hittade i steg 1
-- Avsluta med exakt 3-5 hashtags på egen rad
-- Sista raden: artikelns URL: ${url}`;
+Svara ENDAST med den slutliga versionen av inlägget – inga mellansteg, inga förklaringar, ingen motivering. Max 3000 tecken. Rubrik, radbrytning, brödtext, hashtags, URL.`;
 
   navigator.clipboard.writeText(prompt).then(() => {
     const orig = btn.textContent;

@@ -646,12 +646,20 @@ button:hover{{opacity:0.85}}
 </div>
 
 <script>
-function kopiera_prompt(btn, titel, url) {{
+function kopiera_prompt(btn, titel, url, malgrupp) {{
   const fulltext = btn.getAttribute('data-fulltext') || '';
   const stilref = `{stil_text}`;
+  const malgruppKontext = {{
+    'brf': 'Målgrupp: BRF-styrelser. Fokusera på kostnader, beslutsgång på stämma, risk och vad föreningen konkret vinner på energiomställning utan att belasta balansräkningen.',
+    'kommersiell': 'Målgrupp: CFO och VD på kommersiella fastighetsbolag. Fokusera på driftnetto, yield, stranded assets-risk och hur energiomställning påverkar fastighetsvärdet.',
+    'institutionell': 'Målgrupp: Institutionella investerare och kapitalförvaltare. Fokusera på riskprofil, stabil avkastning, EU-taxonomi och hur grön energiinfrastruktur passar in i en institutionell portfölj.'
+  }};
+  const mg = malgruppKontext[malgrupp] || '';
   const prompt = `Du är kommunikationsansvarig på Rison Capital och skriver ett LinkedIn-inlägg för Jesper Lövkvist, delägare.
 
 Rison Capital finansierar energieffektivisering i fastigheter via EaaS-modell utan fordringar på fastighetsägaren. Bergvärme, BESS, värmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
+
+${{mg}}
 
 Här är exempel på Jespers ton och stil – följ den noga:
 
@@ -664,11 +672,11 @@ Gör följande i exakt denna ordning:
 
 1. VERIFIERA: Sök på webben och kontrollera artikelns centrala faktapåståenden mot oberoende källor. Om något inte håller – utelämna eller tona ner det i utkastet.
 
-2. SKRIV UTKASTET: Börja med en kort rubrik på max 8 ord. Sedan brödtext baserat på verifierade fakta – direkt och analytisk ton. Analysera och kommentera, referera inte artikeln. Väv in relevanta organisationer, myndigheter eller studier naturligt när det stärker argumentet. Peka på en konkret väg framåt. Inga flummiga slutsatser. Avsluta med påstående eller retorisk fråga – aldrig generisk engagemangsfråga. Max 3000 tecken. Skriv organisationsnamn i klartext – inga @-slugs ännu.
+2. SKRIV UTKASTET: Börja med en kort rubrik på max 8 ord. Sedan brödtext anpassad för målgruppen – direkt och analytisk ton. Analysera och kommentera, referera inte artikeln. Väv in relevanta organisationer, myndigheter eller studier naturligt när det stärker argumentet. Peka på en konkret väg framåt för just denna målgrupp. Inga flummiga slutsatser. Avsluta med påstående eller retorisk fråga – aldrig generisk engagemangsfråga. Max 3000 tecken. Skriv organisationsnamn i klartext.
 
-3. LÄGG TILL SLUGS: Gå igenom det färdiga utkastet. Sök LinkedIn-URL för varje organisation som nämns. Ersätt organisationsnamnen med @slug i texten. Avsluta med hashtags och artikelns URL på sista raden.
+3. LÄGG TILL SLUGS: Gå igenom det färdiga utkastet och identifiera organisationer som nämns i texten. Sök LinkedIn-URL bara för dessa. Ersätt med @slug. Avsluta med hashtags och artikelns URL på sista raden.
 
-Svara ENDAST med det färdiga inlägget. Inga mellansteg, inga förklaringar.`;
+Svara ENDAST med det färdiga inlägget. Inga mellansteg, inga förklaringar.\`;
 
   navigator.clipboard.writeText(prompt).then(() => {{
     const orig = btn.textContent;

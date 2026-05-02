@@ -648,7 +648,8 @@ Här är exempel på Jespers ton och stil – följ den noga:
 
 ${{stilref}}
 
-Läs hela artikeln: ${{url}}
+ARTIKEL:
+${{fulltext}}
 
 Gör följande i exakt denna ordning:
 

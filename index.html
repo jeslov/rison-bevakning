@@ -24,6 +24,11 @@ body{font-family:Georgia,serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh
 .sokord-panel{max-width:760px;margin:0 auto;padding:0 40px 40px}
 a:hover{opacity:0.75}
 button:hover{opacity:0.85}
+.tabs{display:flex;background:#181D27;border-bottom:1px solid rgba(255,255,255,0.2)}
+.tab{padding:14px 28px;font-size:12px;color:#8892a4;cursor:pointer;letter-spacing:1.5px;text-transform:uppercase;border:none;background:transparent;font-family:Georgia,serif;font-weight:600}
+.tab:hover{color:#EFEDE0}
+.tab.active{color:#EFEDE0;border-bottom:2px solid #EFEDE0;margin-bottom:-1px}
+.tab-proaktiv-card{background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
 </style>
 </head>
 <body>
@@ -44,6 +49,12 @@ button:hover{opacity:0.85}
     <h1>Rison &middot; Omvärldsbevakning</h1>
     <p>02 May 2026, 16:22 &middot; 7 relevanta artiklar &middot; RSS + Google News via Serper</p>
   </div>
+  <!-- PROAKTIV_TABS_INSTALLED -->
+  <div class="tabs">
+    <button class="tab active" id="tab-btn-bevakning" onclick="visa_tab('bevakning')">Bevakning</button>
+    <button class="tab" id="tab-btn-proaktiv" onclick="visa_tab('proaktiv')">Proaktiva förslag</button>
+  </div>
+  <div id="tab-bevakning">
   <div class="stats">
     <span><b>0</b> RSS</span>
     <span><b>26</b> Serper</span>
@@ -343,6 +354,189 @@ button:hover{opacity:0.85}
       <span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 bergvärme flerbostadshus</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 bergvärme BRF</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 bergvärme kommersiell</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 värmepump byggnad</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 värmepump BRF</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 batterilager byggnad</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 solceller BRF</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 solceller flerbostadshus</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energilagring byggnad</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 geotermisk energi Sverige</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energieffektivisering byggnad</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energieffektivisering BRF</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energieffektivisering flerbostadshus</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energirenovering fastighet</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energideklaration fastighet</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energikostnad fastighet</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energiprestanda byggnad</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 gröna obligationer fastighet</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 fastighetsinvestering energi</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 EaaS energi tjänst</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 EPBD byggnader Sverige</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 energikrav byggnader</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Boverket energi</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 klimatkrav fastighet</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 fastighetsbolag energiomställning</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 stranded assets fastighet</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 fjärrvärme alternativ byggnad</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Fastighetsägarna energikrav</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Riksbyggen energi</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 HSB energieffektivisering</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Energimyndigheten byggnader</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Boverket byggregler</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Naturvårdsverket klimat</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Hyresgästföreningen energi</span><span style="display:inline-block;background:#f0f0f0;border-radius:20px;padding:3px 10px;font-size:12px;color:#555;margin:3px;">🔍 Sveriges Allmännytta energi</span>
     </div>
   </div>
+  </div>
+  <!-- BEGIN tab-proaktiv -->
+<div id="tab-proaktiv" style="display:none">
+  <div class="content">
+    <h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:#EFEDE0;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.25);background:#293244;padding:10px 16px;border-radius:2px;">Proaktiva förslag</h2>
+    <div class="tab-proaktiv-card">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Tes 2</span>
+    <span style="font-size:13px;color:#666;">2026-05-04 12:55</span>
+  </div>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:14px;line-height:1.3;color:#1a1a1a;">Samma renovering. Olika månadskostnad.</h2>
+  <div style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;white-space:pre-wrap;margin-bottom:14px;">EU har gjort renoveringen obligatorisk. EPBD-direktivet är i kraft sedan 28 maj 2024 och måste vara inskrivet i svensk lag senast 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.
+
+Det är inte mål. Det är deadlines.
+
+Tidigare gick branschens resonemang så här: räkna avkastning på olika investeringar, jämför mot kärnverksamhet, prioritera. Energieffektivisering hamnar nästan alltid sist eftersom kraven på avkastning sattes för att jämföra med tillväxtinvesteringar – inte med 8 procents driftbesparing över tio år.
+
+Den uträkningen fungerar inte längre. När åtgärden är lagkrav handlar det inte om att räkna på olika alternativ. Det handlar om att välja vem som ska finansiera den.
+
+Det är som tandvård som blivit obligatorisk. Den gamla frågan – är det värt det? – har förlorat sin mening. Den enda kvarvarande frågan är: betalar du själv per behandling, eller har du abonnemang?
+
+Forskningsorganet JRC, EU-kommissionens egna experter, har räknat ut att det tar mellan fyra år (för belysning) och tio år (för klimatskal) innan en renovering har betalat sig. Det är just glappet mellan vad det kostar idag och vad som kommer in i besparing imorgon som driver fastighetsägare att skjuta upp åtgärden – när man måste finansiera den själv.
+
+EU-kommissionen har själva pekat ut riktningen. I sin senaste vägledning från juni 2025 listar de vilka finansieringsmodeller som länderna ska främja – modeller där fastighetsägaren inte behöver gå till banken för att finansiera hela renoveringen själv. Det är inte experimentella idéer. Det är de strukturer direktivet förutsätter.
+
+Två fastigheter med exakt samma fysiska renovering kan därför ha helt olika månadskostnader från första månaden. Skillnaden ligger inte i vad som görs eller hur effektivt det blir. Den ligger i hur det finansieras.
+
+Samma stenar, samma fönster, samma installationer. Olika rader i resultatrapporten.
+
+#EPBD #energieffektivisering #fastighetsfinansiering https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</div>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Källor</div>
+  <ul style="font-size:13px;color:#3a3a3a;margin-bottom:14px;padding-left:18px;line-height:1.6;">
+    <li><a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="color:#293244;">https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</a></li>
+    <li><a href="https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en" target="_blank" style="color:#293244;">https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en</a></li>
+    <li><a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf" target="_blank" style="color:#293244;">https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf</a></li>
+    <li><a href="https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en" target="_blank" style="color:#293244;">https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en</a></li>
+  </ul>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Refererar till artikel</div>
+  <a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="font-size:13px;color:#293244;font-weight:600;text-decoration:none;display:block;margin-bottom:14px;">https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</a>
+  <button onclick="kopiera_proaktiv(this)" data-text="EU har gjort renoveringen obligatorisk. EPBD-direktivet är i kraft sedan 28 maj 2024 och måste vara inskrivet i svensk lag senast 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.&#10;&#10;Det är inte mål. Det är deadlines.&#10;&#10;Tidigare gick branschens resonemang så här: räkna avkastning på olika investeringar, jämför mot kärnverksamhet, prioritera. Energieffektivisering hamnar nästan alltid sist eftersom kraven på avkastning sattes för att jämföra med tillväxtinvesteringar – inte med 8 procents driftbesparing över tio år.&#10;&#10;Den uträkningen fungerar inte längre. När åtgärden är lagkrav handlar det inte om att räkna på olika alternativ. Det handlar om att välja vem som ska finansiera den.&#10;&#10;Det är som tandvård som blivit obligatorisk. Den gamla frågan – är det värt det? – har förlorat sin mening. Den enda kvarvarande frågan är: betalar du själv per behandling, eller har du abonnemang?&#10;&#10;Forskningsorganet JRC, EU-kommissionens egna experter, har räknat ut att det tar mellan fyra år (för belysning) och tio år (för klimatskal) innan en renovering har betalat sig. Det är just glappet mellan vad det kostar idag och vad som kommer in i besparing imorgon som driver fastighetsägare att skjuta upp åtgärden – när man måste finansiera den själv.&#10;&#10;EU-kommissionen har själva pekat ut riktningen. I sin senaste vägledning från juni 2025 listar de vilka finansieringsmodeller som länderna ska främja – modeller där fastighetsägaren inte behöver gå till banken för att finansiera hela renoveringen själv. Det är inte experimentella idéer. Det är de strukturer direktivet förutsätter.&#10;&#10;Två fastigheter med exakt samma fysiska renovering kan därför ha helt olika månadskostnader från första månaden. Skillnaden ligger inte i vad som görs eller hur effektivt det blir. Den ligger i hur det finansieras.&#10;&#10;Samma stenar, samma fönster, samma installationer. Olika rader i resultatrapporten.&#10;&#10;#EPBD #energieffektivisering #fastighetsfinansiering https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;margin-top:6px;">Kopiera</button>
+</div>
+<div class="tab-proaktiv-card">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Tes 2</span>
+    <span style="font-size:13px;color:#666;">2026-05-04 12:36</span>
+  </div>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:14px;line-height:1.3;color:#1a1a1a;">Samma renovering. Två helt olika rader i bokföringen.</h2>
+  <div style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;white-space:pre-wrap;margin-bottom:14px;">EU har gjort renoveringen obligatorisk. EPBD-direktivet är i kraft sedan 28 maj 2024 och måste vara inskrivet i svensk lag senast 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.
+
+Det är inte mål. Det är deadlines.
+
+Tidigare gick branschens resonemang så här: räkna avkastning på olika investeringar, jämför mot kärnverksamhet, prioritera. Energieffektivisering hamnar nästan alltid sist eftersom hurdle rates är designade för expansion, inte för 8 procents driftbesparing över tio år.
+
+Den kalkylen är nu obsolet. När åtgärden är lagkrav är det inte längre en investeringskalkyl. Det är ett finansieringsval.
+
+Det är som tandvård som blivit obligatorisk. Den gamla frågan – är det värt det? – har förlorat sin mening. Den enda kvarvarande frågan är: betalar du själv per behandling, eller har du abonnemang?
+
+JRC har räknat att återbetalningstiden för olika åtgärder ligger mellan fyra år för belysning och cirka tio år för klimatskal. Det är just glappet mellan kostnad nu och avkastning sedan som driver investeringar att skjutas upp – när man måste finansiera dem själv.
+
+EU-kommissionen har själva pekat ut riktningen. I sitt Article 17-paket från juni 2025 listar de finansieringsformer som medlemsländerna ska främja: pay-as-you-save, on-bill-financing och energy performance contracting. Det är inte experimentella modeller. Det är de strukturer som direktivet förutsätter.
+
+Två fastigheter med exakt samma fysiska renovering kan därför ha helt olika kassaflöden från dag ett. Skillnaden ligger inte i vad som görs eller hur effektivt det blir. Den ligger i finansieringsstrukturen.
+
+Samma stenar, samma fönster, samma installationer. Olika rader i resultatrapporten.
+
+#EPBD #energieffektivisering #fastighetsfinansiering #PayAsYouSave https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</div>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Källor</div>
+  <ul style="font-size:13px;color:#3a3a3a;margin-bottom:14px;padding-left:18px;line-height:1.6;">
+    <li><a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="color:#293244;">https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</a></li>
+    <li><a href="https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en" target="_blank" style="color:#293244;">https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en</a></li>
+    <li><a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf" target="_blank" style="color:#293244;">https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf</a></li>
+    <li><a href="https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en" target="_blank" style="color:#293244;">https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en</a></li>
+  </ul>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Refererar till artikel</div>
+  <a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="font-size:13px;color:#293244;font-weight:600;text-decoration:none;display:block;margin-bottom:14px;">https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</a>
+  <button onclick="kopiera_proaktiv(this)" data-text="EU har gjort renoveringen obligatorisk. EPBD-direktivet är i kraft sedan 28 maj 2024 och måste vara inskrivet i svensk lag senast 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.&#10;&#10;Det är inte mål. Det är deadlines.&#10;&#10;Tidigare gick branschens resonemang så här: räkna avkastning på olika investeringar, jämför mot kärnverksamhet, prioritera. Energieffektivisering hamnar nästan alltid sist eftersom hurdle rates är designade för expansion, inte för 8 procents driftbesparing över tio år.&#10;&#10;Den kalkylen är nu obsolet. När åtgärden är lagkrav är det inte längre en investeringskalkyl. Det är ett finansieringsval.&#10;&#10;Det är som tandvård som blivit obligatorisk. Den gamla frågan – är det värt det? – har förlorat sin mening. Den enda kvarvarande frågan är: betalar du själv per behandling, eller har du abonnemang?&#10;&#10;JRC har räknat att återbetalningstiden för olika åtgärder ligger mellan fyra år för belysning och cirka tio år för klimatskal. Det är just glappet mellan kostnad nu och avkastning sedan som driver investeringar att skjutas upp – när man måste finansiera dem själv.&#10;&#10;EU-kommissionen har själva pekat ut riktningen. I sitt Article 17-paket från juni 2025 listar de finansieringsformer som medlemsländerna ska främja: pay-as-you-save, on-bill-financing och energy performance contracting. Det är inte experimentella modeller. Det är de strukturer som direktivet förutsätter.&#10;&#10;Två fastigheter med exakt samma fysiska renovering kan därför ha helt olika kassaflöden från dag ett. Skillnaden ligger inte i vad som görs eller hur effektivt det blir. Den ligger i finansieringsstrukturen.&#10;&#10;Samma stenar, samma fönster, samma installationer. Olika rader i resultatrapporten.&#10;&#10;#EPBD #energieffektivisering #fastighetsfinansiering #PayAsYouSave https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;margin-top:6px;">Kopiera</button>
+</div>
+<div class="tab-proaktiv-card">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Tes 2</span>
+    <span style="font-size:13px;color:#666;">2026-05-04 11:52</span>
+  </div>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:14px;line-height:1.3;color:#1a1a1a;">Renoveringen är inte längre valfri. Finansieringen är.</h2>
+  <div style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;white-space:pre-wrap;margin-bottom:14px;">EU har just antagit ett stödpaket för EPBD-direktivet, i kraft sedan 28 maj 2024 och med transponeringsdeadline 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.
+
+Det är inte mål. Det är deadlines.
+
+För svensk fastighetsbransch betyder det att den investeringskalkyl man hittills baserat besluten på har förlorat sin viktigaste variabel. Att räkna avkastning på olika alternativ förutsätter att alternativ finns. När åtgärden är lagkrav finns bara två frågor kvar: vem betalar, och hur ser kassaflödet ut det första året.
+
+Det är som att tvingas byta ut bilens motor på grund av nya utsläppskrav, men fortfarande få välja mellan att betala kontant eller leasa. Bytet är obligatoriskt. Finansieringsstrukturen avgör om månadens budget krymper eller växer.
+
+Siffrorna är tydliga. JRC har räknat att återbetalningstiden för renoveringsinvesteringar ligger mellan fyra år för belysning och cirka tio år för klimatskal. Det är just glappet mellan upfront-kostnad och avkastning som driver fastighetsägare att skjuta upp åtgärden – även när lönsamheten är god.
+
+I sitt Article 17-paket från juni 2025 listar EU-kommissionen vilka finansieringsformer medlemsländerna ska främja: pay-as-you-save, on-bill-financing och energy performance contracting. Det är inte tillfälliga branschexperiment. Det är de strukturer som direktivet förutsätter ska användas i praktiken.
+
+Det är samma logik som Energy Efficiency as a Service: tredje part står för investeringen, fastighetsägaren betalar utifrån faktisk besparing. Kassaflödet är positivt från första månaden eftersom ersättningen sätts under själva besparingen.
+
+Den ena vägen ger drift. Den andra ger investeringspåfrestning. Båda leder till samma fysiska resultat. Det är bara siffrorna som skiljer.
+
+#EPBD #energieffektivisering #fastighetsfinansiering #PayAsYouSave https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</div>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Källor</div>
+  <ul style="font-size:13px;color:#3a3a3a;margin-bottom:14px;padding-left:18px;line-height:1.6;">
+    <li><a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="color:#293244;">https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</a></li>
+    <li><a href="https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en" target="_blank" style="color:#293244;">https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en</a></li>
+    <li><a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf" target="_blank" style="color:#293244;">https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf</a></li>
+    <li><a href="https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en" target="_blank" style="color:#293244;">https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en</a></li>
+  </ul>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Refererar till artikel</div>
+  <a href="https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" target="_blank" style="font-size:13px;color:#293244;font-weight:600;text-decoration:none;display:block;margin-bottom:14px;">https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/</a>
+  <button onclick="kopiera_proaktiv(this)" data-text="EU har just antagit ett stödpaket för EPBD-direktivet, i kraft sedan 28 maj 2024 och med transponeringsdeadline 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.&#10;&#10;Det är inte mål. Det är deadlines.&#10;&#10;För svensk fastighetsbransch betyder det att den investeringskalkyl man hittills baserat besluten på har förlorat sin viktigaste variabel. Att räkna avkastning på olika alternativ förutsätter att alternativ finns. När åtgärden är lagkrav finns bara två frågor kvar: vem betalar, och hur ser kassaflödet ut det första året.&#10;&#10;Det är som att tvingas byta ut bilens motor på grund av nya utsläppskrav, men fortfarande få välja mellan att betala kontant eller leasa. Bytet är obligatoriskt. Finansieringsstrukturen avgör om månadens budget krymper eller växer.&#10;&#10;Siffrorna är tydliga. JRC har räknat att återbetalningstiden för renoveringsinvesteringar ligger mellan fyra år för belysning och cirka tio år för klimatskal. Det är just glappet mellan upfront-kostnad och avkastning som driver fastighetsägare att skjuta upp åtgärden – även när lönsamheten är god.&#10;&#10;I sitt Article 17-paket från juni 2025 listar EU-kommissionen vilka finansieringsformer medlemsländerna ska främja: pay-as-you-save, on-bill-financing och energy performance contracting. Det är inte tillfälliga branschexperiment. Det är de strukturer som direktivet förutsätter ska användas i praktiken.&#10;&#10;Det är samma logik som Energy Efficiency as a Service: tredje part står för investeringen, fastighetsägaren betalar utifrån faktisk besparing. Kassaflödet är positivt från första månaden eftersom ersättningen sätts under själva besparingen.&#10;&#10;Den ena vägen ger drift. Den andra ger investeringspåfrestning. Båda leder till samma fysiska resultat. Det är bara siffrorna som skiljer.&#10;&#10;#EPBD #energieffektivisering #fastighetsfinansiering #PayAsYouSave https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;margin-top:6px;">Kopiera</button>
+</div>
+<div class="tab-proaktiv-card">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Tes 1</span>
+    <span style="font-size:13px;color:#666;">2026-05-04 11:24</span>
+  </div>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:14px;line-height:1.3;color:#1a1a1a;">Kunskapsfrågan är löst. Budgetfrågan kvarstår.</h2>
+  <div style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;white-space:pre-wrap;margin-bottom:14px;">Forskare på Umeå universitet har nyligen visat att AI kan ge byggnadsspecifika rekommendationer för energirenovering – med hänsyn till klimatpåverkan, faktiska användningsmönster och kostnader för den enskilda fastigheten. De generaliseringar som tidigare planeringsmodeller byggt på är på väg ut. Vad som ger störst utdelning per investerad krona kan nu i praktiken beräknas exakt, byggnad för byggnad.
+
+Det är ett genombrott på rätt fråga. Men inte på den fråga som faktiskt blockerar omställningen.
+
+IEA:s Energy Efficiency 2025 rapporterar att investeringarna i byggnaders energieffektivisering når 800 miljarder USD i år, men att tillväxten stannar upp. Två tredjedelar sker i bara tre regioner – Kina, USA och EU. Offentliga stödsystem krymper i flera länder under budgetåtstramning, samtidigt som byggpriserna i EU stigit över 20 procent sedan 2021.
+
+Energimyndigheten konstaterar att lönsamhet i sig inte räcker för att åtgärden ska bli av. Kapitaltillgång och organisationens beslutsstrukturer fäller avgörandet. Att hitta åtgärden och att finansiera den är två olika problem. Det första är teknik. Det andra är kapitalallokering inom företag och fastighetsägare. Och det är där flaskhalsen sitter – inte i bristande analys.
+
+Energieffektivisering hamnar systematiskt utanför kärnverksamhetens budget. Återbetalningskrav på 1–3 år, hurdle rates designade för expansion, och projektstorlekar för små för att direkt finansiera ger samma resultat: åtgärden gör sig aldrig synlig i kapitalprioriteringen, hur lönsam den än är.
+
+Tekniken är löst. Verktygen finns. Datan är där. Det är fördelningen av kapital som måste lösas separat – och det är inte en teknisk fråga.
+
+#energieffektivisering #fastighetsbranschen #kapitalallokering https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader</div>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Källor</div>
+  <ul style="font-size:13px;color:#3a3a3a;margin-bottom:14px;padding-left:18px;line-height:1.6;">
+    <li><a href="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" target="_blank" style="color:#293244;">https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader</a></li>
+    <li><a href="https://www.iea.org/reports/energy-efficiency-2025/buildings" target="_blank" style="color:#293244;">https://www.iea.org/reports/energy-efficiency-2025/buildings</a></li>
+    <li><a href="https://www.energimyndigheten.se/energisystem-och-analys/samhallsbyggnad-och-energiplanering/vagledning-for-kommunal-energiplanering/energisystemet/anvandning/energieffektivisering/" target="_blank" style="color:#293244;">https://www.energimyndigheten.se/energisystem-och-analys/samhallsbyggnad-och-energiplanering/vagledning-for-kommunal-energiplanering/energisystemet/anvandning/energieffektivisering/</a></li>
+  </ul>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Refererar till artikel</div>
+  <a href="https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" target="_blank" style="font-size:13px;color:#293244;font-weight:600;text-decoration:none;display:block;margin-bottom:14px;">https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader</a>
+  <button onclick="kopiera_proaktiv(this)" data-text="Forskare på Umeå universitet har nyligen visat att AI kan ge byggnadsspecifika rekommendationer för energirenovering – med hänsyn till klimatpåverkan, faktiska användningsmönster och kostnader för den enskilda fastigheten. De generaliseringar som tidigare planeringsmodeller byggt på är på väg ut. Vad som ger störst utdelning per investerad krona kan nu i praktiken beräknas exakt, byggnad för byggnad.&#10;&#10;Det är ett genombrott på rätt fråga. Men inte på den fråga som faktiskt blockerar omställningen.&#10;&#10;IEA:s Energy Efficiency 2025 rapporterar att investeringarna i byggnaders energieffektivisering når 800 miljarder USD i år, men att tillväxten stannar upp. Två tredjedelar sker i bara tre regioner – Kina, USA och EU. Offentliga stödsystem krymper i flera länder under budgetåtstramning, samtidigt som byggpriserna i EU stigit över 20 procent sedan 2021.&#10;&#10;Energimyndigheten konstaterar att lönsamhet i sig inte räcker för att åtgärden ska bli av. Kapitaltillgång och organisationens beslutsstrukturer fäller avgörandet. Att hitta åtgärden och att finansiera den är två olika problem. Det första är teknik. Det andra är kapitalallokering inom företag och fastighetsägare. Och det är där flaskhalsen sitter – inte i bristande analys.&#10;&#10;Energieffektivisering hamnar systematiskt utanför kärnverksamhetens budget. Återbetalningskrav på 1–3 år, hurdle rates designade för expansion, och projektstorlekar för små för att direkt finansiera ger samma resultat: åtgärden gör sig aldrig synlig i kapitalprioriteringen, hur lönsam den än är.&#10;&#10;Tekniken är löst. Verktygen finns. Datan är där. Det är fördelningen av kapital som måste lösas separat – och det är inte en teknisk fråga.&#10;&#10;#energieffektivisering #fastighetsbranschen #kapitalallokering https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;margin-top:6px;">Kopiera</button>
+</div>
+<div class="tab-proaktiv-card">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Tes 3</span>
+    <span style="font-size:13px;color:#666;">2026-05-04 10:35</span>
+  </div>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:14px;line-height:1.3;color:#1a1a1a;">Skattepengar låser. Pensionskapital skulle frigöra omställningen.</h2>
+  <div style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;white-space:pre-wrap;margin-bottom:14px;">Fastighetstidningen rapporterar att fastighetsägare som tagit emot 22,7 miljarder kronor i investeringsstöd nu sitter med 15 års återbetalningsrisk: hyrestak, energikrav och löpande tillsyn från länsstyrelserna. En 50-lägenhetsfastighet kan tvingas betala tillbaka uppemot 20 miljoner kronor.
+
+Det är inte ett undantagsfall. Det är ett mönster.
+
+Skattepengar kommer alltid med villkor. Det måste de göra – det är skattebetalarnas pengar. Men villkoren skapar samtidigt en ny typ av inlåsning: fastigheten blir hårt reglerad, hyresintäkterna kapade och handlingsutrymmet förlorat under en hel investeringscykel.
+
+IEA visar i Energy Efficiency 2025 att investeringarna i energieffektivisering globalt måste tredubblas från 660 miljarder USD idag till 1,9 biljoner USD årligen 2030 för att nå Net Zero. Och idag står hushåll – inte institutioner – för över 70 procent av investeringarna i byggnader. Det är fel kapitalkälla för en omställning av denna storlek.
+
+OECD och Climate Policy Initiative rapporterar samtidigt att pensionsfonders allokering till infrastruktur ligger på cirka 1 procent. Samtidigt har 63 procent av OECD-pensionsfonder satt minst ett klimatmål – upp från 9 procent 2020. Den samlade förvaltningsvolymen i tracking är 22,5 biljoner USD.
+
+Pensionskapitalet är den enda källa som matchar:
+• Skalan (biljoner, inte miljarder)
+• Tidshorisonten (5–15 år)
+• Riskprofilen (stabila kassaflöden från verifierade besparingar)
+• Klimatmandatet (växande och politiskt stabilt)
+
+Off-balance-sheet-modeller som Energy Efficiency as a Service gör fastighetsägaren skuldfri – ingen återbetalningsrisk, ingen reglerad hyresnivå, ingen 15-års lock-in. Hyran sätts under den faktiska besparingen och finansiären står för investeringen.
+
+Det är inte ideologi. Det är matematik.
+
+22,7 miljarder kronor i statligt stöd har bundit en hel sektor under 15 år. De 22,5 biljoner USD som pensionsfonderna förvaltar söker exakt den profil som energieffektivisering erbjuder.
+
+Frågan är inte om kapitalet finns. Det finns. Frågan är vilken kanal som faktiskt frigör fastigheterna istället för att låsa dem.</div>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Källor</div>
+  <ul style="font-size:13px;color:#3a3a3a;margin-bottom:14px;padding-left:18px;line-height:1.6;">
+    <li><a href="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" target="_blank" style="color:#293244;">https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/</a></li>
+    <li><a href="https://www.iea.org/reports/energy-efficiency-2025/buildings" target="_blank" style="color:#293244;">https://www.iea.org/reports/energy-efficiency-2025/buildings</a></li>
+    <li><a href="https://www.climatepolicyinitiative.org/publication/state-of-oecd-pension-funds-climate-transition-insights-and-recommendations-from-the-net-zero-finance-tracker/" target="_blank" style="color:#293244;">https://www.climatepolicyinitiative.org/publication/state-of-oecd-pension-funds-climate-transition-insights-and-recommendations-from-the-net-zero-finance-tracker/</a></li>
+    <li><a href="https://www.boverket.se/sv/bidrag--garantier/stod-till-energieffektivisering-i-flerbostadshus/" target="_blank" style="color:#293244;">https://www.boverket.se/sv/bidrag--garantier/stod-till-energieffektivisering-i-flerbostadshus/</a></li>
+  </ul>
+  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Refererar till artikel</div>
+  <a href="https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/" target="_blank" style="font-size:13px;color:#293244;font-weight:600;text-decoration:none;display:block;margin-bottom:14px;">https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/</a>
+  <button onclick="kopiera_proaktiv(this)" data-text="Fastighetstidningen rapporterar att fastighetsägare som tagit emot 22,7 miljarder kronor i investeringsstöd nu sitter med 15 års återbetalningsrisk: hyrestak, energikrav och löpande tillsyn från länsstyrelserna. En 50-lägenhetsfastighet kan tvingas betala tillbaka uppemot 20 miljoner kronor.&#10;&#10;Det är inte ett undantagsfall. Det är ett mönster.&#10;&#10;Skattepengar kommer alltid med villkor. Det måste de göra – det är skattebetalarnas pengar. Men villkoren skapar samtidigt en ny typ av inlåsning: fastigheten blir hårt reglerad, hyresintäkterna kapade och handlingsutrymmet förlorat under en hel investeringscykel.&#10;&#10;IEA visar i Energy Efficiency 2025 att investeringarna i energieffektivisering globalt måste tredubblas från 660 miljarder USD idag till 1,9 biljoner USD årligen 2030 för att nå Net Zero. Och idag står hushåll – inte institutioner – för över 70 procent av investeringarna i byggnader. Det är fel kapitalkälla för en omställning av denna storlek.&#10;&#10;OECD och Climate Policy Initiative rapporterar samtidigt att pensionsfonders allokering till infrastruktur ligger på cirka 1 procent. Samtidigt har 63 procent av OECD-pensionsfonder satt minst ett klimatmål – upp från 9 procent 2020. Den samlade förvaltningsvolymen i tracking är 22,5 biljoner USD.&#10;&#10;Pensionskapitalet är den enda källa som matchar:&#10;• Skalan (biljoner, inte miljarder)&#10;• Tidshorisonten (5–15 år)&#10;• Riskprofilen (stabila kassaflöden från verifierade besparingar)&#10;• Klimatmandatet (växande och politiskt stabilt)&#10;&#10;Off-balance-sheet-modeller som Energy Efficiency as a Service gör fastighetsägaren skuldfri – ingen återbetalningsrisk, ingen reglerad hyresnivå, ingen 15-års lock-in. Hyran sätts under den faktiska besparingen och finansiären står för investeringen.&#10;&#10;Det är inte ideologi. Det är matematik.&#10;&#10;22,7 miljarder kronor i statligt stöd har bundit en hel sektor under 15 år. De 22,5 biljoner USD som pensionsfonderna förvaltar söker exakt den profil som energieffektivisering erbjuder.&#10;&#10;Frågan är inte om kapitalet finns. Det finns. Frågan är vilken kanal som faktiskt frigör fastigheterna istället för att låsa dem." style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;margin-top:6px;">Kopiera</button>
+</div>
+  </div>
+</div>
+<!-- END tab-proaktiv -->
 </div>
 
 <script>
@@ -755,6 +949,22 @@ async function logga_in() {
 if (sessionStorage.getItem('auth') === '1') {
   document.getElementById('login').style.display = 'none';
   document.getElementById('rapport').style.display = 'block';
+}
+</script>
+<script>
+function visa_tab(name) {
+  document.getElementById('tab-bevakning').style.display = (name === 'bevakning') ? '' : 'none';
+  document.getElementById('tab-proaktiv').style.display = (name === 'proaktiv') ? '' : 'none';
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-btn-' + name).classList.add('active');
+}
+function kopiera_proaktiv(btn) {
+  const text = btn.getAttribute('data-text');
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Kopierat!';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
 }
 </script>
 </body>

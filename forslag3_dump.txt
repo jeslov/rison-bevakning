@@ -1,0 +1,30 @@
+=== RUBRIK ===
+Renoveringen är inte längre valfri. Finansieringen är.
+
+=== TEXT ===
+EU har just antagit ett stödpaket för EPBD-direktivet, i kraft sedan 28 maj 2024 och med transponeringsdeadline 29 maj 2026. Senast 2030 ska 16 procent av Europas sämsta icke-bostadsbyggnader ha renoverats. Senast 2033, 26 procent.
+
+Det är inte mål. Det är deadlines.
+
+För svensk fastighetsbransch betyder det att den investeringskalkyl man hittills baserat besluten på har förlorat sin viktigaste variabel. Att räkna avkastning på olika alternativ förutsätter att alternativ finns. När åtgärden är lagkrav finns bara två frågor kvar: vem betalar, och hur ser kassaflödet ut det första året.
+
+Det är som att tvingas byta ut bilens motor på grund av nya utsläppskrav, men fortfarande få välja mellan att betala kontant eller leasa. Bytet är obligatoriskt. Finansieringsstrukturen avgör om månadens budget krymper eller växer.
+
+Siffrorna är tydliga. JRC har räknat att återbetalningstiden för renoveringsinvesteringar ligger mellan fyra år för belysning och cirka tio år för klimatskal. Det är just glappet mellan upfront-kostnad och avkastning som driver fastighetsägare att skjuta upp åtgärden – även när lönsamheten är god.
+
+I sitt Article 17-paket från juni 2025 listar EU-kommissionen vilka finansieringsformer medlemsländerna ska främja: pay-as-you-save, on-bill-financing och energy performance contracting. Det är inte tillfälliga branschexperiment. Det är de strukturer som direktivet förutsätter ska användas i praktiken.
+
+Det är samma logik som Energy Efficiency as a Service: tredje part står för investeringen, fastighetsägaren betalar utifrån faktisk besparing. Kassaflödet är positivt från första månaden eftersom ersättningen sätts under själva besparingen.
+
+Den ena vägen ger drift. Den andra ger investeringspåfrestning. Båda leder till samma fysiska resultat. Det är bara siffrorna som skiljer.
+
+#EPBD #energieffektivisering #fastighetsfinansiering #PayAsYouSave https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/
+
+=== KÄLLOR ===
+- https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/
+- https://energy.ec.europa.eu/topics/energy-efficiency/energy-performance-buildings/energy-performance-buildings-directive_en
+- https://publications.jrc.ec.europa.eu/repository/bitstream/JRC117816/accelerating_energy_renovation_investments_in_buildings.pdf
+- https://energy.ec.europa.eu/document/download/40f29e74-65a6-4a5d-ad1f-c20d9ff75f04_en
+
+=== REFERERAR TILL ===
+https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/

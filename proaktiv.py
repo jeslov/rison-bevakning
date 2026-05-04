@@ -157,7 +157,7 @@ av aktuell bevakningsbild. Sök kompletterande källor på webben vid behov.
 
 4. Ton:
    - Direkt och analytisk – kommentera situationen, beskriv inte lösningen
-   - Undvik säljig produktbeskrivning av Risons modell. Om Risons modell nämns: en mening, integrerad i analysen, inte som broschyr
+   - Beskriv ALDRIG mekaniken i Risons modell eller EaaS. Det vill säga: undvik formuleringar som "tredje part står för investeringen", "fastighetsägaren betalar utifrån faktisk besparing", "kassaflödet är positivt från första månaden", eller liknande beskrivningar av HUR finansieringsstrukturen fungerar. Inläggets uppgift är att kommentera SITUATIONEN. Om finansieringsstrukturer ska nämnas: hänvisa till externa institutioner som benämner dem (EU Article 17-paketet, IEA, etc.), inte till Risons egen produkt.
    - Avsluta med påstående, inte engagemangsfråga
    - Stilreferens: linkedin_stil.txt om relevant
    - Använd minst en konkret liknelse eller skarp omramning som vänder läsarens förväntan. Hitta din egen liknelse – exemplen nedan är illustrationer, inte mallar att kopiera. Exempel: "Det är som att ge en hungrig människa ett recept", "X-problemet löstes 2023 – men ingen märkte det", "Lösningen finns sedan länge – det är efterfrågan som saknas". Liknelsen är obligatorisk.

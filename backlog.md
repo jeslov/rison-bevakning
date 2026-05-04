@@ -15,3 +15,6 @@ Datum finns i pipelinen (RSS pubDate som ISO, Serper date som naturligt språk) 
 Commit-meddelanden visar `"Jesper <jesperlovkvist@mac.lan>` (med inledande citattecken och .lan-domän). Bör konfigureras om till korrekt namn och e-post:
 git config --global user.name "Jesper Lövkvist"
 git config --global user.email "jesper@utopia.se"
+
+## Prompt-refaktorisering till stilprincip
+v3 och v4 har lagt till specifika förbud mot exakta formuleringar (t.ex. "tredje part står för investeringen"). Det är effektivt på kort sikt men skapar en växande lista av post-hoc-regler. På sikt: omformulera specifika förbud till en allmän stilprincip som täcker fler liknande fall.

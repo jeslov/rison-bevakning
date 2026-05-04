@@ -372,6 +372,33 @@ def las_senaste_forslag(antal=10):
     cache = _las_cache()
     return list(reversed(cache[-antal:]))
 
+def uppdatera_html_med_forslag():
+    """Injicerar tab-UI i index.html och visar senaste 10 proaktiva förslag.
+    Idempotent: om markörerna redan finns ersätts bara tab-proaktiv-blocket."""
+    if not INDEX_HTML.exists():
+        return {"error": "index.html saknas"}
+
+    html_content = INDEX_HTML.read_text(encoding="utf-8")
+    forslag_lista = las_senaste_forslag(10)
+    proaktiv_block = _bygg_proaktiv_block(forslag_lista)
+
+    if _INSTALL_MARKER in html_content:
+        start = html_content.find(_BEGIN_PROAKTIV)
+        end   = html_content.find(_END_PROAKTIV)
+        if start == -1 or end == -1:
+            return {"error": "INSTALLED-markör finns men BEGIN/END saknas"}
+        end += len(_END_PROAKTIV)
+        new_html = html_content[:start] + proaktiv_block + html_content[end:]
+        lage = "uppdatering"
+    else:
+        new_html = _forsta_installation(html_content, proaktiv_block)
+        if new_html is None:
+            return {"error": "Kunde inte hitta anchor-punkter i index.html"}
+        lage = "installation"
+
+    INDEX_HTML.write_text(new_html, encoding="utf-8")
+    return {"ok": True, "antal_forslag": len(forslag_lista), "lage": lage}
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":

@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
 """
 Rison Capital – Proaktiv modul
-Genererar förslag på nya inlägg utifrån de tre bärande teserna och aktuell
-bevakningsbild. Anropar Cloudflare Worker (action='proaktiv').
-Datalagring: proaktiv_cache.json (rullande, max 30).
+Bygger prompt för proaktiva inläggsförslag (teser + bevakningsbild) och sparar
+färdiga förslag i proaktiv_cache.json. Genereringen görs av Claude i sessionen
+via wizard-promptar – denna modul innehåller ingen modellanropslogik.
 """
 
 import json
 import re
-import time
 import uuid
 import html as _html
-import requests
 from datetime import datetime
 from pathlib import Path
 
-WORKER_URL          = "https://risonbevakning.jesper-75b.workers.dev"
 TESER_FILE          = Path(__file__).parent / "teser_med_underlag.md"
 INDEX_HTML          = Path(__file__).parent / "index.html"
 PROAKTIV_CACHE_FILE = Path(__file__).parent / "proaktiv_cache.json"
 MAX_FORSLAG         = 30
+TEXT_MIN            = 500
+TEXT_MAX            = 3000
 
-# ── Hjälpare ──────────────────────────────────────────────────────────────────
+# ── Läsare ────────────────────────────────────────────────────────────────────
 
 def _las_teser():
     if not TESER_FILE.exists():
@@ -37,7 +36,6 @@ def _las_bevakningsbild():
     except Exception:
         return []
 
-    # Splitta på artikel-card divs (samma stil för Hög- och Medel-block)
     delare = '<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;'
     blocks = raw.split(delare)
     if len(blocks) < 2:
@@ -45,17 +43,14 @@ def _las_bevakningsbild():
 
     artiklar = []
     for blk in blocks[1:]:
-        # Relevansnivå (text "Hog" eller "Medel" – HTML har detta utan å)
         mr = re.search(r'<span[^>]*>(Hog|Medel)</span>', blk)
         if not mr:
             continue
         relevansniva = "Hög" if mr.group(1) == "Hog" else "Medel"
 
-        # Poäng
         mp = re.search(r'<span[^>]*>(\d+)/10</span>', blk)
         poang = int(mp.group(1)) if mp else 0
 
-        # Rubrik + URL från första kopiera_prompt-anropet
         mk = re.search(r"kopiera_prompt\(this,\s*'([^']*)',\s*'([^']*)'", blk)
         if not mk:
             continue
@@ -64,8 +59,6 @@ def _las_bevakningsbild():
         if not (rubrik and url):
             continue
 
-        # Relativt datum: leta i alla <span style="font-size:13px;color:#666;">...</span>
-        # Filtrera bort eventuella träffar som bara innehåller relevansnivå-text
         datum_relativt = ""
         kandidater = re.findall(
             r'<span style="font-size:13px;color:#666;">([^<]+)</span>',
@@ -78,7 +71,6 @@ def _las_bevakningsbild():
             datum_relativt = _html.unescape(t)
             break
 
-        # Sammanfattning: första <ul>...</ul> i blocket, li-texter ihopslagna
         sammanfattning = ""
         mu = re.search(r'<ul[^>]*>(.*?)</ul>', blk, flags=re.DOTALL)
         if mu:
@@ -96,9 +88,10 @@ def _las_bevakningsbild():
             "datum_relativt": datum_relativt,
         })
 
-    # Sortera: Hög före Medel, sedan högst poäng först
     artiklar.sort(key=lambda x: (0 if x["relevansniva"] == "Hög" else 1, -x["poang"]))
     return artiklar[:25]
+
+# ── Cache ─────────────────────────────────────────────────────────────────────
 
 def _las_cache():
     if not PROAKTIV_CACHE_FILE.exists():
@@ -115,71 +108,93 @@ def _spara_cache(lista):
         encoding="utf-8",
     )
 
-# ── Worker-anrop ──────────────────────────────────────────────────────────────
+# ── Prompt-byggare ────────────────────────────────────────────────────────────
 
-def _worker_anrop(payload, max_forsok=3):
-    for forsok in range(max_forsok):
-        try:
-            r = requests.post(
-                WORKER_URL,
-                headers={"Content-Type": "application/json"},
-                json=payload,
-                timeout=60,
-            )
-            if r.status_code == 429:
-                time.sleep(20 + forsok * 20)
-                continue
-            if r.status_code != 200:
-                return {"error": f"HTTP {r.status_code}", "body": r.text[:500]}
-            try:
-                return r.json()
-            except Exception:
-                return {"error": "Ogiltig JSON", "body": r.text[:500]}
-        except Exception as e:
-            if forsok < max_forsok - 1:
-                time.sleep(5)
-            else:
-                return {"error": f"Exception: {e}"}
-    return {"error": "Inga försök lyckades"}
+def _formatera_bevakning(bevakning):
+    if not bevakning:
+        return "(Ingen bevakningsbild tillgänglig.)"
+    rader = []
+    for i, a in enumerate(bevakning, 1):
+        rader.append(
+            f"{i}. [{a['relevansniva']} {a['poang']}/10 · {a.get('datum_relativt') or 'okänt datum'}] "
+            f"{a['rubrik']}\n"
+            f"   URL: {a['url']}\n"
+            f"   Sammanfattning: {a['sammanfattning']}"
+        )
+    return "\n\n".join(rader)
 
-# ── Publikt API ───────────────────────────────────────────────────────────────
-
-def generera_proaktivt_forslag():
+def bygg_prompt():
     teser = _las_teser()
     bevakning = _las_bevakningsbild()
 
     if not teser:
-        return {"error": "teser_med_underlag.md saknas eller är tom"}
+        return None, {"error": "teser_med_underlag.md saknas eller är tom"}
 
-    payload = {
-        "action": "proaktiv",
-        "teser": teser,
-        "bevakning": bevakning,
-    }
+    prompt = f"""# Proaktivt inläggsförslag – Rison Capital
 
-    svar = _worker_anrop(payload)
-    if not isinstance(svar, dict) or svar.get("error"):
-        return svar if isinstance(svar, dict) else {"error": "Okänt svar"}
+Generera ett LinkedIn-inlägg som driver en av de tre bärande teserna med stöd
+av aktuell bevakningsbild. Sök kompletterande källor på webben vid behov.
 
-    # Förväntade fält från Worker
-    tes      = svar.get("tes")
-    rubrik   = (svar.get("rubrik") or "").strip()
-    text     = (svar.get("text") or "").strip()
-    kallor   = svar.get("kallor") or []
-    referens = svar.get("refererar_till_artikel")
+## Tre bärande teser med underlag
 
-    if not (tes and rubrik and text):
-        return {"error": "Ofullständigt Worker-svar", "raw": svar}
+{teser}
 
+## Aktuell bevakningsbild (parsad från index.html)
+
+{_formatera_bevakning(bevakning)}
+
+## Instruktion
+
+1. Välj den tes (1, 2 eller 3) som har starkast stöd i bevakningsbilden just nu.
+2. Skriv ett inlägg: rubrik (max 8 ord), brödtext (500–3000 tecken).
+3. Lista källor som URL:er – minst en bör komma från bevakningsbilden om möjligt.
+4. Om inlägget direkt svarar på en artikel i bevakningen: ange den URL:en separat.
+5. När förslaget är klart: spara via proaktiv.spara_forslag(tes=..., rubrik=..., text=..., kallor=[...], refererar_till_artikel=...). Anropa funktionen direkt i denna Claude Code-session – inte via separat python3 -c-kommando.
+"""
+    return prompt, None
+
+# ── Publikt API ───────────────────────────────────────────────────────────────
+
+def generera_proaktivt_forslag():
+    """Bygger och printar prompten. Returnerar prompt-strängen (eller error-dict)."""
+    prompt, err = bygg_prompt()
+    if err:
+        print(json.dumps(err, ensure_ascii=False, indent=2))
+        return err
+    print(prompt)
+    return prompt
+
+def spara_forslag(tes, rubrik, text, kallor=None, refererar_till_artikel=None):
+    """Sparar ett färdigt förslag i proaktiv_cache.json (rullande, max 30).
+
+    Returnerar den sparade dicten. Om text är utanför 500–3000 tecken läggs
+    fältet 'varning' till i den returnerade dicten – förslaget sparas ändå.
+    """
+    if tes not in (1, 2, 3):
+        return {"error": "tes måste vara 1, 2 eller 3", "fick": tes}
+    if not isinstance(rubrik, str) or not rubrik.strip():
+        return {"error": "rubrik måste vara en icke-tom sträng"}
+    if not isinstance(text, str) or not text.strip():
+        return {"error": "text måste vara en icke-tom sträng"}
+
+    rena_kallor = []
+    if kallor:
+        rena_kallor = [k for k in kallor if isinstance(k, str) and k.strip()]
+
+    text_ren = text.strip()
     forslag = {
         "id":     str(uuid.uuid4()),
         "datum":  datetime.now().isoformat(timespec="seconds"),
-        "tes":    int(tes) if str(tes).isdigit() else tes,
-        "rubrik": rubrik,
-        "text":   text,
-        "kallor": [k for k in kallor if isinstance(k, str)],
-        "refererar_till_artikel": referens if isinstance(referens, str) else None,
+        "tes":    int(tes),
+        "rubrik": rubrik.strip(),
+        "text":   text_ren,
+        "kallor": rena_kallor,
+        "refererar_till_artikel": refererar_till_artikel if isinstance(refererar_till_artikel, str) else None,
     }
+
+    n = len(text_ren)
+    if n < TEXT_MIN or n > TEXT_MAX:
+        forslag["varning"] = f"text utanför {TEXT_MIN}-{TEXT_MAX} tecken (faktisk: {n})"
 
     cache = _las_cache()
     cache.append(forslag)
@@ -194,5 +209,4 @@ def las_senaste_forslag(antal=10):
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    res = generera_proaktivt_forslag()
-    print(json.dumps(res, ensure_ascii=False, indent=2))
+    generera_proaktivt_forslag()

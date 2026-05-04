@@ -33,6 +33,9 @@ Följ alla regler i prompten – särskilt:
 ## Steg 6: Spara
 Anropa proaktiv.spara_forslag(tes=..., rubrik=..., text=..., kallor=[...], refererar_till_artikel=...) direkt i sessionen. Spara även en dump till tempfil för läsning.
 
+## Steg 6.5: Uppdatera HTML
+Anropa proaktiv.uppdatera_html_med_forslag() i samma session så att index.html visar det nyligen sparade förslaget.
+
 ## Steg 7: Mätningar
 Kör de tre programmatiska mätningarna för mekanik, rapportstil och jargong. Förväntat: alla tre 0.
 

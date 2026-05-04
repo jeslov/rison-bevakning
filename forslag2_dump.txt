@@ -1,0 +1,25 @@
+=== RUBRIK ===
+Kunskapsfrågan är löst. Budgetfrågan kvarstår.
+
+=== TEXT ===
+Forskare på Umeå universitet har nyligen visat att AI kan ge byggnadsspecifika rekommendationer för energirenovering – med hänsyn till klimatpåverkan, faktiska användningsmönster och kostnader för den enskilda fastigheten. De generaliseringar som tidigare planeringsmodeller byggt på är på väg ut. Vad som ger störst utdelning per investerad krona kan nu i praktiken beräknas exakt, byggnad för byggnad.
+
+Det är ett genombrott på rätt fråga. Men inte på den fråga som faktiskt blockerar omställningen.
+
+IEA:s Energy Efficiency 2025 rapporterar att investeringarna i byggnaders energieffektivisering når 800 miljarder USD i år, men att tillväxten stannar upp. Två tredjedelar sker i bara tre regioner – Kina, USA och EU. Offentliga stödsystem krymper i flera länder under budgetåtstramning, samtidigt som byggpriserna i EU stigit över 20 procent sedan 2021.
+
+Energimyndigheten konstaterar att lönsamhet i sig inte räcker för att åtgärden ska bli av. Kapitaltillgång och organisationens beslutsstrukturer fäller avgörandet. Att hitta åtgärden och att finansiera den är två olika problem. Det första är teknik. Det andra är kapitalallokering inom företag och fastighetsägare. Och det är där flaskhalsen sitter – inte i bristande analys.
+
+Energieffektivisering hamnar systematiskt utanför kärnverksamhetens budget. Återbetalningskrav på 1–3 år, hurdle rates designade för expansion, och projektstorlekar för små för att direkt finansiera ger samma resultat: åtgärden gör sig aldrig synlig i kapitalprioriteringen, hur lönsam den än är.
+
+Tekniken är löst. Verktygen finns. Datan är där. Det är fördelningen av kapital som måste lösas separat – och det är inte en teknisk fråga.
+
+#energieffektivisering #fastighetsbranschen #kapitalallokering https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader
+
+=== KÄLLOR ===
+- https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader
+- https://www.iea.org/reports/energy-efficiency-2025/buildings
+- https://www.energimyndigheten.se/energisystem-och-analys/samhallsbyggnad-och-energiplanering/vagledning-for-kommunal-energiplanering/energisystemet/anvandning/energieffektivisering/
+
+=== REFERERAR TILL ===
+https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader

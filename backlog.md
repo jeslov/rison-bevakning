@@ -10,3 +10,8 @@ Rad 806: `"\)" is an invalid escape sequence`. Liknande typ av problem som backs
 
 ## Strukturerat datum i bedomning_cache.json
 Datum finns i pipelinen (RSS pubDate som ISO, Serper date som naturligt språk) men persisteras bara som visningssträng i index.html. Lägg till "datum" som strukturerat fält i cachen så att proaktiv.py och framtida funktioner inte behöver gå via HTML-parsning.
+
+## Git-författarnamn felkonfigurerat
+Commit-meddelanden visar `"Jesper <jesperlovkvist@mac.lan>` (med inledande citattecken och .lan-domän). Bör konfigureras om till korrekt namn och e-post:
+git config --global user.name "Jesper Lövkvist"
+git config --global user.email "jesper@utopia.se"

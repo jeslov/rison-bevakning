@@ -160,6 +160,8 @@ av aktuell bevakningsbild. Sök kompletterande källor på webben vid behov.
    - Undvik säljig produktbeskrivning av Risons modell. Om Risons modell nämns: en mening, integrerad i analysen, inte som broschyr
    - Avsluta med påstående, inte engagemangsfråga
    - Stilreferens: linkedin_stil.txt om relevant
+   - Använd minst en konkret liknelse eller skarp omramning som vänder läsarens förväntan. Hitta din egen liknelse – exemplen nedan är illustrationer, inte mallar att kopiera. Exempel: "Det är som att ge en hungrig människa ett recept", "X-problemet löstes 2023 – men ingen märkte det", "Lösningen finns sedan länge – det är efterfrågan som saknas". Liknelsen är obligatorisk.
+   - Undvik AI-rapportstil: meningar som börjar "Forskare visar...", "IEA rapporterar...", "Energimyndigheten konstaterar..." får inte upprepas mer än tre gånger totalt i texten. Variera språket: "siffrorna säger", "i den senaste rapporten framgår", "verkligheten ser annorlunda ut", etc.
 
 5. Källor:
    - Sök på webben efter 1-3 oberoende, institutionella källor: myndigheter (Boverket, Energimyndigheten, Naturvårdsverket, Riksdagen), akademiska studier, internationella institutioner (IEA, ADB, IPCC, OECD, IMF), kvalificerade branschpublikationer

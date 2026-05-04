@@ -1,0 +1,169 @@
+# Proaktivt inläggsförslag – Rison Capital
+
+Generera ett LinkedIn-inlägg som driver en av de tre bärande teserna med stöd
+av aktuell bevakningsbild. Sök kompletterande källor på webben vid behov.
+
+## Tre bärande teser med underlag
+
+# Bärande teser med underlag – Rison Capital
+
+*Skapad 2026-05-02. Samma tre teser som teser.md, kompletterade med oberoende källor som stödjer problembeskrivning och lösning.*
+
+## Tes 1: Klimatomställningens flaskhals är inte teknik eller kapital – det är investeringsbudgeten
+
+Marknadens standardberättelse är att klimatomställningen kräver mer kapital eller bättre teknik. Det är fel diagnos. Tekniken finns. Kapitalet finns. Det fastnar i organisationers interna budgetkonkurrens.
+
+### Underlag – problembeskrivning
+
+**Schneider Electrics Trendrapport 2025** (refererad i ENERGInyheter, nov 2025):
+- 64 % av fastighetsägarna uppger att hyresgäster är positiva till tekniska förbättringar – förutsatt att hyran inte påverkas
+- 32 % anger kostnaden som största hindret
+- Endast 10 % tror att hyreshöjning för investeringar skulle accepteras
+
+**IT-Hållbarhet (maj 2025):**
+- Energianvändningen i svenska flerbostadshus väntas avvika från utsläppsminskningstakten redan 2026
+- Trots att fastigheterna presterar bättre än det nationella snittet
+
+**Holländsk firmstudie i Energy Economics 2024** (Brunke et al.):
+- Vid medianen finns 15 % outnyttjat energieffektiviseringsutrymme
+- Energi-intensiva företag pekar specifikt på interna budgetbegränsningar som hinder
+- Investeringar bedöms ofta enligt payback-period (1–3 år) istället för NPV/IRR
+
+**Climate Sustainability Directory (akademisk genomgång):**
+- "Energy efficiency investments often fall outside established capital planning cycles"
+- "Companies use hurdle rates designed for core business expansions, demanding very short payback periods"
+
+**Asian Development Bank:**
+- 24,5 biljoner USD i energieffektiviseringsinvesteringar behövs globalt till 2040
+- Skuld- och självfinansiering kan endast stå för en tredjedel
+- "Self-financed projects require upfront capital from companies' budgets to be spent on EE, which most would regard as a noncore activity"
+
+**MP-motion 2025/26:3547:**
+- Regeringen har fasat ut energieffektiviseringsstöd för flerbostadshus
+- Pekar på att energieffektivisering kan frigöra el motsvarande flera kärnkraftsreaktorer
+
+### Underlag – lösningen (off-balance-sheet/EaaS)
+
+**Navigant/Guidehouse marknadsrapport 2017:**
+- Energy Efficiency as a Service: marknad estimerad till 221 mdr USD 2026 (från ~50 mdr 2017)
+
+**DOE Better Buildings (USA):**
+- ESA är off-balance-sheet, betalningar behandlas som driftkostnad
+- Betalningar baseras på faktiska besparingar
+- Standardkontrakt 5–15 år med köpoption
+
+**Metrus Energy / ENFRA / ERG:**
+- Modellen finns i kommersiell drift sedan 2010-talet
+- Kund garanteras kassaflödespositiv från start
+
+## Tes 2: Energieffektivisering ska inte kosta pengar – den ska generera dem från dag ett
+
+Många energiprojekt presenteras som investeringar med 10–15 års återbetalning. Med rätt finansieringsmodell ska besparingen överstiga hyran från månad ett.
+
+### Underlag
+
+**Akademisk genomgång (Climate Sustainability Directory):**
+- Företag använder hurdle-rates anpassade för kärnverksamhet, vilket kräver payback 1–3 år
+- Energieffektiviseringsprojekt med längre horisont och lägre risk bortprioriteras systematiskt
+
+**Studie i Energy Policy om industriella beslutsfattare:**
+- Företag är 40 % mer känsliga för initial kostnad än för årlig besparing
+- Innebär att modeller som tar bort den initiala kostnaden ändrar beslutsbeteendet
+
+**Rison-modellen:**
+- Hyran sätts under den faktiska energibesparingen
+- Resultat: kassaflödespositivt från månad ett, ingen påverkan på investeringsbudget
+
+## Tes 3: Pensionskapital ska driva omställningen – inte skattepengar och inte bolagens egna kassor
+
+Pensionskapital söker långsiktigt stabil avkastning. Energieffektiviseringsprojekt är exakt den profilen.
+
+### Underlag
+
+**Asian Development Bank:**
+- Skuld- och självfinansiering räcker bara till en tredjedel av behovet
+- Resterande måste komma från institutionellt kapital genom strukturer som ESCO performance contracts, super ESCOs och off-balance-sheet equity
+
+**BloombergNEF Energy Transition Investment Trends 2024:**
+- Globalt 1,8 biljoner USD i förnybar energiinvestering 2023
+- Institutionella investerare med 57,5 biljoner USD committed till net zero 2050 driver kapitalallokering
+
+**Risons egen modell:**
+- SEB Nordic Energy: ~50 miljoner euro fokuserat på Norden
+- Pensionskapital och försäkringskapital matchas med energieffektiviseringsprojekt med 5–15 års kontraktshorisont
+
+## Källförteckning
+
+| # | Källa | URL |
+|---|-------|-----|
+| 1 | Schneider Electric / ENERGInyheter | https://www.energinyheter.se/20251112/33984/regelverk-okar-trycket-pa-fastighetsbranschen-men-vem-ska-sta-kostnaderna |
+| 2 | IT-Hållbarhet | https://it-hallbarhet.se/energieffektivisering-tappar-fart-i-fastighet/ |
+| 3 | Brunke et al. 2024, Energy Economics | https://www.sciencedirect.com/science/article/pii/S0140988324002068 |
+| 4 | Climate Sustainability Directory | https://climate.sustainability-directory.com/term/energy-efficiency-gap/ |
+| 5 | Asian Development Bank | https://www.adb.org/publications/off-balance-sheet-equity-energy-efficiency-capital-mobilization |
+| 6 | MP-motion 2025/26:3547 | https://www.riksdagen.se/sv/dokument-och-lagar/dokument/motion/energieffektivisering-for-sverige_hd023547/ |
+| 7 | DOE Better Buildings | https://betterbuildingssolutioncenter.energy.gov/financing-navigator/option/efficiency-a-service |
+| 8 | Utility Dive om EEaS-marknad | https://www.utilitydive.com/news/rapid-energy-efficiency-as-a-service-growth-belies-financing-other-diffi/600498/ |
+
+
+## Aktuell bevakningsbild (parsad från index.html)
+
+1. [Hög 8/10 · För 6 dagar sedan] AI visar hur energirenovering kan påverka utsläpp och kostnader
+   URL: https://www.dagensfastigheter.se/20260424/13499/ai-visar-hur-energirenovering-kan-paverka-utslapp-och-kostnader
+   Sammanfattning: Umeå universitets forskning visar hur AI kan ge byggnadspecifika rekommendationer för energirenoveringar, med hänsyn till klimatpåverkan, kostnader och användningsmönster. Byggnader står för 30 % av världens energianvändning och mer än en fjärdedel av globala koldioxidutsläpp, vilket motiverar precisionsverktyg för renoveringsplanering. AI-baserade analysmodeller kan ersätta förenklade kategoriseringsmodeller och ge bättre beslutsunderlag för fastighetsägare och finansiärer. Tekniken är relevant för EaaS-aktörer som behöver bedöma energibesparingspotential och avkastning innan investering i en
+
+2. [Hög 7/10 · För 3 dagar sedan] Värme från jordens inre – ett grönt energislag på frammarsch
+   URL: https://www.uu.se/nyheter/2026/2026-04-27-varme-fran-jordens-inre---ett-gront-energislag-pa-frammarsch
+   Sammanfattning: Uppsala universitets forskning presenterar geotermisk energi, inklusive bergvärme, som ett växande grönt energislag med stor potential. Ny teknik gör det möjligt att utvinna jordvärme på fler platser än tidigare, vilket kan bredda marknaden för bergvärmelösningar i svenska fastigheter. Artikeln signalerar akademiskt och institutionellt intresse för geotermisk energi, vilket stärker teknikens legitimitet gentemot investerare. Uppsala universitets kommunikation når beslutsfattare och kan påverka policy och finansieringsviljan för bergvärme.
+
+3. [Hög 7/10 · För 2 dagar sedan] Jordens värme kan bli nästa stora energikälla
+   URL: https://www.extrakt.se/jordens-varme-kan-bli-nasta-stora-energikalla/
+   Sammanfattning: Tidningen Extrakt rapporterar om det globalt ökande intresset för geotermisk energi i takt med den gröna omställningen, med IEA som källa. I Sverige används geotermisk energi redan i form av jordvärme och bergvärme, och tekniken väntas kunna byggas ut kraftigt. Ny borrnings- och utviningsteknik gör att geotermisk energi kan etableras på platser som tidigare var olämpliga, vilket ökar marknadspotentialen i Sverige. Artikeln är publicerad i en trovärdig sakjournalistisk kanal vilket ger god spridning bland beslutsfattare inom energi och fastighet.
+
+4. [Hög 7/10 · För 3 dagar sedan] EU-enighet om tidsplan för viktiga lagpaket
+   URL: https://www.aktuellhallbarhet.se/miljo-och-klimat/miljopolitik/eu-enighet-om-tidsplan-for-viktiga-lagpaket/
+   Sammanfattning: EU-kommissionen, parlamentet och medlemsländerna har enats om tidsplaner för flera viktiga lagpaket inom energi och hållbarhet. Paketen inkluderar sannolikt EPBD och Omnibus-relaterad lagstiftning som direkt påverkar energikrav på byggnader. Tidsplanen skapar klarhet för fastighetsmarknaden om när krav på energieffektivisering träder i kraft. För institutionella investerare som SEB Nordic Energy Fund ger tydligare EU-lagstiftning bättre planeringshorisont för gröna fastighetsinvesteringar.
+
+5. [Medel 5/10 · För 1 dag sedan] EU förbjuder installation av gaspannor i nya byggnader från och med januari 2026
+   URL: https://www.mixvale.com.br/2026/04/29/eu-forbjuder-installation-av-gaspannor-i-nya-byggnader-fran-och-med-januari-2026-sv/
+   Sammanfattning: EU inför förbud mot installation av gaspannor i nya byggnader från januari 2026, vilket är en del av EPBD-direktivets genomförande. Förbudet driver fastighetsägare och byggherrar mot alternativa uppvärmningslösningar som värmepumpar och bergvärme. Regeländringen påverkar nybyggnation direkt men sätter även press på renovering av befintligt bestånd. Källan är en brasiliansk innehållssajt med låg redaktionell tyngd, vilket begränsar artikelns tillförlitlighet.
+
+6. [Medel 5/10 · För 1 dag sedan] Hållbar stadsutveckling i Kallebäck
+   URL: https://www.mynewsdesk.com/se/wikstromab/news/haallbar-stadsutveckling-i-kallebaeck-508787?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=Alert&amp;utm_content=news
+   Sammanfattning: Fastighetsbolaget Wallenstam certifierar kvarter inom Kallebäcks Terrasser i Göteborg enligt Miljöbyggnad Silver, med fokus på energiprestanda, dagsljus och termisk komfort. Wikström installationskonsult har agerat miljöbyggnadssamordnare och balanserat energikrav mot arkitektoniska förutsättningar i ett tätt bebyggt område. Certifieringen lyfts fram som ett sätt att höja fastighetsvärde, marknadsattraktivitet och minska driftkostnader – argument som är relevanta för EaaS-finansiering. Projektet illustrerar hur etablerade fastighetsbolag arbetar med energicertifiering som strategisk fråga snar
+
+7. [Medel 5/10 · För 6 dagar sedan] Hyror hålls tillbaka för att inte riskera återbetalning av investeringsstöd
+   URL: https://fastighetstidningen.se/okategoriserade/hyror-halls-tillbaka-for-att-inte-riskera-aterbetalning-av-investeringsstod/
+   Sammanfattning: Fastighetsägare som mottagit investeringsstöd (totalt 22,7 mdr kr) riskerar återbetalningskrav vid länsstyrelsernas tillsyn under 15 år. Stödet kom med tuffa energikrav och tak för hyreshöjningar, vilket begränsar fastighetsägarnas ekonomiska handlingsutrymme. Mindre aktörer är särskilt utsatta – en 50-lägenhetsfastighet kan ha fått ~20 mkr i stöd som kan krävas tillbaka. Reglerna påverkar direkt lönsamhetskalkylen för energieffektiviserade hyresfastigheter, relevant för EaaS-finansiering där hyresintäkter är del av återbetalningsmodellen.
+
+## Instruktion
+
+1. Välj den tes (1, 2 eller 3) som har starkast stöd i bevakningsbilden just nu.
+
+2. Skriv ett LinkedIn-inlägg på 500-3000 tecken inkl. mellanslag, hashtags och URL. Hård gräns: 3000 tecken.
+
+3. Struktur:
+   - Rubrik på max 8 ord
+   - Brödtext i prosa – inga punktlistor
+   - Hashtags på sista raden (max 5)
+   - Eventuell artikel-URL på samma sista rad
+
+4. Ton:
+   - Direkt och analytisk – kommentera situationen, beskriv inte lösningen
+   - Beskriv ALDRIG mekaniken i Risons modell eller EaaS. Det vill säga: undvik formuleringar som "tredje part står för investeringen", "fastighetsägaren betalar utifrån faktisk besparing", "kassaflödet är positivt från första månaden", eller liknande beskrivningar av HUR finansieringsstrukturen fungerar. Inläggets uppgift är att kommentera SITUATIONEN. Om finansieringsstrukturer ska nämnas: hänvisa till externa institutioner som benämner dem (EU Article 17-paketet, IEA, etc.), inte till Risons egen produkt.
+   - Avsluta med påstående, inte engagemangsfråga
+   - Stilreferens: linkedin_stil.txt om relevant
+   - Skriv för en intelligent läsare som inte är finansspecialist. Undvik finansjargong som "hurdle rate", "payback-period", "investeringskalkyl", "ROI", "capex", "diskonteringsränta", "internränta" om det inte är absolut nödvändigt. Om en branschterm ändå måste användas: förklara den i samma mening eller ersätt med vardagligt språk. Exempel: "kraven på avkastning sattes för att jämföra med tillväxtinvesteringar" istället för "hurdle rates är designade för expansion"; "kostnaden blir lägre från månad ett" istället för "kassaflödet är positivt från dag ett"; "två fastighetsägare kan ha helt olika månadskostnader för samma renovering" istället för "samma asset, olika balansräkningseffekt". Skriv som du skulle tala med en intresserad läsare som inte är ekonom – inte som du skulle tala med en CFO.
+   - Använd minst en konkret liknelse eller skarp omramning som vänder läsarens förväntan. Hitta din egen liknelse – exemplen nedan är illustrationer, inte mallar att kopiera. Exempel: "Det är som att ge en hungrig människa ett recept", "X-problemet löstes 2023 – men ingen märkte det", "Lösningen finns sedan länge – det är efterfrågan som saknas". Liknelsen är obligatorisk.
+   - Undvik AI-rapportstil: meningar som börjar "Forskare visar...", "IEA rapporterar...", "Energimyndigheten konstaterar..." får inte upprepas mer än tre gånger totalt i texten. Variera språket: "siffrorna säger", "i den senaste rapporten framgår", "verkligheten ser annorlunda ut", etc.
+
+5. Källor:
+   - Sök på webben efter 1-3 oberoende, institutionella källor: myndigheter (Boverket, Energimyndigheten, Naturvårdsverket, Riksdagen), akademiska studier, internationella institutioner (IEA, ADB, IPCC, OECD, IMF), kvalificerade branschpublikationer
+   - Inte bara nyhetsartiklar
+   - Minst en källa bör komma från bevakningsbilden om relevant
+
+6. Artikelreferens:
+   - Om en artikel i bevakningen är väldigt direkt relaterad till tesen: skriv inlägget som svar/kommentar på den artikeln, ange dess URL i refererar_till_artikel
+   - Annars fristående resonemang, refererar_till_artikel = None
+
+7. När förslaget är klart: spara via proaktiv.spara_forslag(tes=..., rubrik=..., text=..., kallor=[...], refererar_till_artikel=...). Anropa funktionen direkt i denna Claude Code-session – inte via separat python3 -c-kommando.

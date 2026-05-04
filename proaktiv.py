@@ -108,6 +108,148 @@ def _spara_cache(lista):
         encoding="utf-8",
     )
 
+# ── HTML-injektion ────────────────────────────────────────────────────────────
+
+_INSTALL_MARKER  = "<!-- PROAKTIV_TABS_INSTALLED -->"
+_BEGIN_PROAKTIV  = "<!-- BEGIN tab-proaktiv -->"
+_END_PROAKTIV    = "<!-- END tab-proaktiv -->"
+
+def _bygg_proaktiv_card(forslag):
+    """Bygger HTML för ett proaktiv-card."""
+    rubrik = _html.escape(forslag.get("rubrik", "") or "", quote=True)
+    raw_datum = forslag.get("datum", "") or ""
+    datum_kort = raw_datum[:16].replace("T", " ") if raw_datum else ""
+    datum = _html.escape(datum_kort, quote=True)
+    tes = forslag.get("tes", "?")
+    raw_text = forslag.get("text", "") or ""
+    text_html = _html.escape(raw_text, quote=True)
+    text_attr = text_html.replace("\n", "&#10;")
+    kallor = forslag.get("kallor", []) or []
+    referens = forslag.get("refererar_till_artikel")
+
+    kallor_html = ""
+    if kallor:
+        kallor_html = (
+            '<div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Källor</div>\n'
+            '  <ul style="font-size:13px;color:#3a3a3a;margin-bottom:14px;padding-left:18px;line-height:1.6;">\n'
+        )
+        for k in kallor:
+            url = _html.escape(k or "", quote=True)
+            kallor_html += f'    <li><a href="{url}" target="_blank" style="color:#293244;">{url}</a></li>\n'
+        kallor_html += '  </ul>'
+
+    referens_html = ""
+    if referens and isinstance(referens, str):
+        url = _html.escape(referens, quote=True)
+        referens_html = (
+            '\n  <div style="font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Refererar till artikel</div>'
+            f'\n  <a href="{url}" target="_blank" style="font-size:13px;color:#293244;font-weight:600;text-decoration:none;display:block;margin-bottom:14px;">{url}</a>'
+        )
+
+    return (
+        f'<div class="tab-proaktiv-card">\n'
+        f'  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center;">\n'
+        f'    <span style="font-size:10px;color:#fff;background:#293244;padding:2px 8px;border-radius:20px;font-weight:600;">Tes {tes}</span>\n'
+        f'    <span style="font-size:13px;color:#666;">{datum}</span>\n'
+        f'  </div>\n'
+        f'  <h2 style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:22px;font-weight:500;margin-bottom:14px;line-height:1.3;color:#1a1a1a;">{rubrik}</h2>\n'
+        f'  <div style="font-size:14px;color:#3a3a3a;line-height:1.7;font-weight:300;white-space:pre-wrap;margin-bottom:14px;">{text_html}</div>\n'
+        f'  {kallor_html}{referens_html}\n'
+        f'  <button onclick="kopiera_proaktiv(this)" data-text="{text_attr}" style="font-size:12px;background:#293244;color:#EFEDE0;border:none;padding:6px 14px;border-radius:2px;cursor:pointer;font-weight:500;letter-spacing:0.5px;margin-top:6px;">Kopiera</button>\n'
+        f'</div>'
+    )
+
+def _bygg_proaktiv_block(forslag_lista):
+    """Bygger hela <div id='tab-proaktiv'>-blocket inkl. start/slut-markörer."""
+    if forslag_lista:
+        cards_html = "\n".join(_bygg_proaktiv_card(f) for f in forslag_lista)
+        inner = (
+            '<h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;'
+            'color:#EFEDE0;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.25);'
+            'background:#293244;padding:10px 16px;border-radius:2px;">Proaktiva förslag</h2>\n'
+            f'    {cards_html}'
+        )
+    else:
+        inner = (
+            '<div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;'
+            'padding:32px;margin-top:28px;text-align:center;color:#888;font-size:14px;line-height:1.6;">'
+            'Inga proaktiva förslag genererade ännu.<br>'
+            'Kör wizard_proaktiv.md i Claude Code för att generera ett förslag.'
+            '</div>'
+        )
+    return (
+        f'{_BEGIN_PROAKTIV}\n'
+        f'<div id="tab-proaktiv" style="display:none">\n'
+        f'  <div class="content">\n'
+        f'    {inner}\n'
+        f'  </div>\n'
+        f'</div>\n'
+        f'{_END_PROAKTIV}'
+    )
+
+def _forsta_installation(html_content, proaktiv_block):
+    """Första gångens injektion: CSS, JS, tab-meny, wrap, proaktiv-block."""
+    css = (
+        ".tabs{display:flex;background:#181D27;border-bottom:1px solid rgba(255,255,255,0.2)}\n"
+        ".tab{padding:14px 28px;font-size:12px;color:#8892a4;cursor:pointer;letter-spacing:1.5px;text-transform:uppercase;border:none;background:transparent;font-family:Georgia,serif;font-weight:600}\n"
+        ".tab:hover{color:#EFEDE0}\n"
+        ".tab.active{color:#EFEDE0;border-bottom:2px solid #EFEDE0;margin-bottom:-1px}\n"
+        ".tab-proaktiv-card{background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}\n"
+    )
+    if "</style>" not in html_content:
+        return None
+    html_content = html_content.replace("</style>", css + "</style>", 1)
+
+    js_block = (
+        "<script>\n"
+        "function visa_tab(name) {\n"
+        "  document.getElementById('tab-bevakning').style.display = (name === 'bevakning') ? '' : 'none';\n"
+        "  document.getElementById('tab-proaktiv').style.display = (name === 'proaktiv') ? '' : 'none';\n"
+        "  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));\n"
+        "  document.getElementById('tab-btn-' + name).classList.add('active');\n"
+        "}\n"
+        "function kopiera_proaktiv(btn) {\n"
+        "  const text = btn.getAttribute('data-text');\n"
+        "  navigator.clipboard.writeText(text).then(() => {\n"
+        "    const orig = btn.textContent;\n"
+        "    btn.textContent = 'Kopierat!';\n"
+        "    setTimeout(() => { btn.textContent = orig; }, 1500);\n"
+        "  });\n"
+        "}\n"
+        "</script>\n"
+    )
+    if "</body>" not in html_content:
+        return None
+    html_content = html_content.replace("</body>", js_block + "</body>", 1)
+
+    tabs_open = (
+        f"\n  {_INSTALL_MARKER}\n"
+        '  <div class="tabs">\n'
+        '    <button class="tab active" id="tab-btn-bevakning" onclick="visa_tab(\'bevakning\')">Bevakning</button>\n'
+        '    <button class="tab" id="tab-btn-proaktiv" onclick="visa_tab(\'proaktiv\')">Proaktiva förslag</button>\n'
+        '  </div>\n'
+        '  <div id="tab-bevakning">\n'
+    )
+    header_anchor = '</p>\n  </div>\n  <div class="stats">'
+    if header_anchor not in html_content:
+        return None
+    html_content = html_content.replace(
+        header_anchor,
+        '</p>\n  </div>' + tabs_open + '  <div class="stats">',
+        1,
+    )
+
+    rapport_anchor = "</div>\n\n<script>"
+    if rapport_anchor not in html_content:
+        return None
+    html_content = html_content.replace(
+        rapport_anchor,
+        "  </div>\n  " + proaktiv_block + "\n</div>\n\n<script>",
+        1,
+    )
+
+    return html_content
+
 # ── Prompt-byggare ────────────────────────────────────────────────────────────
 
 def _formatera_bevakning(bevakning):

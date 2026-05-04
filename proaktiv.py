@@ -146,10 +146,31 @@ av aktuell bevakningsbild. Sök kompletterande källor på webben vid behov.
 ## Instruktion
 
 1. Välj den tes (1, 2 eller 3) som har starkast stöd i bevakningsbilden just nu.
-2. Skriv ett inlägg: rubrik (max 8 ord), brödtext (500–3000 tecken).
-3. Lista källor som URL:er – minst en bör komma från bevakningsbilden om möjligt.
-4. Om inlägget direkt svarar på en artikel i bevakningen: ange den URL:en separat.
-5. När förslaget är klart: spara via proaktiv.spara_forslag(tes=..., rubrik=..., text=..., kallor=[...], refererar_till_artikel=...). Anropa funktionen direkt i denna Claude Code-session – inte via separat python3 -c-kommando.
+
+2. Skriv ett LinkedIn-inlägg på 500-3000 tecken inkl. mellanslag, hashtags och URL. Hård gräns: 3000 tecken.
+
+3. Struktur:
+   - Rubrik på max 8 ord
+   - Brödtext i prosa – inga punktlistor
+   - Hashtags på sista raden (max 5)
+   - Eventuell artikel-URL på samma sista rad
+
+4. Ton:
+   - Direkt och analytisk – kommentera situationen, beskriv inte lösningen
+   - Undvik säljig produktbeskrivning av Risons modell. Om Risons modell nämns: en mening, integrerad i analysen, inte som broschyr
+   - Avsluta med påstående, inte engagemangsfråga
+   - Stilreferens: linkedin_stil.txt om relevant
+
+5. Källor:
+   - Sök på webben efter 1-3 oberoende, institutionella källor: myndigheter (Boverket, Energimyndigheten, Naturvårdsverket, Riksdagen), akademiska studier, internationella institutioner (IEA, ADB, IPCC, OECD, IMF), kvalificerade branschpublikationer
+   - Inte bara nyhetsartiklar
+   - Minst en källa bör komma från bevakningsbilden om relevant
+
+6. Artikelreferens:
+   - Om en artikel i bevakningen är väldigt direkt relaterad till tesen: skriv inlägget som svar/kommentar på den artikeln, ange dess URL i refererar_till_artikel
+   - Annars fristående resonemang, refererar_till_artikel = None
+
+7. När förslaget är klart: spara via proaktiv.spara_forslag(tes=..., rubrik=..., text=..., kallor=[...], refererar_till_artikel=...). Anropa funktionen direkt i denna Claude Code-session – inte via separat python3 -c-kommando.
 """
     return prompt, None
 

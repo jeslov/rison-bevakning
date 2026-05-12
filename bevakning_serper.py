@@ -562,7 +562,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         poang = r.get("poang", 0)
         faerg = "#293244" if niva == "Hog" else "#3d5a80"
         kalla_typ_ikon = ""
-        datum_str  = f'<span style="font-size:13px;color:#666;">{escape_html(r.get("datum",""))}</span>' if r.get("datum") else ""
+        datum_str  = f'<span style="font-size:13px;color:#666;">{escape_html(_relativt_fran_iso(r.get("datum","")))}</span>' if r.get("datum") else ""
         sokord_str = f'<span style="font-size:12px;color:#888;">via: {escape_html(r.get("sokord",""))}</span>' if r.get("sokord") else ""
         kontext_sokord_js = json.dumps(r.get('kontextsokord', [])).replace('"', "&apos;").replace("[", "").replace("]", "").replace('"', "&apos;").replace("[", "").replace("]", "")
         titel_esc = escape_html(r.get('titel','')).replace("'", "\\'")

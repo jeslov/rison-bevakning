@@ -18,3 +18,6 @@ git config --global user.email "jesper@utopia.se"
 
 ## Prompt-refaktorisering till stilprincip
 v3 och v4 har lagt till specifika förbud mot exakta formuleringar (t.ex. "tredje part står för investeringen"). Det är effektivt på kort sikt men skapar en växande lista av post-hoc-regler. På sikt: omformulera specifika förbud till en allmän stilprincip som täcker fler liknande fall.
+
+## Möjlig finjustering: använd dateutil.relativedelta för månader/år i _parse_relativt_datum
+Nuvarande implementation approximerar månad som 30 dagar (i bevakning_serper.py). För nyhetsartiklar är driften (1–2 dagar för N=12 månader) inte kritisk. Om exaktare datum behövs på sikt: importera dateutil.relativedelta och hantera månader/år korrekt med kalenderkännedom.

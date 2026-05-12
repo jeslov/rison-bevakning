@@ -5,7 +5,7 @@ v4: RSS + Serper parallellt, cachade testart-artiklar, dagsaktuella sokord cacha
     organisationssokord, hashtagforslag, web search i prompt, minskad referatgrad
 """
 
-import os, json, hashlib, time, re, requests, xml.etree.ElementTree as ET
+import os, json, hashlib, time, re, requests, argparse, xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -17,6 +17,7 @@ ZEITGEIST_FILE    = Path(__file__).parent / "zeitgeist_cache.json"
 DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
+OBEDOMA_FILE      = Path(__file__).parent / "obedoma_artiklar.json"
 MIN_RELEVANS      = "Medel"
 LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
 BATCH_STORLEK     = 10
@@ -871,7 +872,7 @@ if (sessionStorage.getItem('auth') === '1') {{
 
 # ── Huvudflöde ────────────────────────────────────────────────────────────────
 
-def main():
+def kor_hamtning():
     print(f"[{datetime.now():%H:%M}] Startar Rison bevakning v4")
     sedda = ladda_sedda()
 
@@ -952,6 +953,11 @@ def main():
     for a in representanter:
         if not a.get("fulltext"):
             a["fulltext"] = hamta_text(a["url"])
+
+    # Förberedelse för Fas B: spara artiklar som väntar på bedömning
+    OBEDOMA_FILE.write_text(json.dumps(representanter, ensure_ascii=False, indent=2))
+    print(f"  Sparade {OBEDOMA_FILE.name} ({len(representanter)} artiklar)")
+
     relevanta_repr = bedom_med_cache(representanter)
 
     repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}
@@ -981,5 +987,26 @@ def main():
         spara_sedda(sedda)
     print("  Klar.")
 
+def kor_rendering():
+    """Stub för Fas A. Riktig implementation kommer i Fas E."""
+    print(f"[{datetime.now():%H:%M}] kor_rendering(): inte implementerad i Fas A.")
+    print(f"  Använd --hamta. Rendering separeras från hämtning i Fas E.")
+
+def main(kor_typ):
+    if kor_typ == "hamta":
+        kor_hamtning()
+    elif kor_typ == "rendera":
+        kor_rendering()
+    else:
+        print(f"Okänd kör-typ: {kor_typ!r}")
+
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Rison Capital omvärldsbevakning")
+    grupp = parser.add_mutually_exclusive_group(required=True)
+    grupp.add_argument("--hamta", action="store_true", help="Hämta artiklar + bedöm + bygg rapport (Fas A: AI fortfarande inblandat)")
+    grupp.add_argument("--rendera", action="store_true", help="Rendera HTML från caches (Fas E+)")
+    args = parser.parse_args()
+    if args.hamta:
+        main("hamta")
+    elif args.rendera:
+        main("rendera")

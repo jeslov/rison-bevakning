@@ -9,7 +9,6 @@ import os, json, hashlib, time, re, requests, argparse, xml.etree.ElementTree as
 from datetime import datetime, timedelta
 from pathlib import Path
 
-ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
 SERPER_API_KEY    = os.environ.get("SERPER_API_KEY", "")
 OUTPUT_FILE       = Path(__file__).parent / "index.html"
 SEEN_FILE         = Path(__file__).parent / "sedda_artiklar.json"
@@ -21,9 +20,7 @@ OBEDOMA_FILE      = Path(__file__).parent / "obedoma_artiklar.json"
 GRUPPER_FILE      = Path(__file__).parent / "grupper_cache.json"
 RUN_STATE_FILE    = Path(__file__).parent / "run_state.json"
 TITLAR_FOR_ZEITGEIST_FILE = Path(__file__).parent / "titlar_for_zeitgeist.json"
-MIN_RELEVANS      = "Medel"
 LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
-BATCH_STORLEK     = 10
 TESTLAGE          = TESTART_FILE.exists()  # Kör i testläge om cachefil finns
 
 # ── Källor ────────────────────────────────────────────────────────────────────
@@ -177,31 +174,6 @@ def _relativt_fran_iso(iso_datum):
         rel = f"för {dagar} dagar sedan"
     return f"{iso_datum} ({rel})"
 
-def claude_anrop(prompt, max_tokens=1000):
-    for forsok in range(4):
-        try:
-            r = requests.post(
-                "https://api.anthropic.com/v1/messages",
-                headers={"x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-                json={"model": "claude-sonnet-4-6", "max_tokens": max_tokens, "messages": [{"role": "user", "content": prompt}]},
-                timeout=60,
-            )
-            if r.status_code == 429:
-                vantetid = 20 + forsok * 20
-                print(f"    [429 rate limit, vantar {vantetid}s...]")
-                time.sleep(vantetid)
-                continue
-            if r.status_code != 200:
-                return None
-            text = r.json()["content"][0]["text"].strip()
-            text = re.sub(r'^```(?:json)?\s*', '', text)
-            text = re.sub(r'\s*```$', '', text)
-            return text.strip()
-        except Exception:
-            if forsok < 3:
-                time.sleep(5)
-    return None
-
 # ── RSS ───────────────────────────────────────────────────────────────────────
 
 def hamta_rss(flode):
@@ -282,39 +254,6 @@ def zeitgeist_behovs():
     except Exception:
         return True
 
-def uppdatera_zeitgeist():
-    # DEAD CODE — ersatt av Claude Code-zeitgeist via wizard_bevakning.md i Fas C (2026-05-12)
-    # Behålls för referens tills Fas G då claude_anrop() rivs
-    print("  Uppdaterar zeitgeist (var 7e dag)...")
-    titlar = []
-    for medium in MALMEDIER:
-        traff = sok_serper(f"site:{medium} energi fastighet", antal=10)
-        for a in traff:
-            titlar.append(f"{a['titel']} – {a['beskrivning'][:100]}")
-        time.sleep(0.2)
-    if not titlar:
-        return []
-    print(f"  Analyserar {len(titlar)} artiklar...")
-    prompt = f"""Analysera dessa titlar/snippets fran svenska malmedier inom energi och fastighet.
-Identifiera dominerande teman och zeitgeist inom Risons fokusomraden.
-
-{chr(10).join(f"- {t}" for t in titlar[:150])}
-
-Generera 8 svenska sokord (2-3 ord) som fanger aktuella amnesomraden.
-Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3","s4","s5","s6","s7","s8"]}}"""
-    svar = claude_anrop(prompt, max_tokens=400)
-    if not svar:
-        return []
-    try:
-        data = json.loads(svar)
-        ZEITGEIST_FILE.write_text(json.dumps({"datum": datetime.now().isoformat(),
-            "teman": data.get("teman", []), "sokord": data.get("sokord", [])},
-            ensure_ascii=False, indent=2))
-        print(f"  Teman: {', '.join(data.get('teman', []))}")
-        return data.get("sokord", [])
-    except Exception:
-        return []
-
 def hamta_zeitgeist():
     # Fas C: API-anrop borttaget. Om uppdatering behövs skrivs titlarna till disk
     # och Claude Code uppdaterar zeitgeist_cache.json via wizard_bevakning.md.
@@ -347,50 +286,6 @@ def hamta_zeitgeist():
         print("  Zeitgeist-cache korrupt eller saknas. Kör wizard_bevakning.md.")
         return []
 
-# ── Dagsaktuella sokord (cachade per dag) ─────────────────────────────────────
-
-def dagsaktuella_behovs():
-    if not DAGSAKTUELLA_FILE.exists():
-        return True
-    try:
-        cache = json.loads(DAGSAKTUELLA_FILE.read_text())
-        return cache.get("datum", "")[:10] != datetime.now().strftime("%Y-%m-%d")
-    except Exception:
-        return True
-
-def hamta_dagsaktuella(zeitgeist_sokord):
-    # DEAD CODE — ersatt av Claude Code-dagsaktuella via wizard_bevakning.md i Fas D (2026-05-12)
-    # Behålls för referens tills Fas G då claude_anrop() rivs
-    if not dagsaktuella_behovs():
-        try:
-            cache = json.loads(DAGSAKTUELLA_FILE.read_text())
-            sokord = cache.get("sokord", [])
-            print(f"  Cachade dagsaktuella sokord ({len(sokord)} st)")
-            return sokord
-        except Exception:
-            pass
-    manad = datetime.now().month
-    if manad in (3, 4, 5): sasong = "Var: BRF-stammer, energideklarationer"
-    elif manad in (6, 7, 8): sasong = "Sommar: Planering hostinstallationer"
-    elif manad in (9, 10, 11): sasong = "Host: Uppvarmningssasong, varmepumpar"
-    else: sasong = "Vinter: Energikostnader, arsbokslut"
-    prompt = f"""Datum: {datetime.now().strftime('%d %B %Y')}. Sasong: {sasong}
-Zeitgeist-sokord denna vecka: {', '.join(zeitgeist_sokord)}
-Generera 3 dagsaktuella svenska Google-sokord (2-3 ord) som skiljer sig fran zeitgeist-sokorden.
-Svara ENDAST med JSON-lista: ["s1", "s2", "s3"]"""
-    svar = claude_anrop(prompt, max_tokens=100)
-    sokord = []
-    if svar:
-        try:
-            sokord = json.loads(svar)
-            if not isinstance(sokord, list):
-                sokord = []
-        except Exception:
-            sokord = []
-    DAGSAKTUELLA_FILE.write_text(json.dumps({"datum": datetime.now().strftime("%Y-%m-%d"), "sokord": sokord},
-        ensure_ascii=False))
-    return sokord
-
 # ── Dubblettgruppering ────────────────────────────────────────────────────────
 
 def titel_likhet(a, b):
@@ -416,47 +311,6 @@ def gruppera_dubletter(artiklar):
 
 def basta_i_grupp(grupp):
     return max(grupp, key=lambda a: len(a.get("beskrivning", "")))
-
-# ── Batch-bedomning ───────────────────────────────────────────────────────────
-
-def bedom_batch(artiklar):
-    # DEAD CODE — ersatt av Claude Code-bedömning via wizard_bevakning.md i Fas B (2026-05-12)
-    # Behålls för referens tills Fas G då claude_anrop() rivs
-    lista = "\n".join(
-        f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:2000]}"
-        for i, a in enumerate(artiklar)
-    )
-    prompt = f"""Du ar omvarldsanalytiker for Rison Capital som finansierar energieffektivisering i fastigheter via EaaS. Bergvarme, BESS, varmepumpar, BRF, kommersiella fastigheter. Institutionellt kapital via SEB Nordic Energy Fund.
-
-HOG relevans: bergvarme/varmepump/BESS/solceller i fastigheter, energieffektivisering BRF/kommersiella fastigheter, EPBD/energikrav byggnader, institutionellt kapital gron fastighet, EaaS-finansiering, fjarvarmebyte, energikostnad fastighet, grona obligationer fastighet, intresseorganisationer och myndigheters utspel om energikrav.
-
-MEDEL relevans: hallbar fastighetsutveckling, energipolicy Sverige, fastighetsbolag energiarbete, energipriser fastighet.
-
-EXKLUDERA: privatbostader/villa/konsument, datakenter, karnkraft, elbilar, sport, underhallning, fastighetsaffarer utan energikoppling.
-
-Bedöm foljande {len(artiklar)} artiklar:
-
-{lista}
-
-Svara med JSON-lista (ingen annan text):
-[{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En kort rubrik på max 8 ord som fångar artikelns kärna, följt av | och sedan 3-5 punkter separerade med • – varje punkt ska vara 1-2 meningar med tillräckligt sammanhang för att förstå poängen utan att läsa artikeln", "motivering": "En mening", "kontextsokord": ["sokord1", "sokord2", "sokord3"]}}]"""
-
-    svar = claude_anrop(prompt, max_tokens=3000)
-    if not svar: return []
-    try:
-        resultat = json.loads(svar)
-        if not isinstance(resultat, list): return []
-        relevanta = []
-        for b in resultat:
-            idx = b.get("index", 0) - 1
-            if not (0 <= idx < len(artiklar)): continue
-            if not b.get("relevant"): continue
-            if b.get("relevansniva") == "Lag": continue
-            if b.get("relevansniva") == "Medel" and MIN_RELEVANS == "Hog": continue
-            relevanta.append({**artiklar[idx], **b})
-        return relevanta
-    except Exception:
-        return []
 
 # ── Testlage ──────────────────────────────────────────────────────────────────
 
@@ -484,66 +338,6 @@ def ladda_bedomning_cache():
 
 def spara_bedomning_cache(cache):
     BEDOMNING_CACHE_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=2))
-
-def bedom_med_cache(representanter):
-    """
-    Bedömer artiklar med cache – kör bara Claude på artiklar som inte redan bedömts.
-    Returnerar lista med relevanta artiklar.
-    """
-    # DEAD CODE — ersatt av Claude Code-bedömning via wizard_bevakning.md i Fas B (2026-05-12)
-    # Behålls för referens tills Fas G då claude_anrop() rivs
-    cache = ladda_bedomning_cache()
-    att_bedomma = []
-    relevanta = []
-
-    # Dela upp i cachade och nya
-    for a in representanter:
-        aid = artikel_id(a["url"])
-        if aid in cache:
-            bedomning = cache[aid]
-            if bedomning:  # None = tidigare bedömd som irrelevant
-                relevanta.append({**a, **bedomning})
-        else:
-            att_bedomma.append(a)
-
-    cachade = len(representanter) - len(att_bedomma)
-    if cachade:
-        print(f"  {cachade} artiklar hämtade från cache")
-    if att_bedomma:
-        print(f"  {len(att_bedomma)} nya artiklar skickas till Claude...")
-
-    # Bedöm nya artiklar i batchar
-    for i in range(0, len(att_bedomma), BATCH_STORLEK):
-        batch = att_bedomma[i:i + BATCH_STORLEK]
-        print(f"  Batch {i//BATCH_STORLEK + 1}: {len(batch)} artiklar...")
-        tid = time.time()
-        resultat = bedom_batch(batch)
-        elapsed = time.time() - tid
-        print(f"    -> {len(resultat)} relevanta ({elapsed:.1f}s)")
-
-        # Bygg lookup för snabb sökning
-        relevanta_urls = {r["url"]: r for r in resultat}
-
-        # Uppdatera cache för alla i batchen
-        for a in batch:
-            aid = artikel_id(a["url"])
-            if a["url"] in relevanta_urls:
-                b = relevanta_urls[a["url"]]
-                # Spara bara bedömningsfälten, inte hela artikeln
-                cache[aid] = {
-                    "relevant": b.get("relevant"),
-                    "relevansniva": b.get("relevansniva"),
-                    "poang": b.get("poang"),
-                    "sammanfattning": b.get("sammanfattning"),
-                    "motivering": b.get("motivering"),
-                    "kontextsokord": b.get("kontextsokord", []),
-                }
-                relevanta.append(b)
-            else:
-                cache[aid] = None  # Markera som bedömd men irrelevant
-
-    spara_bedomning_cache(cache)
-    return relevanta
 
 def sorteringsnyckel(r):
     niva = {"Hog": 0, "Medel": 1, "Lag": 2}
@@ -870,7 +664,7 @@ function radera_artikel(btn, url) {{
 document.addEventListener('DOMContentLoaded', function() {{
   const raderade = JSON.parse(localStorage.getItem('raderade_artiklar') || '[]');
   document.querySelectorAll('[onclick*="radera_artikel"]').forEach(btn => {{
-    const url = btn.getAttribute('onclick').match(/'([^']+)'\)$/)?.[1];
+    const url = btn.getAttribute('onclick').match(/'([^']+)'\\)$/)?.[1];
     if (url && raderade.includes(url)) {{
       const kort = btn.closest('div[style*="border:1px solid"]');
       if (kort) kort.style.display = 'none';

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Rison-bevakning – Dagliga prompter</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #1a1a1a;
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+  .prompt {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .where {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .description {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .code-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+  pre {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 0;
+    font-family: 'SF Mono', Monaco, monospace;
+    font-size: 13px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  button {
+    padding: 8px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  button:hover {
+    background: #f0f0f0;
+    border-color: #999;
+  }
+  button.copied {
+    background: #2d7a2d;
+    color: #fff;
+    border-color: #2d7a2d;
+  }
+  .order {
+    color: #999;
+    font-weight: normal;
+    margin-right: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Rison-bevakning</h1>
+<div class="subtitle">Dagliga prompter, i ordning. Tryck på "Kopiera" för att klistra in.</div>
+
+<div class="prompt">
+  <div class="header">
+    <div class="title"><span class="order">1.</span>Starta Claude Code</div>
+    <div class="where">Terminal</div>
+  </div>
+  <div class="description">Öppnar Claude Code i projektkatalogen utan tillståndsfrågor.</div>
+  <div class="code-row">
+    <pre>cd ~/rison-bevakning &amp;&amp; claude --dangerously-skip-permissions</pre>
+    <button onclick="kopiera(this)">Kopiera</button>
+  </div>
+</div>
+
+<div class="prompt">
+  <div class="header">
+    <div class="title"><span class="order">2.</span>Kör bevakningen</div>
+    <div class="where">Claude Code</div>
+  </div>
+  <div class="description">Hämtar nya artiklar, bedömer dem, renderar HTML.</div>
+  <div class="code-row">
+    <pre>Kör wizard_bevakning</pre>
+    <button onclick="kopiera(this)">Kopiera</button>
+  </div>
+</div>
+
+<div class="prompt">
+  <div class="header">
+    <div class="title"><span class="order">3.</span>Generera proaktiva förslag</div>
+    <div class="where">Claude Code</div>
+  </div>
+  <div class="description">Skapar 5 nya LinkedIn-inläggsförslag.</div>
+  <div class="code-row">
+    <pre>Kör wizard_proaktiv</pre>
+    <button onclick="kopiera(this)">Kopiera</button>
+  </div>
+</div>
+
+<div class="prompt">
+  <div class="header">
+    <div class="title"><span class="order">4.</span>Öppna rapporten</div>
+    <div class="where">Terminal</div>
+  </div>
+  <div class="description">Visar bevakning + proaktiv-flikar i webbläsaren.</div>
+  <div class="code-row">
+    <pre>open ~/rison-bevakning/index.html</pre>
+    <button onclick="kopiera(this)">Kopiera</button>
+  </div>
+</div>
+
+<script>
+function kopiera(btn) {
+  const pre = btn.previousElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Kopierat';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+</script>
+
+</body>
+</html>

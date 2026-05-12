@@ -20,6 +20,7 @@ BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
 OBEDOMA_FILE      = Path(__file__).parent / "obedoma_artiklar.json"
 GRUPPER_FILE      = Path(__file__).parent / "grupper_cache.json"
 RUN_STATE_FILE    = Path(__file__).parent / "run_state.json"
+TITLAR_FOR_ZEITGEIST_FILE = Path(__file__).parent / "titlar_for_zeitgeist.json"
 MIN_RELEVANS      = "Medel"
 LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
 BATCH_STORLEK     = 10
@@ -282,6 +283,8 @@ def zeitgeist_behovs():
         return True
 
 def uppdatera_zeitgeist():
+    # DEAD CODE — ersatt av Claude Code-zeitgeist via wizard_bevakning.md i Fas C (2026-05-12)
+    # Behålls för referens tills Fas G då claude_anrop() rivs
     print("  Uppdaterar zeitgeist (var 7e dag)...")
     titlar = []
     for medium in MALMEDIER:
@@ -313,8 +316,27 @@ Svara med JSON: {{"teman": ["t1","t2","t3","t4","t5"], "sokord": ["s1","s2","s3"
         return []
 
 def hamta_zeitgeist():
+    # Fas C: API-anrop borttaget. Om uppdatering behövs skrivs titlarna till disk
+    # och Claude Code uppdaterar zeitgeist_cache.json via wizard_bevakning.md.
     if zeitgeist_behovs():
-        return uppdatera_zeitgeist()
+        print("  Zeitgeist behöver uppdateras (var 7e dag)...")
+        titlar = []
+        for medium in MALMEDIER:
+            traff = sok_serper(f"site:{medium} energi fastighet", antal=10)
+            for a in traff:
+                titlar.append({
+                    "titel":   a.get("titel", ""),
+                    "kalla":   medium,
+                    "snippet": (a.get("beskrivning", "") or "")[:100],
+                    "datum":   a.get("datum", ""),
+                    "url":     a.get("url", ""),
+                })
+            time.sleep(0.2)
+        titlar = titlar[:150]
+        TITLAR_FOR_ZEITGEIST_FILE.write_text(json.dumps(titlar, ensure_ascii=False, indent=2))
+        print(f"  Sparade titlar_for_zeitgeist.json ({len(titlar)} titlar)")
+        print(f"  Kör wizard_bevakning.md i Claude Code för att uppdatera zeitgeist_cache.json.")
+        return []
     try:
         cache = json.loads(ZEITGEIST_FILE.read_text())
         sokord = cache.get("sokord", [])
@@ -322,7 +344,8 @@ def hamta_zeitgeist():
         print(f"  Cachad zeitgeist fran {sparad} ({len(sokord)} sokord)")
         return sokord
     except Exception:
-        return uppdatera_zeitgeist()
+        print("  Zeitgeist-cache korrupt eller saknas. Kör wizard_bevakning.md.")
+        return []
 
 # ── Dagsaktuella sokord (cachade per dag) ─────────────────────────────────────
 

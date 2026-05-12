@@ -18,6 +18,8 @@ DAGSAKTUELLA_FILE = Path(__file__).parent / "dagsaktuella_cache.json"
 TESTART_FILE      = Path(__file__).parent / "testart_artiklar.json"
 BEDOMNING_CACHE_FILE = Path(__file__).parent / "bedomning_cache.json"
 OBEDOMA_FILE      = Path(__file__).parent / "obedoma_artiklar.json"
+GRUPPER_FILE      = Path(__file__).parent / "grupper_cache.json"
+RUN_STATE_FILE    = Path(__file__).parent / "run_state.json"
 MIN_RELEVANS      = "Medel"
 LINKEDIN_STIL_FIL = Path(__file__).parent / "linkedin_stil.txt"
 BATCH_STORLEK     = 10
@@ -393,6 +395,8 @@ def basta_i_grupp(grupp):
 # ── Batch-bedomning ───────────────────────────────────────────────────────────
 
 def bedom_batch(artiklar):
+    # DEAD CODE — ersatt av Claude Code-bedömning via wizard_bevakning.md i Fas B (2026-05-12)
+    # Behålls för referens tills Fas G då claude_anrop() rivs
     lista = "\n".join(
         f"{i+1}. Titel: {a['titel']}\n   Kalla: {a['kalla']}\n   Text: {(a.get('fulltext') or a.get('beskrivning',''))[:2000]}"
         for i, a in enumerate(artiklar)
@@ -461,6 +465,8 @@ def bedom_med_cache(representanter):
     Bedömer artiklar med cache – kör bara Claude på artiklar som inte redan bedömts.
     Returnerar lista med relevanta artiklar.
     """
+    # DEAD CODE — ersatt av Claude Code-bedömning via wizard_bevakning.md i Fas B (2026-05-12)
+    # Behålls för referens tills Fas G då claude_anrop() rivs
     cache = ladda_bedomning_cache()
     att_bedomma = []
     relevanta = []
@@ -958,34 +964,23 @@ def kor_hamtning():
     OBEDOMA_FILE.write_text(json.dumps(representanter, ensure_ascii=False, indent=2))
     print(f"  Sparade {OBEDOMA_FILE.name} ({len(representanter)} artiklar)")
 
-    relevanta_repr = bedom_med_cache(representanter)
-
-    repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}
-    grupper_relevanta = []
-    for r in relevanta_repr:
-        grupp = repr_url_till_grupp.get(r["url"], [r])
-        grupp[0] = r
-        grupper_relevanta.append(grupp)
-
-    grupper_relevanta.sort(key=lambda g: sorteringsnyckel(g[0]))
-
-    hog_n = sum(1 for g in grupper_relevanta if g[0].get("relevansniva") == "Hog")
-    med_n = sum(1 for g in grupper_relevanta if g[0].get("relevansniva") == "Medel")
-    print(f"\n  Resultat: {len(grupper_relevanta)} grupper ({hog_n} höga, {med_n} medel)")
-
-    stat = {
-        "rss_artiklar":     stat_rss if not TESTLAGE else 0,
-        "serper_artiklar":  stat_serper if not TESTLAGE else len(nya),
-        "efter_dubbletter": len(representanter),
-        "relevanta":        len(grupper_relevanta),
+    # Förberedelse för Fas E: spara intermediate-data som rendering behöver
+    GRUPPER_FILE.write_text(json.dumps(grupper_alla, ensure_ascii=False, indent=2))
+    run_state = {
+        "datum": datetime.now().isoformat(),
+        "stat_rss": stat_rss if not TESTLAGE else 0,
+        "stat_serper": stat_serper if not TESTLAGE else len(nya),
+        "antal_artiklar": len(representanter),
+        "dagsaktuella": dagsaktuella,
+        "zeitgeist_sokord": zeitgeist_sokord,
+        "testlage": TESTLAGE,
     }
+    RUN_STATE_FILE.write_text(json.dumps(run_state, ensure_ascii=False, indent=2))
+    print(f"  Sparade grupper_cache.json och run_state.json (förberedelse för Fas E)")
 
-    html = bygg_html(grupper_relevanta, stat, dagsaktuella, zeitgeist_sokord)
-    OUTPUT_FILE.write_text(html, encoding="utf-8")
-    print(f"  Rapport sparad: {OUTPUT_FILE}")
-    if not TESTLAGE:
-        spara_sedda(sedda)
-    print("  Klar.")
+    print(f"\n  Hämtning klar. Nästa steg:")
+    print(f"    1. Bedöm artiklar via wizard_bevakning.md (Claude Code)")
+    print(f"    2. Kör python3 bevakning_serper.py --rendera när bedömning är klar")
 
 def kor_rendering():
     """Stub för Fas A. Riktig implementation kommer i Fas E."""

@@ -24,3 +24,6 @@ Nuvarande implementation approximerar månad som 30 dagar (i bevakning_serper.py
 
 ## _parse_rss_datum hanterar inte ISO 8601 (Atom-feeds)
 Funktionen använder email.utils.parsedate_to_datetime som bara hanterar RFC 2822. Atom-feeds som ofta levererar atom:published i ISO 8601-format (t.ex. "2026-04-22T14:30:00+02:00") returnerar tom sträng. Säker fallback gör att fel datum aldrig visas, bara tomt datum. Fix: lägg till datetime.fromisoformat() som fallback om parsedate_to_datetime misslyckas. Prioritet: låg tills någon Atom-feed visar tom datumcell i rapporten.
+
+## spara_sedda(sedda) borttagen från kor_hamtning
+2026-05-12: I Fas B togs bedömnings- och renderingsstegen ut ur kor_hamtning(). Som bieffekt togs även spara_sedda(sedda) bort. Funktionen var redan en no-op (sedda läses men muteras aldrig under en körning), så ingen funktionalitet förlorades. Om framtida "markera som sedd"-logik byggs ut: behöver explicit anrop till spara_sedda i wizardens bedömningssteg eller separat skript.

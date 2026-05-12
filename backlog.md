@@ -27,3 +27,18 @@ Funktionen använder email.utils.parsedate_to_datetime som bara hanterar RFC 282
 
 ## spara_sedda(sedda) borttagen från kor_hamtning
 2026-05-12: I Fas B togs bedömnings- och renderingsstegen ut ur kor_hamtning(). Som bieffekt togs även spara_sedda(sedda) bort. Funktionen var redan en no-op (sedda läses men muteras aldrig under en körning), så ingen funktionalitet förlorades. Om framtida "markera som sedd"-logik byggs ut: behöver explicit anrop till spara_sedda i wizardens bedömningssteg eller separat skript.
+
+## Cloudflare Pages + Access för publik rapport med autentisering
+2026-05-12: Repot är publikt på GitHub. Önskemål: göra rapporten (index.html) tillgänglig för utvalda personer med lösenord/autentisering, utan att exponera kod, teser, bedömningar och cache publikt.
+
+Lösning att utforska:
+- Privat huvudrepo (rison-bevakning) — gör om till private
+- Separat publikt repo (rison-bevakning-rapport) som bara innehåller index.html
+- autopush.sh utökas att kopiera index.html till det publika repot vid varje uppdatering
+- Cloudflare Pages publicerar det publika repot automatiskt
+- Cloudflare Access (gratis tier) ger e-post-PIN eller magic links för åtkomst
+
+Fördel: gratis, robust autentisering, kod förblir privat.
+Nackdel: kräver setup av Cloudflare Pages + Access-policy + GitHub-token för det andra repot.
+
+Prioritet: medium. Görs när det finns konkret behov av att dela rapporten externt.

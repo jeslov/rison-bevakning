@@ -359,6 +359,8 @@ def dagsaktuella_behovs():
         return True
 
 def hamta_dagsaktuella(zeitgeist_sokord):
+    # DEAD CODE — ersatt av Claude Code-dagsaktuella via wizard_bevakning.md i Fas D (2026-05-12)
+    # Behålls för referens tills Fas G då claude_anrop() rivs
     if not dagsaktuella_behovs():
         try:
             cache = json.loads(DAGSAKTUELLA_FILE.read_text())
@@ -919,11 +921,27 @@ def kor_hamtning():
         print("\n  [1/5] Zeitgeist-analys...")
         zeitgeist_sokord = hamta_zeitgeist()
 
-        # Steg 2: Dagsaktuella sökord
+        # Steg 2: Dagsaktuella sökord (Fas D: läs direkt från cache, wizard uppdaterar)
         print("\n  [2/5] Dagsaktuella sökord...")
-        dagsaktuella = hamta_dagsaktuella(zeitgeist_sokord)
-        for s in dagsaktuella:
-            print(f"    ✨ {s}")
+        idag = datetime.now().strftime("%Y-%m-%d")
+        dagsaktuella = []
+        if DAGSAKTUELLA_FILE.exists():
+            try:
+                cache = json.loads(DAGSAKTUELLA_FILE.read_text())
+                if cache.get("datum", "")[:10] == idag:
+                    dagsaktuella = cache.get("sokord", [])
+                    if not dagsaktuella:
+                        print(f"  Dagsaktuella-cache är tom (datum=idag men sokord=[]). Kör wizard_bevakning.md.")
+                    else:
+                        print(f"  Dagsaktuella från cache: {len(dagsaktuella)} sökord")
+                        for s in dagsaktuella:
+                            print(f"    ✨ {s}")
+                else:
+                    print(f"  Dagsaktuella-cache är gammal (datum={cache.get('datum', '')[:10]}). Kör wizard_bevakning.md.")
+            except Exception:
+                print(f"  Dagsaktuella-cache korrupt. Kör wizard_bevakning.md.")
+        else:
+            print(f"  Dagsaktuella-cache saknas. Kör wizard_bevakning.md.")
 
         alla_sokord = FASTA_SOKORD + zeitgeist_sokord + dagsaktuella
         kandidater = {}

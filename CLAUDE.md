@@ -7,13 +7,10 @@
 - Aldrig generera HTML utan att syntaxkontroll passerat
 - Vid fel i arbetssättet: lägg till regel i denna fil omedelbart
 
-## Sessionsstart
-Kör automatiskt vid varje ny session:
-\`\`\`bash
-md5 ~/rison-bevakning/bevakning_serper.py
-git -C ~/rison-bevakning log --oneline -1
-\`\`\`
-Verifiera att MD5 matchar checksumman i senaste commit-meddelandet. Om inte – stoppa och rapportera till Jesper innan något ändras.
+## Vid sessionsstart
+- Kör `git -C ~/rison-bevakning status` för att verifiera att arbetskatalogen är ren eller bara har förväntade ändringar
+- Om bevakning_serper.py har okommitterade ändringar: rapportera dem och fråga om de ska ses som "förväntad drift" eller "okänd drift" innan något annat görs
+- Läs denna fil och bekräfta att reglerna är förstådda
 
 ## Arbetsflöde vid ändring
 1. Läs hela det berörda blocket med \`sed -n\` eller \`grep\` innan ändring föreslås

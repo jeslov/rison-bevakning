@@ -1,9 +1,22 @@
 {
-  "datum": "2026-05-12T11:02:42.313544",
-  "stat_rss": 0,
-  "stat_serper": 26,
-  "antal_artiklar": 26,
-  "dagsaktuella": [],
-  "zeitgeist_sokord": [],
-  "testlage": true
+  "datum": "2026-05-12T11:07:27.549527",
+  "stat_rss": 70,
+  "stat_serper": 22,
+  "antal_artiklar": 90,
+  "dagsaktuella": [
+    "BRF stämma energi",
+    "energideklaration 2026",
+    "småhus värmepump"
+  ],
+  "zeitgeist_sokord": [
+    "fjärrvärme reform",
+    "energiavtal fastighet",
+    "energigemenskap sverige",
+    "BRF energi",
+    "energieffektivisering byggnad",
+    "värmepump fastighet",
+    "batterilager fastighet",
+    "byggkostnader 2026"
+  ],
+  "testlage": false
 }

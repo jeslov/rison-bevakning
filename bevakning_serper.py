@@ -411,7 +411,17 @@ Bedöm foljande {len(artiklar)} artiklar:
 Svara med JSON-lista (ingen annan text):
 [{{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En kort rubrik på max 8 ord som fångar artikelns kärna, följt av | och sedan 3-5 punkter separerade med • – varje punkt ska vara 1-2 meningar med tillräckligt sammanhang för att förstå poängen utan att läsa artikeln", "motivering": "En mening", "kontextsokord": ["sokord1", "sokord2", "sokord3"]}}]"""
 
+    # DEBUG (tillfällig)
+    print(f"    [DEBUG] Prompt-längd: {len(prompt)} tecken")
+    print(f"    [DEBUG] Prompt första 500: {prompt[:500]!r}")
+
     svar = claude_anrop(prompt, max_tokens=3000)
+
+    # DEBUG (tillfällig)
+    print(f"    [DEBUG] Svar-längd: {len(svar) if svar else 0}")
+    print(f"    [DEBUG] Svar (första 800): {(svar[:800] if svar else 'None')!r}")
+    print(f"    [DEBUG] Svar (sista 200): {(svar[-200:] if svar and len(svar) > 200 else '')!r}")
+
     if not svar: return []
     try:
         resultat = json.loads(svar)
@@ -424,8 +434,11 @@ Svara med JSON-lista (ingen annan text):
             if b.get("relevansniva") == "Lag": continue
             if b.get("relevansniva") == "Medel" and MIN_RELEVANS == "Hog": continue
             relevanta.append({**artiklar[idx], **b})
+        print(f"    [DEBUG] Parsade {len(resultat)} bedömningar, {len(relevanta)} relevanta")
         return relevanta
-    except Exception:
+    except Exception as e:
+        print(f"    [DEBUG] JSON-parse-fel: {e}")
+        print(f"    [DEBUG] Råsvar som inte kunde parsas: {svar!r}")
         return []
 
 # ── Testlage ──────────────────────────────────────────────────────────────────

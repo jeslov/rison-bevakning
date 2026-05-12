@@ -109,6 +109,70 @@ def spara_sedda(s):
 def artikel_id(url):
     return hashlib.md5(url.encode()).hexdigest()
 
+def _parse_relativt_datum(s):
+    """Konvertera Serper-relativ tidsträng (sv/eng) till ISO YYYY-MM-DD.
+    Returnerar tom sträng vid parsningsfel."""
+    if not s or not isinstance(s, str):
+        return ""
+    t = s.strip().lower()
+    if not t:
+        return ""
+    nu = datetime.now()
+    if t in ("igår", "yesterday"):
+        return (nu - timedelta(days=1)).strftime("%Y-%m-%d")
+    if t in ("idag", "today", "just nu", "now"):
+        return nu.strftime("%Y-%m-%d")
+    if "stund" in t or "moment" in t:
+        return nu.strftime("%Y-%m-%d")
+    m = re.search(r'(\d+|en|ett)\s*(minut|timm|dag|veck|månad|min|hour|day|week|month)', t)
+    if not m:
+        return ""
+    n_str = m.group(1)
+    n = 1 if n_str in ("en", "ett") else int(n_str)
+    enhet = m.group(2)
+    if enhet.startswith("min"):
+        return (nu - timedelta(minutes=n)).strftime("%Y-%m-%d")
+    if enhet in ("timm", "hour"):
+        return (nu - timedelta(hours=n)).strftime("%Y-%m-%d")
+    if enhet in ("dag", "day"):
+        return (nu - timedelta(days=n)).strftime("%Y-%m-%d")
+    if enhet in ("veck", "week"):
+        return (nu - timedelta(weeks=n)).strftime("%Y-%m-%d")
+    if enhet in ("månad", "month"):
+        return (nu - timedelta(days=n*30)).strftime("%Y-%m-%d")
+    return ""
+
+def _parse_rss_datum(s):
+    """Konvertera RSS pubDate (RFC 2822) till ISO YYYY-MM-DD.
+    Returnerar tom sträng vid parsningsfel."""
+    if not s or not isinstance(s, str):
+        return ""
+    try:
+        from email.utils import parsedate_to_datetime
+        return parsedate_to_datetime(s).strftime("%Y-%m-%d")
+    except Exception:
+        return ""
+
+def _relativt_fran_iso(iso_datum):
+    """Bygg 'YYYY-MM-DD (för N dagar sedan)' från ISO-datum för HTML-rendering.
+    Räknas alltid mot datetime.now() vid anropet."""
+    if not iso_datum:
+        return ""
+    try:
+        d = datetime.fromisoformat(iso_datum)
+    except Exception:
+        return iso_datum
+    dagar = (datetime.now() - d).days
+    if dagar < 0:
+        rel = "framtida"
+    elif dagar == 0:
+        rel = "idag"
+    elif dagar == 1:
+        rel = "igår"
+    else:
+        rel = f"för {dagar} dagar sedan"
+    return f"{iso_datum} ({rel})"
+
 def claude_anrop(prompt, max_tokens=1000):
     for forsok in range(4):
         try:

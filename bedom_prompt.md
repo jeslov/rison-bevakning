@@ -20,7 +20,7 @@ Bedöm foljande {antal} artiklar:
 {lista}
 
 Svara med JSON-lista (ingen annan text):
-[{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "En kort rubrik på max 8 ord som fångar artikelns kärna, följt av | och sedan 3-5 punkter separerade med • – varje punkt ska vara 1-2 meningar med tillräckligt sammanhang för att förstå poängen utan att läsa artikeln", "motivering": "En mening", "kontextsokord": ["sokord1", "sokord2", "sokord3"]}]
+[{"index": 1, "relevant": true/false, "relevansniva": "Hog"/"Medel"/"Lag", "poang": 1-10, "sammanfattning": "Rubrik max 8 ord | 5-7 punkter separerade med • enligt analytiskt format (se Sammanfattnings-format nedan)", "motivering": "En mening", "kontextsokord": ["sokord1", "sokord2", "sokord3"]}]
 ```
 
 **Placeholders i prompten:**

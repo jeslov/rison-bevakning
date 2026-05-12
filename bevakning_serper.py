@@ -544,7 +544,7 @@ def bygg_html(grupper_relevanta, stat, dynamiska_sokord, zeitgeist_sokord):
         ovriga = grupp[1:]
         items = ""
         for a in ovriga:
-            datum_tag = f'&nbsp;·&nbsp;<span style="font-size:10px;color:#bbb;">{escape_html(a.get("datum",""))}</span>' if a.get("datum") else ""
+            datum_tag = f'&nbsp;·&nbsp;<span style="font-size:10px;color:#bbb;">{escape_html(_relativt_fran_iso(a.get("datum","")))}</span>' if a.get("datum") else ""
             items += (f'<div style="padding:7px 0;border-bottom:1px solid #f0f0f0;">'
                       f'<span style="font-size:13px;color:#666;">{escape_html(a["kalla"])}</span>{datum_tag}'
                       f' &nbsp;<a href="{escape_html(a["url"])}" target="_blank" style="font-size:13px;color:#666;">{escape_html(a["titel"])}</a></div>')

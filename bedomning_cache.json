@@ -210,5 +210,31 @@
   "52de6e9414c21a132e5b88a2915a1172": null,
   "ff5112f70c29fb23bd1ef548d9217b85": null,
   "046d09a50b086f2de5c822d7857b159b": null,
-  "d0cc2599fb1bf67f7f7583ba90fda62d": null
+  "d0cc2599fb1bf67f7f7583ba90fda62d": null,
+  "83bce0e89fe7616a5ba7c88bbbba2c95": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Energimyndigheten lyfter datakvalitet som styrmedelsfundament | • Energimyndigheten ber husägare svara på enkät för att förbättra Sveriges officiella energistatistik som rapporteras enligt EU:s energieffektivitetsdirektiv. • Pressmeddelandet kom 12 maj 2026 och pekar på myndighetens beroende av privatpersoners deltagande för rapporteringen. • Marknadssignal: bättre statistik ger tydligare prioritering av åtgärder — fastighetsbestånd med störst energipotential lyfts upp i policy-radarn. • Regulatorisk implikation: skarpare data används som underlag för framtida styrmedel och investeringsstöd för energieffektivisering. • För institutionellt kapital: officiell statistik minskar informationsasymmetrin och gör deal-flow inom fastighetsenergi mer förutsägbar. • Strategisk position: Energimyndigheten är en signal-källa Rison bör följa — vad de prioriterar i datainsamling blir ofta morgondagens reglering. • Risk: lågt svarsdeltagande fördröjer statistiken och därmed också beslut som påverkar EaaS-marknadens regulatoriska ramverk.",
+    "motivering": "Energimyndighetens datainsamlingsutspel signalerar prioriteringar för svensk energipolicy som direkt påverkar EaaS-marknadens regulatoriska ramverk.",
+    "kontextsokord": [
+      "Energimyndigheten",
+      "energistatistik",
+      "energipolicy",
+      "EPBD-rapportering"
+    ]
+  },
+  "2fd12d9411b7e3c4840f141619e5968f": {
+    "relevant": true,
+    "relevansniva": "Medel",
+    "poang": 5,
+    "sammanfattning": "Irankrig pressar byggkostnader och öppnar för EaaS | • Prognoscentret rapporterar att Irankriget förstärker en redan stigande trend i svenska byggkostnader, främst via oljeprisets påverkan på material och transport. • Analysföretaget bedömer att energichocken slår hårt mot byggsektorn och tvingar fram nedreviderade tillväxtprognoser. • Marknadssignal: när byggbudgetar pressas tvingas fastighetsägare välja bort något — risken är att frivilliga energiåtgärder skjuts på framtiden. • Finansieringskonsekvens: dyra byggprojekt ökar attraktionen för off-balance-sheet-finansiering — EaaS-modellen blir mer relevant när CAPEX är knapp. • Konkurrenslandskap: traditionella banker blir mer riskaversiva i osäker konjunktur, vilket öppnar för specialiserade aktörer med längre tidshorisont och institutionellt kapital. • Strategisk position: Risons narrativ — bromsklossen är finansieringen, inte tekniken — blir starkare i en kostnadskris. • Regulatorisk implikation: om byggsektorn fortsätter underprestera mot energimål kan staten tvingas accelerera styrmedel, vilket pressar marknaden mot finansierade EaaS-lösningar.",
+    "motivering": "Stigande byggkostnader förstärker behovet av off-balance-finansieringsmodeller som EaaS — Risons strategiska position blir mer attraktiv i en kostnadskris.",
+    "kontextsokord": [
+      "byggkostnader",
+      "Irankriget",
+      "finansieringsstrukturer",
+      "Prognoscentret"
+    ]
+  }
 }

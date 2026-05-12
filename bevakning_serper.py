@@ -240,7 +240,7 @@ def sok_serper(sokord, antal=10):
         return [
             {"titel": n.get("title", "").strip(), "url": n.get("link", "").strip(),
              "beskrivning": n.get("snippet", "").strip()[:300], "kalla": n.get("source", "").strip(),
-             "datum": n.get("date", ""), "sokord": sokord, "kalla_typ": "serper"}
+             "datum": _parse_relativt_datum(n.get("date", "")), "sokord": sokord, "kalla_typ": "serper"}
             for n in r.json().get("news", [])
             if n.get("title") and n.get("link") and "ANNONS" not in n.get("title", "").upper()
         ]

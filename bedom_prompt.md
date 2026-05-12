@@ -32,6 +32,37 @@ Svara med JSON-lista (ingen annan text):
      Text: <fulltext eller beskrivning, trunkerad till 2000 tecken>
   ```
 
+## Sammanfattnings-format
+
+Sammanfattnings-fältet ska vara ANALYTISKT, inte refererande. Strukturen är:
+
+**Rubrik:** Max 8 ord som fångar artikelns kärna.
+Sedan `|` följt av 5-7 punkter separerade med `•`.
+
+**Punkt-fördelning:**
+- **1-2 punkter referat** — vad artikeln faktiskt säger. Bara så mycket som behövs för kontext.
+- **3-5 punkter analys** — vad detta betyder för Risons värld (EaaS-finansiering, institutionellt kapital, BRF/kommersiella fastigheter, EPBD-deadlines, finansieringsstrukturer). Varje analyspunkt bör peka på en av:
+  - Marknadssignal
+  - Finansieringskonsekvens
+  - Regulatorisk implikation
+  - Konkurrenslandskap
+  - Strategisk position
+
+Varje punkt 1-2 meningar. Frågan att besvara: *"Om Jesper bara läser denna sammanfattning, varför ska han bry sig?"*
+
+**Exempel på analytisk sammanfattning:**
+
+> EU enas om hårdare EPBD-deadlines för byggnadsrenovering |
+> • EU-rådet har beslutat att 16% av byggnadsbeståndet ska renoveras till 2030, 26% till 2033.
+> • Sverige måste transponera direktivet till nationell lag senast 29 maj 2026.
+> • För fastighetsägare: åtgärden flyttar från frivillig till obligatorisk – kalkylen blir finansieringsfråga, inte investeringsfråga.
+> • För institutionellt kapital: skapar förutsägbar deal-pipeline med klar tidshorisont, något pensionskapital behöver.
+> • För EaaS-modellen specifikt: off-balance-sheet-finansiering blir betydligt mer attraktiv när motorbytet är obligatoriskt men budgeten är knapp.
+> • Risk: om svensk transponering blir sen, kan deals i Q4 2026 bli pressade.
+> • Möjlighet: tidigt-flyttare-fördel för bolag med fungerande finansieringsstruktur.
+
+OBS: detta är endast ett exempel på hur en analytisk sammanfattning kan se ut. Anpassa till varje specifik artikel.
+
 ## Batch-storlek
 
 Bedöm **10 artiklar per batch**. Om `obedoma_artiklar.json` har fler än 10, gör flera batchar i sekvens.

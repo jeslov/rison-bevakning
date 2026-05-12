@@ -214,7 +214,8 @@ def hamta_rss(flode):
             url   = (item.findtext("link") or
                      (item.find("atom:link", ns).get("href") if item.find("atom:link", ns) is not None else "") or "").strip()
             besk  = (item.findtext("description") or item.findtext("atom:summary", namespaces=ns) or "").strip()[:300]
-            pub   = (item.findtext("pubDate") or item.findtext("atom:published", namespaces=ns) or "").strip()
+            pub_raw = (item.findtext("pubDate") or item.findtext("atom:published", namespaces=ns) or "").strip()
+            pub = _parse_rss_datum(pub_raw)
             if titel and url and "ANNONS" not in titel.upper():
                 result.append({"titel": titel, "url": url, "beskrivning": besk,
                                 "kalla": flode["namn"], "datum": pub, "kalla_typ": "rss"})

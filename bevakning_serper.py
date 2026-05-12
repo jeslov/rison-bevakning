@@ -1024,9 +1024,97 @@ def kor_hamtning():
     print(f"    2. Kör python3 bevakning_serper.py --rendera när bedömning är klar")
 
 def kor_rendering():
-    """Stub för Fas A. Riktig implementation kommer i Fas E."""
-    print(f"[{datetime.now():%H:%M}] kor_rendering(): inte implementerad i Fas A.")
-    print(f"  Använd --hamta. Rendering separeras från hämtning i Fas E.")
+    """Fas E: Läser caches och bygger index.html. Förutsätter att --hamta körts och
+    wizard_bevakning.md har skrivit bedomning_cache.json."""
+    print(f"[{datetime.now():%H:%M}] Renderar Rison bevakning")
+
+    # Steg 1: Verifiera att hämtning körts
+    if not OBEDOMA_FILE.exists():
+        print(f"  FEL: {OBEDOMA_FILE.name} saknas.")
+        print(f"  Kör 'python3 bevakning_serper.py --hamta' först.")
+        return
+    if not GRUPPER_FILE.exists():
+        print(f"  FEL: {GRUPPER_FILE.name} saknas.")
+        print(f"  Kör 'python3 bevakning_serper.py --hamta' först.")
+        return
+    if not RUN_STATE_FILE.exists():
+        print(f"  FEL: {RUN_STATE_FILE.name} saknas.")
+        print(f"  Kör 'python3 bevakning_serper.py --hamta' först.")
+        return
+
+    representanter   = json.loads(OBEDOMA_FILE.read_text())
+    grupper_alla     = json.loads(GRUPPER_FILE.read_text())
+    run_state        = json.loads(RUN_STATE_FILE.read_text())
+    bedomning_cache  = ladda_bedomning_cache()
+
+    stat_rss         = run_state.get("stat_rss", 0)
+    stat_serper      = run_state.get("stat_serper", 0)
+    dagsaktuella     = run_state.get("dagsaktuella", [])
+    zeitgeist_sokord = run_state.get("zeitgeist_sokord", [])
+
+    print(f"  Inläst: {len(representanter)} artiklar, {len(grupper_alla)} grupper, "
+          f"{len(bedomning_cache)} bedömningar (cache totalt)")
+
+    # Steg 2: Slå upp bedömning per artikel
+    if not bedomning_cache:
+        print(f"  FEL: {BEDOMNING_CACHE_FILE.name} är tom.")
+        print(f"  Bedöm artiklar via wizard_bevakning.md först.")
+        return
+
+    antal_bedomda = sum(1 for a in representanter if artikel_id(a["url"]) in bedomning_cache)
+    print(f"  {antal_bedomda} av {len(representanter)} artiklar är bedömda")
+    if antal_bedomda < len(representanter):
+        print(f"  ({len(representanter) - antal_bedomda} saknar bedömning – kör wizard_bevakning.md)")
+
+    relevanta_repr = []
+    obedomda = 0
+    for a in representanter:
+        aid = artikel_id(a["url"])
+        if aid not in bedomning_cache:
+            obedomda += 1
+            continue
+        bedomning = bedomning_cache[aid]
+        if bedomning:  # None = bedömd som irrelevant
+            relevanta_repr.append({**a, **bedomning})
+
+    if obedomda:
+        print(f"  VARNING: {obedomda} av {len(representanter)} artiklar saknar bedömning.")
+        print(f"  De renderas inte. Kör wizard_bevakning.md för att bedöma dem.")
+
+    # Steg 3: Mappa relevanta tillbaka till sina grupper
+    repr_url_till_grupp = {basta_i_grupp(g)["url"]: g for g in grupper_alla}
+    grupper_relevanta = []
+    for r in relevanta_repr:
+        grupp = repr_url_till_grupp.get(r["url"], [r])
+        grupp[0] = r
+        grupper_relevanta.append(grupp)
+
+    grupper_relevanta.sort(key=lambda g: sorteringsnyckel(g[0]))
+
+    hog_n = sum(1 for g in grupper_relevanta if g[0].get("relevansniva") == "Hog")
+    med_n = sum(1 for g in grupper_relevanta if g[0].get("relevansniva") == "Medel")
+    print(f"\n  Resultat: {len(grupper_relevanta)} grupper ({hog_n} höga, {med_n} medel)")
+
+    # Steg 4: Bygg HTML
+    stat = {
+        "rss_artiklar":     stat_rss,
+        "serper_artiklar":  stat_serper,
+        "efter_dubbletter": len(representanter),
+        "relevanta":        len(grupper_relevanta),
+    }
+    html = bygg_html(grupper_relevanta, stat, dagsaktuella, zeitgeist_sokord)
+    OUTPUT_FILE.write_text(html, encoding="utf-8")
+    print(f"  Rapport sparad: {OUTPUT_FILE.name}")
+
+    # Steg 5: Lägg på proaktiv-flik
+    try:
+        import proaktiv
+        proaktiv.uppdatera_html_med_forslag()
+        print(f"  Proaktiv-flik uppdaterad")
+    except Exception as e:
+        print(f"  VARNING: Proaktiv-uppdatering misslyckades: {e}")
+
+    print("  Klar.")
 
 def main(kor_typ):
     if kor_typ == "hamta":

@@ -21,3 +21,6 @@ v3 och v4 har lagt till specifika förbud mot exakta formuleringar (t.ex. "tredj
 
 ## Möjlig finjustering: använd dateutil.relativedelta för månader/år i _parse_relativt_datum
 Nuvarande implementation approximerar månad som 30 dagar (i bevakning_serper.py). För nyhetsartiklar är driften (1–2 dagar för N=12 månader) inte kritisk. Om exaktare datum behövs på sikt: importera dateutil.relativedelta och hantera månader/år korrekt med kalenderkännedom.
+
+## _parse_rss_datum hanterar inte ISO 8601 (Atom-feeds)
+Funktionen använder email.utils.parsedate_to_datetime som bara hanterar RFC 2822. Atom-feeds som ofta levererar atom:published i ISO 8601-format (t.ex. "2026-04-22T14:30:00+02:00") returnerar tom sträng. Säker fallback gör att fel datum aldrig visas, bara tomt datum. Fix: lägg till datetime.fromisoformat() som fallback om parsedate_to_datetime misslyckas. Prioritet: låg tills någon Atom-feed visar tom datumcell i rapporten.
